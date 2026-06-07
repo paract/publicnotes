@@ -32,7 +32,7 @@
 
     header {
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 48px;
       padding-bottom: 40px;
       border-bottom: 2px solid #d9d4c8;
     }
@@ -49,6 +49,49 @@
       font-size: 1rem;
       color: #667078;
       letter-spacing: 0.5px;
+    }
+
+    .filter-section {
+      margin-bottom: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0d2b4d;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-right: 8px;
+    }
+
+    .tag-btn {
+      padding: 8px 16px;
+      border: 2px solid #0d2b4d;
+      background: white;
+      color: #0d2b4d;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+
+    .tag-btn:hover {
+      background: #0d2b4d;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .tag-btn.active {
+      background: #0d2b4d;
+      color: white;
+      box-shadow: 0 8px 16px rgba(13, 43, 77, 0.2);
     }
 
     .grid {
@@ -92,6 +135,10 @@
       border-left-color: #4a7ba7;
     }
 
+    .card.hidden {
+      display: none;
+    }
+
     .card-date {
       display: inline-block;
       font-size: 0.85rem;
@@ -119,6 +166,24 @@
       margin-top: auto;
     }
 
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      margin-top: 16px;
+    }
+
+    .tag-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(13, 43, 77, 0.1);
+      color: #0d2b4d;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
     .card-question {
       font-size: 0.9rem;
       color: #4a7ba7;
@@ -133,18 +198,40 @@
       font-weight: 700;
     }
 
+    .empty-state {
+      text-align: center;
+      padding: 64px 32px;
+      color: #667078;
+      grid-column: 1 / -1;
+    }
+
+    .empty-state p {
+      font-size: 1.1rem;
+    }
+
     @media (max-width: 768px) {
       body {
         padding: 32px 16px;
       }
 
       header {
-        margin-bottom: 40px;
+        margin-bottom: 32px;
         padding-bottom: 32px;
       }
 
       header h1 {
         font-size: 1.8rem;
+      }
+
+      .filter-section {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 32px;
+      }
+
+      .filter-label {
+        margin-right: 0;
+        margin-bottom: 12px;
       }
 
       .grid {
@@ -160,16 +247,6 @@
         font-size: 1.2rem;
       }
     }
-
-    .empty-state {
-      text-align: center;
-      padding: 64px 32px;
-      color: #667078;
-    }
-
-    .empty-state p {
-      font-size: 1.1rem;
-    }
   </style>
 </head>
 <body>
@@ -179,49 +256,130 @@
       <p>思考の資産化 — 内省と言語化の記録</p>
     </header>
 
+    <div class="filter-section" id="filterSection">
+      <span class="filter-label">フィルター:</span>
+      <button class="tag-btn active" data-tag="all">すべて表示</button>
+    </div>
+
     <div class="grid" id="cardGrid">
       <!-- Cards will be generated here -->
     </div>
   </div>
 
   <script>
-    // Log data structure
     const logs = [
-      {
-        filename: "remote-codex-near-future-2026-06-07.html",
-        date: "2026-06-07",
-        title: "遠隔Codexと近未来感",
-        excerpt: "遠隔でcodexを楽しんでいる。近未来ぽくて面白い",
-        question: "あなたが「近未来ぽくて面白い」と感じた瞬間、いちばん面白かったのは技術が進んだことですか、それとも自分の行為が身体の外側まで伸びた感覚ですか？"
+  {
+    "filename": "remote-codex-near-future-2026-06-07.html",
+    "date": "2026-06-07",
+    "title": "遠隔Codexと近未来感",
+    "excerpt": "遠隔でcodexを楽しんでいる。近未来ぽくて面白い",
+    "question": "あなたが「近未来ぽくて面白い」と感じた瞬間、いちばん面白かったのは\n        技術が進んだことですか、それとも\n        自分の行為が身体の外側まで伸びた感覚ですか？…",
+    "tags": [
+      "#未来感",
+      "#道具性",
+      "#感情"
+    ]
+  },
+  {
+    "filename": "voice-to-codex-system-and-next-projects-2026-06-07.html",
+    "date": "2026-06-07",
+    "title": "音声ログからCodexへ、次のプロジェクト欲へ",
+    "excerpt": "VS Code、Codex、スマホアプリを連携して、気づいたことを音声で残すシステムを作成し、HTMLで可視化するようにした。\n          今回、Codexを実行するにあたり、他のプロジェクト",
+    "question": "Codexで別プロジェクトを動かしたい欲求の中心にあるのは、\n        作業時間を短くしたいことですか、\n        自分の発想がすぐ形になる感覚を味わいたいことですか、\n        そ…",
+    "tags": [
+      "#未来感",
+      "#道具性",
+      "#マインド"
+    ]
+  }
+];
+    const allTags = [
+  "#未来感",
+  "#道具性",
+  "#感情",
+  "#マインド"
+];
+    let activeFilter = 'all';
+
+    // フィルターボタンを初期化
+    function initializeFilters() {
+      const filterSection = document.getElementById('filterSection');
+      const allBtn = filterSection.querySelector('[data-tag="all"]');
+
+      allTags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'tag-btn';
+        btn.textContent = tag;
+        btn.setAttribute('data-tag', tag);
+        btn.addEventListener('click', () => filterCards(tag, btn));
+        filterSection.appendChild(btn);
+      });
+
+      allBtn.addEventListener('click', () => filterCards('all', allBtn));
+    }
+
+    // カード表示/非表示の切り替え
+    function filterCards(tag, button) {
+      activeFilter = tag;
+
+      // ボタンのactive状態を更新
+      document.querySelectorAll('.tag-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      button.classList.add('active');
+
+      // カードのフィルタリング
+      document.querySelectorAll('.card').forEach(card => {
+        if (tag === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          const cardTags = card.getAttribute('data-tags').split(',');
+          card.classList.toggle('hidden', !cardTags.includes(tag));
+        }
+      });
+
+      // アニメーション
+      setTimeout(() => {
+        document.querySelectorAll('.card:not(.hidden)').forEach(card => {
+          card.style.animation = 'none';
+          setTimeout(() => {
+            card.style.animation = 'fadeIn 0.3s ease-out';
+          }, 10);
+        });
+      }, 50);
+    }
+
+    // カードを描画
+    function renderCards() {
+      const grid = document.getElementById('cardGrid');
+
+      if (logs.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><p>ログがまだありません</p></div>';
+        return;
       }
-    ];
 
-    // Sort by date (newest first)
-    logs.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    // Render cards
-    const grid = document.getElementById("cardGrid");
-
-    if (logs.length === 0) {
-      grid.innerHTML = '<div class="empty-state"><p>ログがまだありません</p></div>';
-    } else {
       logs.forEach(log => {
-        const card = document.createElement("a");
+        const card = document.createElement('a');
         card.href = `notes/${log.filename}`;
-        card.className = "card";
+        card.className = 'card';
+        card.setAttribute('data-tags', log.tags.join(','));
 
-        const dateStr = new Date(log.date).toLocaleDateString("ja-JP", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit"
+        const dateStr = new Date(log.date).toLocaleDateString('ja-JP', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
         });
 
+        const tagsHTML = log.tags
+          .map(tag => `<span class="tag-badge">${tag}</span>`)
+          .join('');
+
         const excerptText = log.excerpt.length > 100
-          ? log.excerpt.substring(0, 100) + "…"
+          ? log.excerpt.substring(0, 100) + '…'
           : log.excerpt;
 
         const questionText = log.question.length > 80
-          ? log.question.substring(0, 80) + "…"
+          ? log.question.substring(0, 80) + '…'
           : log.question;
 
         card.innerHTML = `
@@ -229,6 +387,7 @@
             <div class="card-date">${dateStr}</div>
             <div class="card-title">${log.title}</div>
             <div class="card-excerpt">${excerptText}</div>
+            <div class="card-tags">${tagsHTML}</div>
           </div>
           <div class="card-question">${questionText}</div>
         `;
@@ -236,6 +395,10 @@
         grid.appendChild(card);
       });
     }
+
+    // 初期化
+    initializeFilters();
+    renderCards();
   </script>
 </body>
 </html>

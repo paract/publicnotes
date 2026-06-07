@@ -1,0 +1,12 @@
+{
+  "name": "publicnotes",
+  "version": "1.0.0",
+  "description": "内省ログダッシュボード",
+  "main": "generate-dashboard.js",
+  "scripts": {
+    "build-dashboard": "node generate-dashboard.js"
+  },
+  "dependencies": {
+    "jsdom": "^23.0.0"
+  }
+}
