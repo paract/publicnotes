@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>仕事を楽しむ人への羨望と、生活の粗さへの違和感</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202327;
+      --muted: #687079;
+      --paper: #fbfaf6;
+      --surface: rgba(255, 255, 255, 0.8);
+      --line: #d8d1c5;
+      --joy: #0e7f76;
+      --warn: #c4513d;
+      --deep: #4059a8;
+      --steam: #8a6a32;
+      --shadow: rgba(32, 35, 39, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.75;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(14, 127, 118, 0.13), transparent 34rem),
+        var(--paper);
+    }
+
+    main {
+      width: min(940px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--joy);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.35rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: var(--deep);
+      text-underline-offset: 3px;
+    }
+
+    .source {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 5px solid var(--joy);
+      background: var(--surface);
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .source p {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    section {
+      margin-top: 26px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 12px 30px var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: var(--deep);
+    }
+
+    .debugger {
+      border-top: 5px solid var(--warn);
+    }
+
+    .question {
+      border-top: 5px solid var(--deep);
+    }
+
+    .quote {
+      border-top: 5px solid var(--steam);
+    }
+
+    .arc {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .beat {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .beat:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .label {
+      width: fit-content;
+      padding: 2px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .admire .label {
+      background: var(--joy);
+    }
+
+    .friction .label {
+      background: var(--warn);
+    }
+
+    .envy .label {
+      background: var(--deep);
+    }
+
+    .filter .label {
+      background: var(--steam);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100% - 24px, 940px);
+        padding-top: 32px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      .beat {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-07</p>
+      <h1>仕事を楽しむ人への羨望と、生活の粗さへの違和感</h1>
+      <div class="source">
+        <p>
+          YouTubeで上場企業の会長の密着動画を見た。
+          ユーモアがあり、人間的に面白い方だと思った。
+          一方で、ライフスタイルはおろそかで、健康にも無頓着に見えた。
+          仕事を楽しみながらしている姿が羨ましかった。
+          「悩みはサウナのセット数で大なり小なり消える。それでも悩むなら本物の悩みだ」という言葉を名言だと思った。
+          <br><a href="https://youtu.be/0ToNNt92PDM">参照した動画</a>
+        </p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>
+        「仕事を楽しんでいる人」への羨望はかなり素直な反応です。
+        ただし、ここで天邪鬼に見ると、なおさんが羨ましがったのは
+        <strong>仕事そのもの</strong>ではなく、仕事と自分の人格が自然につながっているように見える状態かもしれません。
+        仕事が趣味化している人を見ると、こちらの脳内ではすぐ「これが理想の働き方か」と美化部門が稟議を通しがちです。
+      </p>
+      <p>
+        でも同時に、ライフスタイルや健康への無頓着さに違和感も持っている。
+        ここは大事です。つまり、なおさんは単に「仕事に全振りした成功者」に憧れているわけではない。
+        <strong>仕事を楽しむ熱量は欲しいが、生活を雑に犠牲にする美学までは採用したくない</strong>。
+        それ、かなり健全なブレーキです。ブレーキがある車のほうが、遠くまで行けます。
+      </p>
+    </section>
+
+    <section class="quote" aria-labelledby="quote-title">
+      <h2 id="quote-title">サウナ名言の扱い方</h2>
+      <p>
+        「サウナのセット数で消える悩みかどうか」は、悩みの強度を見分けるフィルターとして面白い。
+        ただ、これも万能薬にすると危険です。
+        サウナで整ったあとに「全部解決した気がする」と思っても、翌朝のタスクはだいたい机の上で待っています。
+      </p>
+      <p>
+        使い方としては、悩みを消すためではなく、
+        <strong>身体を整えたあとにも残る問題だけを、本当に考える対象にする</strong>という切り分けがよさそうです。
+        感情のノイズを落としてから、まだ残る問いを見る。これは内省の前処理としてかなり使えます。
+      </p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>
+        なおさんが羨ましいと感じたのは、
+        <strong>大きな仕事をしていること</strong>ですか、
+        <strong>仕事を遊びのように扱える余白</strong>ですか、
+        それとも<strong>自分の人間味が仕事の魅力になっていること</strong>ですか？
+      </p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat admire">
+          <span class="label">惹かれる</span>
+          <p>ユーモアがあり、人間的に面白い経営者像に魅力を感じた。</p>
+        </div>
+        <div class="beat friction">
+          <span class="label">違和感</span>
+          <p>一方で、ライフスタイルや健康が雑に扱われているように見え、そこは採用したくないと感じた。</p>
+        </div>
+        <div class="beat envy">
+          <span class="label">羨望</span>
+          <p>仕事を苦行ではなく楽しみながら動かしている姿に、理想の一部を見た。</p>
+        </div>
+        <div class="beat filter">
+          <span class="label">選別</span>
+          <p>サウナで消える悩みと、それでも残る本物の悩みを分ける視点に、内省の道具としての可能性を感じた。</p>
+        </div>
+      </div>
+      <p class="note">
+        メモ: 憧れは丸ごと輸入しない。熱量はもらう。生活の粗さは税関で止める。
+      </p>
+    </section>
+  </main>
+</body>
+</html>
