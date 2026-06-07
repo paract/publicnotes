@@ -163,7 +163,7 @@ function generateHTML(logs, tags) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>内省ログ ダッシュボード</title>
+  <title>パラ式　思考デバッガー</title>
   <style>
     * {
       margin: 0;
@@ -412,7 +412,7 @@ function generateHTML(logs, tags) {
 <body>
   <div class="container">
     <header>
-      <h1>内省ログ ダッシュボード</h1>
+      <h1>パラ式　思考デバッガー</h1>
       <p>思考の資産化 — 内省と言語化の記録</p>
     </header>
 
