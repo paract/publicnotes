@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>遠隔Codexと近未来感</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2528;
+      --muted: #667078;
+      --paper: #fbfaf6;
+      --line: #d9d4c8;
+      --spark: #0f8a8a;
+      --heat: #d45f3a;
+      --cool: #4056a1;
+      --shadow: rgba(31, 37, 40, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.75;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(15, 138, 138, 0.11), transparent 34rem),
+        var(--paper);
+    }
+
+    main {
+      width: min(880px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--spark);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .source {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 5px solid var(--spark);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 10px 28px var(--shadow);
+    }
+
+    .source p {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    section {
+      margin-top: 26px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: 0 12px 30px var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .debugger {
+      border-top: 5px solid var(--heat);
+    }
+
+    .question {
+      border-top: 5px solid var(--cool);
+    }
+
+    .arc {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .beat {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .beat:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .label {
+      width: fit-content;
+      padding: 2px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .rise .label {
+      background: var(--spark);
+    }
+
+    .tilt .label {
+      background: var(--heat);
+    }
+
+    .depth .label {
+      background: var(--cool);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 620px) {
+      main {
+        width: min(100% - 24px, 880px);
+        padding-top: 32px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      .beat {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-07</p>
+      <h1>遠隔Codexと近未来感</h1>
+      <div class="source">
+        <p>「遠隔でcodexを楽しんでいる。近未来ぽくて面白い」</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>
+        近未来っぽい、いいですね。ただし少し意地悪に見ると、
+        「未来を操作している」というより「遠隔操作できるだけでテンションが上がる自分」を楽しんでいる可能性もあります。
+        技術の進歩に感動しているのか、秘密基地ごっこにうっかり魂を持っていかれているのか。そこはログに残す価値があります。
+      </p>
+      <p>
+        しかも「codexを楽しんでいる」と言いながら、楽しさの正体をまだ分解していません。
+        便利だから楽しいのか、他者性のある道具を動かす感じが楽しいのか、
+        自分の手が少し拡張されたように感じるのか。ここを雑に「近未来」で包むと、思考が銀紙に包まれたままになります。
+      </p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>
+        あなたが「近未来ぽくて面白い」と感じた瞬間、いちばん面白かったのは
+        <strong>技術が進んだこと</strong>ですか、それとも
+        <strong>自分の行為が身体の外側まで伸びた感覚</strong>ですか？
+      </p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat rise">
+          <span class="label">高揚</span>
+          <p>遠隔でCodexを扱う体験に、未来の入口を覗いたような面白さがある。</p>
+        </div>
+        <div class="beat tilt">
+          <span class="label">照れ</span>
+          <p>でもその高揚は、技術そのものへの評価だけでなく、操作している自分への小さな酔いも混じっていそう。</p>
+        </div>
+        <div class="beat depth">
+          <span class="label">問い</span>
+          <p>この楽しさは、道具の進化への反応なのか、自分の能力が外部化される快感なのか。</p>
+        </div>
+      </div>
+      <p class="note">
+        メモ: 「近未来」という言葉は便利だが、感情の粒度を少し隠す。次回は、面白さの発火点をもう一段だけ具体化する。
+      </p>
+    </section>
+  </main>
+</body>
+</html>
