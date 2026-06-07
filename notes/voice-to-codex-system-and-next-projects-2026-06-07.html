@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>音声ログからCodexへ、次のプロジェクト欲へ</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202326;
+      --muted: #687076;
+      --paper: #fbfaf6;
+      --surface: rgba(255, 255, 255, 0.78);
+      --line: #d8d1c5;
+      --spark: #0f8176;
+      --heat: #c45a3e;
+      --deep: #435aa3;
+      --gold: #b37a22;
+      --shadow: rgba(32, 35, 38, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.75;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(15, 129, 118, 0.14), transparent 32rem),
+        var(--paper);
+    }
+
+    main {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--spark);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .source {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 5px solid var(--spark);
+      background: var(--surface);
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .source p {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    section {
+      margin-top: 26px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 12px 30px var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: var(--deep);
+    }
+
+    .debugger {
+      border-top: 5px solid var(--heat);
+    }
+
+    .question {
+      border-top: 5px solid var(--deep);
+    }
+
+    .manual {
+      border-top: 5px solid var(--gold);
+    }
+
+    .arc {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .beat {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .beat:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .label {
+      width: fit-content;
+      padding: 2px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .rise .label {
+      background: var(--spark);
+    }
+
+    .scatter .label {
+      background: var(--heat);
+    }
+
+    .shape .label {
+      background: var(--deep);
+    }
+
+    .next .label {
+      background: var(--gold);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100% - 24px, 920px);
+        padding-top: 32px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      .beat {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-07</p>
+      <h1>音声ログからCodexへ、次のプロジェクト欲へ</h1>
+      <div class="source">
+        <p>
+          「VS Code、Codex、スマホアプリを連携して、気づいたことを音声で残すシステムを作成し、HTMLで可視化するようにした。
+          今回、Codexを実行するにあたり、他のプロジェクトとしてCodexを動かしたいという欲求がさらに湧いてきた。
+          まずは何ができるのかを調べた上で、時短ができたり面白いことができるアプリケーションなどを作りたい。
+          そして、従来の取り扱い説明書を作成したいと思っているが、どのようにしていいのかいまいちわかっていない。
+          そこも合わせて取り組んでいきたい。」
+        </p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>
+        かなり面白い進展です。ただし、ここで全肯定して「未来の創造者ですね」と言ってしまうと、
+        その場のテンションだけでプロジェクトが七色に増殖します。お茶目に言うと、Codexを起動した瞬間に
+        「あれも作れる、これも作れる」と脳内の企画部が勝手に朝礼を始めています。
+      </p>
+      <p>
+        今のログの核心は、システムを作れたことそのものよりも、
+        <strong>気づきを保存する仕組みを手に入れたことで、次の行動欲が増幅した</strong>点にあります。
+        ここを見落とすと、調査、時短アプリ、面白アプリ、取扱説明書づくりが全部同じ優先度に見えてしまう。
+        それは思考の豊かさでもありますが、同時にタスクの渋滞でもあります。
+      </p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>
+        Codexで別プロジェクトを動かしたい欲求の中心にあるのは、
+        <strong>作業時間を短くしたい</strong>ことですか、
+        <strong>自分の発想がすぐ形になる感覚を味わいたい</strong>ことですか、
+        それとも<strong>自分専用の知的作業環境を育てたい</strong>ことですか？
+      </p>
+    </section>
+
+    <section class="manual" aria-labelledby="manual-title">
+      <h2 id="manual-title">取扱説明書化への足場</h2>
+      <p>
+        「従来の取り扱い説明書」を作りたいなら、いきなり完成版のマニュアルを目指すより、
+        まずは小さく三分割するとよさそうです。
+        <strong>できることリスト</strong>、<strong>よく使う手順</strong>、<strong>失敗したときの戻り方</strong>。
+        この三つがあると、説明書は急に人間が読める形になります。
+      </p>
+      <p>
+        今回のシステムも、最初の取説項目にできます。
+        「音声で気づきを残す」「Codexに構造化させる」「HTMLで保存する」「必要ならGitHubへ同期する」。
+        まずはこの流れを一枚の手順書にする。壮大な知的OSを作る前に、足元のケーブルに名前を貼るところからです。
+      </p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat rise">
+          <span class="label">高揚</span>
+          <p>音声の気づきが、VS Code、Codex、スマホアプリ、HTML可視化へつながり、仕組みとして立ち上がった。</p>
+        </div>
+        <div class="beat scatter">
+          <span class="label">拡散</span>
+          <p>仕組みが動いたことで、別プロジェクト、時短アプリ、面白いアプリ、取説づくりへ欲求が一気に広がった。</p>
+        </div>
+        <div class="beat shape">
+          <span class="label">輪郭</span>
+          <p>今必要なのは、何ができるかの調査と、使い方を説明書に落とすための最小単位を決めること。</p>
+        </div>
+        <div class="beat next">
+          <span class="label">次手</span>
+          <p>まずは「できること」「よく使う手順」「失敗時の戻り方」の三項目で、Codex活用の取説を作り始める。</p>
+        </div>
+      </div>
+      <p class="note">
+        メモ: 可能性が見えた瞬間ほど、最初の一冊目の取説は小さく作る。大風呂敷は広げる前に、畳み方も決める。
+      </p>
+    </section>
+  </main>
+</body>
+</html>
