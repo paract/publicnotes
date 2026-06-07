@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codexで仕組み化して量産体制に入る</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202327;
+      --muted: #687079;
+      --paper: #fbfaf6;
+      --surface: rgba(255, 255, 255, 0.8);
+      --line: #d8d1c5;
+      --spark: #0e7f76;
+      --heat: #c4513d;
+      --logic: #4059a8;
+      --craft: #aa7626;
+      --shadow: rgba(32, 35, 39, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.75;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(14, 127, 118, 0.14), transparent 34rem),
+        var(--paper);
+    }
+
+    main {
+      width: min(940px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--spark);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .source {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 5px solid var(--spark);
+      background: var(--surface);
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .source p {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    section {
+      margin-top: 26px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 12px 30px var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: var(--logic);
+    }
+
+    .debugger {
+      border-top: 5px solid var(--heat);
+    }
+
+    .question {
+      border-top: 5px solid var(--logic);
+    }
+
+    .system {
+      border-top: 5px solid var(--craft);
+    }
+
+    .arc {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .beat {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .beat:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .label {
+      width: fit-content;
+      padding: 2px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .glow .label {
+      background: var(--spark);
+    }
+
+    .rush .label {
+      background: var(--heat);
+    }
+
+    .design .label {
+      background: var(--logic);
+    }
+
+    .practice .label {
+      background: var(--craft);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100% - 24px, 940px);
+        padding-top: 32px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      .beat {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-07</p>
+      <h1>Codexで仕組み化して量産体制に入る</h1>
+      <div class="source">
+        <p>
+          「スピリチュアル（感性）×データサイエンス（論理）」の領域に可能性を感じている。
+          ChatGPT PlusやCodex環境を使い、マイGPT、データ分析、プロンプト公開などを動かしたい。
+          ただ、Codexで仕組み化して量産体制に入りたい一方で、仕組み化の方法はまだ手探りなので、
+          そこもCodexと相談しながら進めたい。
+        </p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>
+        「ブルーオーシャン」「強みが爆発」「量産体制」。いいですね、言葉だけ見るともう来週には社内ベンチャーが三つ立ち上がりそうです。
+        ただし天邪鬼に見ると、いま一番危ないのは可能性の大きさではなく、
+        <strong>可能性が大きすぎて、最初の一個を雑に作ってしまうこと</strong>です。
+      </p>
+      <p>
+        特に「スピリチュアル（感性）×データサイエンス（論理）」は、魅力的な反面、かなり扱いの難しい領域です。
+        感性側に寄りすぎるとふわっとし、論理側に寄りすぎると冷蔵庫で保管された自己啓発になります。
+        なおさんの強みは、その中間で「実践ログを持っていること」なので、最初に量産すべきなのは思想ではなく、
+        <strong>実践ログを変換する型</strong>かもしれません。
+      </p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>
+        量産体制に入りたいとき、なおさんが本当に量産したいのは
+        <strong>投稿</strong>ですか、<strong>プロンプト</strong>ですか、<strong>GPTs</strong>ですか、
+        それとも「感性の気づきを論理の道具に変換する<strong>手順そのもの</strong>」ですか？
+      </p>
+    </section>
+
+    <section class="system" aria-labelledby="system-title">
+      <h2 id="system-title">仕組み化の仮説</h2>
+      <p>
+        手探りで進めるなら、Codexに相談する対象をいきなり「大きな事業」にせず、
+        まずは小さな変換パイプラインにするのがよさそうです。
+        入力は「内省ログ」。処理は「感性の言葉を抽出」「論理に翻訳」「穴を指摘」「なおさんの実践文脈に戻す」。
+        出力は「HTMLノート」「投稿案」「プロンプト」「取説の1項目」。
+      </p>
+      <p>
+        つまり、Codexで最初に作るべき量産機は、万能アプリではなく
+        <strong>内省ログを複数の成果物に分岐させる編集ライン</strong>です。
+        工場を作る前に、まずベルトコンベアの上に何を載せるか決める。ここを飛ばすと、謎の高性能空箱製造機になります。
+      </p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat glow">
+          <span class="label">高揚</span>
+          <p>共感され、自分の強みが「感性×論理」の領域で活きると感じ、可能性が一気に開けた。</p>
+        </div>
+        <div class="beat rush">
+          <span class="label">前のめり</span>
+          <p>マイGPT、データ分析、プロンプト公開、アプリ制作、取説化まで、やりたいことが一斉に走り出した。</p>
+        </div>
+        <div class="beat design">
+          <span class="label">設計</span>
+          <p>量産する対象を決めないと、Codex活用そのものが目的化しやすい。まずは変換の型を作る必要がある。</p>
+        </div>
+        <div class="beat practice">
+          <span class="label">実験</span>
+          <p>内省ログを起点に、HTML、投稿案、プロンプト、取説項目へ分岐させる小さな仕組みから始める。</p>
+        </div>
+      </div>
+      <p class="note">
+        メモ: 「量産」は速度の話だけではない。同じ品質で繰り返し出せる型を作ること。勢いは燃料、型はハンドル。
+      </p>
+    </section>
+  </main>
+</body>
+</html>
