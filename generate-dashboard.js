@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const jsdom = require('jsdom').JSDOM;
 
 // タグ定義とキーワードマッピング
@@ -55,6 +56,27 @@ function extractTags(text) {
   return sortedTags;
 }
 
+// Gitに追加された時刻を優先し、未コミットの新規ファイルは更新時刻を使う
+function getSortTime(filePath, stats) {
+  try {
+    const relativePath = path.relative(__dirname, filePath);
+    const output = execFileSync(
+      'git',
+      ['log', '--diff-filter=A', '--format=%ct', '--', relativePath],
+      { cwd: __dirname, encoding: 'utf-8' }
+    ).trim();
+
+    const firstTimestamp = output.split('\n').filter(Boolean).pop();
+    if (firstTimestamp) {
+      return Number(firstTimestamp) * 1000;
+    }
+  } catch {
+    // Git情報が取れない環境ではファイル更新時刻にフォールバックする
+  }
+
+  return stats.mtimeMs;
+}
+
 // HTMLファイルからテキストを抽出
 function extractTextFromHTML(filePath) {
   try {
@@ -100,7 +122,7 @@ function extractTextFromHTML(filePath) {
       filename,
       title,
       date,
-      sortTime: stats.mtimeMs,
+      sortTime: getSortTime(filePath, stats),
       excerpt,
       question,
       fullText
@@ -137,7 +159,7 @@ async function generateDashboard() {
     }
   }
 
-  // 更新時刻でソート（新しい順）。同日の複数ログも作成順が崩れないようにする。
+  // Gitに追加された時刻でソート（新しい順）。一括編集で順番が崩れないようにする。
   logs.sort((a, b) => b.sortTime - a.sortTime);
 
   // 全タグを収集してユニーク化
