@@ -162,6 +162,27 @@
       font-size: 0.95rem;
     }
 
+    .infographic {
+      border-top: 5px solid var(--soft);
+    }
+
+    .infographic-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin-top: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #f6f1e8;
+      box-shadow: 0 10px 24px var(--shadow);
+    }
+
+    .infographic-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     @media (max-width: 640px) {
       main {
         width: min(100% - 24px, 940px);
@@ -271,6 +292,17 @@
       <p>
         子どもの宿題やスマホ習慣に向き合うと、怒り、心配、後悔が一気に混ざります。親として助言したい気持ちが、子どもには圧力として届くこともあります。正解を急ぐ前に、今日の問題、習慣の問題、関係の問題を分けて見るための視点をまとめています。
       </p>
+    </section>
+
+    <section class="infographic" aria-labelledby="infographic-title">
+      <h2 id="infographic-title">図解</h2>
+      <div class="infographic-frame">
+        <img
+          src="../assets/son-homework-smartphone-parenting-infographic.png"
+          alt="宿題とスマホ習慣をめぐる怒り、願い、後悔、反復の感情ループから、今日の問題、習慣の問題、関係の問題へ分けて考える図解"
+          loading="lazy"
+        >
+      </div>
     </section>
   </main>
 </body>
