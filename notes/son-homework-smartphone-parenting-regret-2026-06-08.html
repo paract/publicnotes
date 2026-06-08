@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>宿題、スマホ、親としての介入と後悔</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202327;
+      --muted: #687079;
+      --paper: #fbfaf6;
+      --surface: rgba(255, 255, 255, 0.82);
+      --line: #d8d1c5;
+      --heat: #c4513d;
+      --care: #0e7f76;
+      --doubt: #4059a8;
+      --soft: #b56b2d;
+      --shadow: rgba(32, 35, 39, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.75;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(196, 81, 61, 0.12), transparent 34rem),
+        var(--paper);
+    }
+
+    main {
+      width: min(940px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--heat);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.35rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .source {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 5px solid var(--heat);
+      background: var(--surface);
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .source p {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    section {
+      margin-top: 26px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 12px 30px var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: var(--doubt);
+    }
+
+    .debugger {
+      border-top: 5px solid var(--heat);
+    }
+
+    .care {
+      border-top: 5px solid var(--care);
+    }
+
+    .question {
+      border-top: 5px solid var(--doubt);
+    }
+
+    .arc {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .beat {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .beat:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .label {
+      width: fit-content;
+      padding: 2px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .anger .label {
+      background: var(--heat);
+    }
+
+    .carebeat .label {
+      background: var(--care);
+    }
+
+    .regret .label {
+      background: var(--doubt);
+    }
+
+    .loop .label {
+      background: var(--soft);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100% - 24px, 940px);
+        padding-top: 32px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      .beat {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-08</p>
+      <h1>宿題、スマホ、親としての介入と後悔</h1>
+      <div class="source">
+        <p>
+          今朝は息子に宿題をしないことを咎めた。
+          土日で時間があったのにやらず、昨夜は「明日、早起きしてからやる」と言っていたのに早起きもできなかった。
+          ここ数ヶ月、暇があればスマホを触ってゲームや動画を見て過ごしている。
+          彼の人生だから咎めるのはよくない。
+          でも、親として選択肢が増えるようなアドバイスもしたい。
+          そのはずなのに怒り気味になり、雰囲気が悪くなる。
+          そして後から後悔する。
+          最適解を探そうとして、答えを出せず繰り返している。
+        </p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>
+        まず、ここには「宿題をやらない問題」だけではなく、
+        <strong>約束したことを実行しないことへの怒り</strong>と、
+        <strong>スマホに時間を吸われていることへの不安</strong>と、
+        <strong>親としてどう関わるべきかという迷い</strong>が同時に走っています。
+        そりゃ答えが出にくいです。三つの議題を一つの朝の会議で片づけようとしているので、議長の感情が先に閉会ベルを鳴らします。
+      </p>
+      <p>
+        天邪鬼に見ると、「彼の人生だから咎めるのはよくない」という言葉は優しさでもありますが、
+        もしかすると<strong>親として介入する難しさから少し引きたい気持ち</strong>も混ざっているかもしれません。
+        逆に「選択肢が増えるアドバイスをしたい」は立派ですが、怒り気味に出ると、子ども側には選択肢ではなく圧力として届きます。
+        親の助言、ラッピングを間違えると中身が知恵でも開封拒否されます。
+      </p>
+    </section>
+
+    <section class="care" aria-labelledby="care-title">
+      <h2 id="care-title">内側で起きていること</h2>
+      <p>
+        今回の苦しさは、息子さんをコントロールしたいだけではなく、
+        <strong>将来の選択肢を失ってほしくない</strong>という願いがあるから生まれている。
+        ただ、その願いが焦りを通ると、言葉が「助言」ではなく「詰問」に変換されやすい。
+      </p>
+      <p>
+        だから最適解を一発で探すより、まず分けるとよさそうです。
+        宿題の未完了は「今日の具体的な問題」。
+        スマホ習慣は「生活設計の問題」。
+        親子の雰囲気が悪くなることは「関わり方の問題」。
+        一つずつ扱わないと、全部が混ざって毎回フライパンで感情炒めになります。
+      </p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>
+        息子さんに本当に渡したいのは、
+        <strong>宿題を終わらせる行動</strong>ですか、
+        <strong>約束を自分で守る感覚</strong>ですか、
+        それとも<strong>スマホより自分の時間を選べる力</strong>ですか？
+      </p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat anger">
+          <span class="label">怒り</span>
+          <p>時間があったのに宿題をせず、早起きしてやるという約束も守られなかったことに苛立った。</p>
+        </div>
+        <div class="beat carebeat">
+          <span class="label">願い</span>
+          <p>本当は、親として息子さんの選択肢が増えるような関わり方をしたいと思っている。</p>
+        </div>
+        <div class="beat regret">
+          <span class="label">後悔</span>
+          <p>しかし怒り気味になり、雰囲気が悪くなったあとで、自分の関わり方を悔やんでいる。</p>
+        </div>
+        <div class="beat loop">
+          <span class="label">反復</span>
+          <p>最適解を探そうとするほど答えが出ず、同じような場面を繰り返している感覚がある。</p>
+        </div>
+      </div>
+      <p class="note">
+        メモ: 最適解がない場面では、「今日の問題」「習慣の問題」「関係の問題」を分ける。全部を同時に正そうとすると、正論が家庭内で渋滞する。
+      </p>
+    </section>
+  </main>
+</body>
+</html>
