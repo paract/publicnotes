@@ -259,19 +259,18 @@ function generateHTML(logs, tags) {
     .filter-section {
       margin-bottom: 40px;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 10px;
       justify-content: center;
       align-items: center;
     }
 
-    .filter-label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #0d2b4d;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-right: 8px;
+    .filter-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
     }
 
     .tag-btn {
@@ -297,6 +296,35 @@ function generateHTML(logs, tags) {
       background: #0d2b4d;
       color: white;
       box-shadow: 0 8px 16px rgba(13, 43, 77, 0.2);
+    }
+
+    .tag-toggle {
+      padding: 8px 14px;
+      border-color: #8aa0b7;
+      color: #355875;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .tag-panel {
+      width: min(520px, 100%);
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+      gap: 8px;
+      justify-content: center;
+      padding-top: 4px;
+    }
+
+    .tag-panel.open {
+      display: grid;
+    }
+
+    .tag-filter-btn {
+      padding: 6px 10px;
+      border-width: 1px;
+      border-radius: 14px;
+      font-size: 0.78rem;
+      line-height: 1.2;
+      text-align: center;
     }
 
     .grid {
@@ -429,14 +457,16 @@ function generateHTML(logs, tags) {
       }
 
       .filter-section {
-        flex-direction: column;
         align-items: stretch;
         margin-bottom: 32px;
       }
 
-      .filter-label {
-        margin-right: 0;
-        margin-bottom: 12px;
+      .filter-controls {
+        justify-content: center;
+      }
+
+      .tag-panel {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .grid {
@@ -461,9 +491,12 @@ function generateHTML(logs, tags) {
       <p>思考の資産化 — 内省と言語化の記録</p>
     </header>
 
-    <div class="filter-section" id="filterSection">
-      <span class="filter-label">フィルター:</span>
+    <div class="filter-section">
+      <div class="filter-controls">
       <button class="tag-btn active" data-tag="all">すべて表示</button>
+        <button class="tag-btn tag-toggle" id="tagToggle" type="button" aria-expanded="false" aria-controls="tagPanel">タグを表示</button>
+      </div>
+      <div class="tag-panel" id="tagPanel"></div>
     </div>
 
     <div class="grid" id="cardGrid">
@@ -478,19 +511,25 @@ function generateHTML(logs, tags) {
 
     // フィルターボタンを初期化
     function initializeFilters() {
-      const filterSection = document.getElementById('filterSection');
-      const allBtn = filterSection.querySelector('[data-tag="all"]');
+      const allBtn = document.querySelector('[data-tag="all"]');
+      const tagToggle = document.getElementById('tagToggle');
+      const tagPanel = document.getElementById('tagPanel');
 
       allTags.forEach(tag => {
         const btn = document.createElement('button');
-        btn.className = 'tag-btn';
+        btn.className = 'tag-btn tag-filter-btn';
         btn.textContent = tag;
         btn.setAttribute('data-tag', tag);
         btn.addEventListener('click', () => filterCards(tag, btn));
-        filterSection.appendChild(btn);
+        tagPanel.appendChild(btn);
       });
 
       allBtn.addEventListener('click', () => filterCards('all', allBtn));
+      tagToggle.addEventListener('click', () => {
+        const isOpen = tagPanel.classList.toggle('open');
+        tagToggle.setAttribute('aria-expanded', String(isOpen));
+        tagToggle.textContent = isOpen ? 'タグを隠す' : 'タグを表示';
+      });
     }
 
     // カード表示/非表示の切り替え
