@@ -110,11 +110,22 @@ function extractTextFromHTML(filePath) {
       }
     }
 
+    // 他者紹介用メモを取得
+    let shareSummary = '';
+    const shareSection = doc.querySelector('[aria-labelledby="share-title"]');
+    if (shareSection) {
+      const shareText = shareSection.querySelector('p');
+      if (shareText) {
+        shareSummary = shareText.textContent.trim();
+      }
+    }
+
     // テキスト全体を結合（タグ抽出用）
     const fullText = [
       title,
       excerpt,
       question,
+      shareSummary,
       doc.body.textContent
     ].join(' ');
 
@@ -125,6 +136,7 @@ function extractTextFromHTML(filePath) {
       sortTime: getSortTime(filePath, stats),
       excerpt,
       question,
+      shareSummary,
       fullText
     };
   } catch (error) {
@@ -154,8 +166,15 @@ async function generateDashboard() {
         title: data.title,
         excerpt: data.excerpt || data.fullText.substring(0, 100),
         question: data.question,
+        shareSummary: data.shareSummary,
         tags: tags.length > 0 ? tags : ['#その他']
       });
+
+      if (!data.shareSummary) {
+        console.warn(`⚠ Missing share summary: ${file}`);
+      } else if (/内省ログ|ノート/.test(data.shareSummary)) {
+        console.warn(`⚠ Share summary contains banned wording: ${file}`);
+      }
     }
   }
 
@@ -173,7 +192,7 @@ async function generateDashboard() {
   });
 
   // index.htmlを生成。sortTimeは並び替え専用なので公開データからは外す。
-  const publicLogs = logs.map(({ sortTime, ...log }) => log);
+  const publicLogs = logs.map(({ sortTime, shareSummary, ...log }) => log);
   const html = generateHTML(publicLogs, allTags);
   fs.writeFileSync(path.join(__dirname, 'index.html'), html);
 
