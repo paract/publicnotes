@@ -59,6 +59,7 @@ function extractTags(text) {
 function extractTextFromHTML(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
+    const stats = fs.statSync(filePath);
     const dom = new jsdom(content);
     const doc = dom.window.document;
 
@@ -99,6 +100,7 @@ function extractTextFromHTML(filePath) {
       filename,
       title,
       date,
+      sortTime: stats.mtimeMs,
       excerpt,
       question,
       fullText
@@ -126,6 +128,7 @@ async function generateDashboard() {
       logs.push({
         filename: file,
         date: data.date,
+        sortTime: data.sortTime,
         title: data.title,
         excerpt: data.excerpt || data.fullText.substring(0, 100),
         question: data.question,
@@ -134,8 +137,8 @@ async function generateDashboard() {
     }
   }
 
-  // 日付でソート（新しい順）
-  logs.sort((a, b) => new Date(b.date) - new Date(a.date));
+  // 更新時刻でソート（新しい順）。同日の複数ログも作成順が崩れないようにする。
+  logs.sort((a, b) => b.sortTime - a.sortTime);
 
   // 全タグを収集してユニーク化
   const allTags = [];
@@ -147,8 +150,9 @@ async function generateDashboard() {
     });
   });
 
-  // index.htmlを生成
-  const html = generateHTML(logs, allTags);
+  // index.htmlを生成。sortTimeは並び替え専用なので公開データからは外す。
+  const publicLogs = logs.map(({ sortTime, ...log }) => log);
+  const html = generateHTML(publicLogs, allTags);
   fs.writeFileSync(path.join(__dirname, 'index.html'), html);
 
   console.log(`✓ Dashboard generated with ${logs.length} logs and ${allTags.length} tags`);
