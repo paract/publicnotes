@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>publicnotesを他者も使えるアプリに整えた日</title>
+  <style>
+    :root {
+      --ink: #202327;
+      --muted: #687079;
+      --paper: #fbfaf6;
+      --surface: rgba(255,255,255,.84);
+      --line: #d8d1c5;
+      --teal: #0e7f76;
+      --blue: #4059a8;
+      --gold: #b56b2d;
+      --rust: #c4513d;
+      --shadow: rgba(32,35,39,.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.75;
+      color: var(--ink);
+      background: linear-gradient(180deg, rgba(14,127,118,.13), transparent 34rem), var(--paper);
+    }
+    main { width: min(940px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 64px; }
+    header { padding-bottom: 24px; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+    .eyebrow { margin: 0 0 8px; color: var(--teal); font-size: .9rem; font-weight: 700; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.35rem); line-height: 1.15; }
+    section, .source { margin-top: 26px; padding: 24px; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 12px 30px var(--shadow); }
+    .source { margin-top: 18px; border-left: 5px solid var(--teal); }
+    h2 { margin: 0 0 12px; font-size: 1.25rem; }
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: var(--blue); }
+    .debugger { border-top: 5px solid var(--rust); }
+    .system { border-top: 5px solid var(--teal); }
+    .question { border-top: 5px solid var(--blue); }
+    .infographic { border-top: 5px solid var(--gold); }
+    .arc { display: grid; gap: 14px; margin-top: 16px; }
+    .beat { display: grid; grid-template-columns: 112px 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); }
+    .beat:first-child { border-top: 0; padding-top: 0; }
+    .label { width: fit-content; padding: 2px 10px; border-radius: 999px; color: #fff; font-size: .82rem; font-weight: 700; white-space: nowrap; }
+    .map .label { background: var(--teal); }
+    .package .label { background: var(--blue); }
+    .release .label { background: var(--gold); }
+    .caution .label { background: var(--rust); }
+    .note { color: var(--muted); font-size: .95rem; }
+    .infographic-frame { width: 100%; aspect-ratio: 16/9; margin-top: 16px; overflow: hidden; border: 1px solid var(--line); background: #f6f1e8; box-shadow: 0 10px 24px var(--shadow); }
+    .infographic-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 640px) {
+      main { width: min(100% - 24px, 940px); padding-top: 32px; }
+      section, .source { padding: 18px; }
+      .beat { grid-template-columns: 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-09</p>
+      <h1>publicnotesを他者も使えるアプリに整えた日</h1>
+      <div class="source">
+        <p>今日は、個人用だったpublicnotesを、他者も初期化して使えるCodex連携型の静的ノート生成アプリへ整えた。スマホで書いた気づきが、CodexによってHTML化、紹介文化、図解化、トップページ生成、GitHub Pages公開まで進む仕組みを整理した。さらにCLI、テンプレート、README、設定ファイル、npm配布の形まで用意した。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>かなり前進しています。ただし「パッケージ化できた」と言うと、少しだけ箱の完成に酔いやすいです。箱ができたから商品になった、とは限りません。READMEを読んだ人が迷わず最初の一回を通せるか。そこまで見て、ようやく他者向けです。</p>
+      <p>天邪鬼に見るなら、今日の成果は完成ではなく、<strong>他者に渡して検証できる入口を作った</strong>ことです。秘密基地は楽しい。でも他者向けツールにするなら、入口に看板、床に段差なし、トイレの場所くらいは必要です。</p>
+    </section>
+
+    <section class="system" aria-labelledby="system-title">
+      <h2 id="system-title">今回の転換</h2>
+      <p>今日の大きな転換は、仕組みの主語が「自分」から「他者も使える」へ移ったことです。`notes/` にHTMLを貯めるだけでなく、`publicnotes init`、`publicnotes build`、テンプレート、設定ファイル、配布除外まで整えた。これは単なる整理ではなく、<strong>運用を再現可能にする作業</strong>です。</p>
+      <p>一方で、Codex、画像生成、GitHub Pages、npm配布という要素が増えたことで、利用者にとっての難所も増えています。次の課題は、機能追加ではなく「最初の一回をどれだけ迷わず通せるか」です。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>この仕組みを他者に渡すとき、最初に体験してほしい価値は <strong>HTMLが自動でできる便利さ</strong>ですか、<strong>自分の気づきが整理されて残る感覚</strong>ですか、それとも<strong>Codexを自分の思考パートナーとして扱える驚き</strong>ですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat map"><span class="label">整理</span><p>スマホ、Codex、Mac、GitHub Pagesの役割を分け、仕組みの全体像が見えた。</p></div>
+        <div class="beat package"><span class="label">変換</span><p>個人用の思考ログCMSを、CLIとテンプレートを持つ再利用可能なキットへ変換した。</p></div>
+        <div class="beat release"><span class="label">公開準備</span><p>README、設定ファイル、npm配布の形、別ディレクトリでの動作確認まで整えた。</p></div>
+        <div class="beat caution"><span class="label">課題</span><p>次は、他者が最初の一回で迷わず使えるかを検証する必要がある。</p></div>
+      </div>
+      <p class="note">メモ: パッケージ化はゴールではなく、他者に試してもらうための玄関づくり。玄関ができたら、次は人を招いて段差を見つける。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>スマホで書いた気づきをCodexが受け取り、HTML、紹介文、図解、トップページ、GitHub Pages公開までつなぐ仕組みを、他者も試せる形へ整えた話です。便利な個人ツールを作って終わらせず、再現できるキットにするために何を整えたのかを振り返っています。</p>
+    </section>
+
+    <section class="infographic" aria-labelledby="infographic-title">
+      <h2 id="infographic-title">図解</h2>
+      <div class="infographic-frame">
+        <img src="../assets/publicnotes-packaging-system-infographic-2026-06-09.png" alt="スマホ入力からCodex実行、HTML化、図解化、トップページ生成、GitHub Pages公開へ進む個人ワークフローを、CLIとテンプレートを備えた他者も使えるキットへ変換する図解" loading="lazy">
+      </div>
+    </section>
+  </main>
+</body>
+</html>
