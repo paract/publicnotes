@@ -1,0 +1,7 @@
+{
+  "siteTitle": "思考デバッガー",
+  "siteDescription": "内省と言語化の記録",
+  "notesDir": "notes",
+  "outputFile": "index.html",
+  "requireInfographics": true
+}

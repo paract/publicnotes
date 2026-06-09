@@ -1,11 +1,30 @@
 {
-  "name": "publicnotes",
+  "name": "@paract/publicnotes",
   "version": "1.0.0",
-  "description": "内省ログダッシュボード",
+  "description": "Codex-assisted public notes dashboard for introspection logs.",
   "main": "generate-dashboard.js",
-  "scripts": {
-    "build-dashboard": "node generate-dashboard.js"
+  "bin": {
+    "publicnotes": "bin/publicnotes.js"
   },
+  "scripts": {
+    "build": "node generate-dashboard.js",
+    "build-dashboard": "node generate-dashboard.js",
+    "check": "node generate-dashboard.js"
+  },
+  "files": [
+    "bin/",
+    "templates/",
+    "generate-dashboard.js",
+    "README.md"
+  ],
+  "keywords": [
+    "codex",
+    "notes",
+    "introspection",
+    "github-pages",
+    "static-site"
+  ],
+  "license": "MIT",
   "dependencies": {
     "jsdom": "^23.0.0"
   }

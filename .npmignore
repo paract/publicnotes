@@ -1,0 +1,7 @@
+notes/
+assets/
+index.html
+node_modules/
+.git/
+package-lock.json
+publicnotes.config.json

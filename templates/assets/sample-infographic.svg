@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">違和感を分けて考える図解</title>
+  <desc id="desc">小さな違和感を、出来事、前提、疲れの三つに分けて整理する16対9のインフォグラフィック。</desc>
+  <rect width="1600" height="900" fill="#fbfaf6"/>
+  <circle cx="330" cy="450" r="190" fill="#c4513d" opacity="0.9"/>
+  <text x="330" y="420" text-anchor="middle" font-family="sans-serif" font-size="74" font-weight="700" fill="#fff">違和感</text>
+  <text x="330" y="500" text-anchor="middle" font-family="sans-serif" font-size="34" fill="#fff">まず否定しない</text>
+  <path d="M540 450 C650 450 690 450 790 450" stroke="#4059a8" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M790 450 l-42 -30 v60 z" fill="#4059a8"/>
+  <text x="690" y="390" text-anchor="middle" font-family="sans-serif" font-size="42" font-weight="700" fill="#1f3b52">分けて見る</text>
+  <g font-family="sans-serif">
+    <rect x="880" y="180" width="430" height="130" rx="22" fill="#fff" stroke="#d8d1c5" stroke-width="4"/>
+    <text x="1095" y="255" text-anchor="middle" font-size="48" font-weight="700" fill="#0e7f76">出来事</text>
+    <rect x="880" y="385" width="430" height="130" rx="22" fill="#fff" stroke="#d8d1c5" stroke-width="4"/>
+    <text x="1095" y="460" text-anchor="middle" font-size="48" font-weight="700" fill="#4059a8">前提</text>
+    <rect x="880" y="590" width="430" height="130" rx="22" fill="#fff" stroke="#d8d1c5" stroke-width="4"/>
+    <text x="1095" y="665" text-anchor="middle" font-size="48" font-weight="700" fill="#b56b2d">疲れ</text>
+  </g>
+  <text x="800" y="815" text-anchor="middle" font-family="sans-serif" font-size="40" font-weight="700" fill="#202327">感情は残して、解釈だけ少しほどく</text>
+</svg>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>サンプル: 小さな違和感を分けてみる</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.75;
+      color: #202327;
+      background: #fbfaf6;
+    }
+
+    main {
+      width: min(880px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    section, header {
+      margin-top: 24px;
+      padding: 24px;
+      border: 1px solid #d8d1c5;
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p>Introspection Debug Log / 2026-01-01</p>
+      <h1>サンプル: 小さな違和感を分けてみる</h1>
+      <div class="source">
+        <p>今日は少しだけ違和感が残った。何が嫌だったのか、まだうまく言葉にならない。</p>
+      </div>
+    </header>
+
+    <section class="debugger">
+      <h2>思考のデバッガーからの突っ込み</h2>
+      <p>違和感がある、で止めると便利ですが、少し雑です。相手への不満なのか、自分の期待が外れたのか、疲れていただけなのか。ここを分けると、感情が少し扱いやすくなります。</p>
+    </section>
+
+    <section class="question">
+      <h2>一段深掘りする問い</h2>
+      <p>今回の違和感は、出来事そのものに対する反応ですか、それとも「こうあるべき」という自分の前提が揺れた反応ですか？</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>小さな違和感をそのまま流さず、何に反応していたのかを分けて考えるためのサンプルです。感情を否定せず、でも少しだけ疑ってみる入り口として使えます。</p>
+    </section>
+
+    <section aria-labelledby="infographic-title">
+      <h2 id="infographic-title">図解</h2>
+      <img src="../assets/sample-infographic.svg" alt="違和感を出来事、前提、疲れの三つに分けて考えるサンプル図解" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid #d8d1c5;">
+    </section>
+  </main>
+</body>
+</html>

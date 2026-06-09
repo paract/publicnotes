@@ -5,6 +5,15 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 const jsdom = require('jsdom').JSDOM;
 
+const defaultConfig = {
+  siteTitle: 'パラ式　思考デバッガー',
+  siteDescription: '思考の資産化 — 内省と言語化の記録',
+  notesDir: 'notes',
+  outputFile: 'index.html',
+  requireInfographics: false,
+  infographicRequiredFrom: null
+};
+
 // タグ定義とキーワードマッピング
 const tagDefinitions = {
   '#マインド': [
@@ -57,13 +66,13 @@ function extractTags(text) {
 }
 
 // Gitに追加された時刻を優先し、未コミットの新規ファイルは更新時刻を使う
-function getSortTime(filePath, stats) {
+function getSortTime(filePath, stats, rootDir) {
   try {
-    const relativePath = path.relative(__dirname, filePath);
+    const relativePath = path.relative(rootDir, filePath);
     const output = execFileSync(
       'git',
       ['log', '--diff-filter=A', '--format=%ct', '--', relativePath],
-      { cwd: __dirname, encoding: 'utf-8' }
+      { cwd: rootDir, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] }
     ).trim();
 
     const firstTimestamp = output.split('\n').filter(Boolean).pop();
@@ -77,8 +86,22 @@ function getSortTime(filePath, stats) {
   return stats.mtimeMs;
 }
 
+function loadConfig(rootDir) {
+  const configPath = path.join(rootDir, 'publicnotes.config.json');
+  if (!fs.existsSync(configPath)) {
+    return defaultConfig;
+  }
+
+  try {
+    const userConfig = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    return { ...defaultConfig, ...userConfig };
+  } catch (error) {
+    throw new Error(`Failed to read publicnotes.config.json: ${error.message}`);
+  }
+}
+
 // HTMLファイルからテキストを抽出
-function extractTextFromHTML(filePath) {
+function extractTextFromHTML(filePath, rootDir = process.cwd()) {
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
     const stats = fs.statSync(filePath);
@@ -120,12 +143,23 @@ function extractTextFromHTML(filePath) {
       }
     }
 
+    // インフォグラフィック画像を取得
+    let infographicSrc = '';
+    const infographicSection = doc.querySelector('[aria-labelledby="infographic-title"]');
+    if (infographicSection) {
+      const infographicImage = infographicSection.querySelector('img');
+      if (infographicImage) {
+        infographicSrc = infographicImage.getAttribute('src') || '';
+      }
+    }
+
     // テキスト全体を結合（タグ抽出用）
     const fullText = [
       title,
       excerpt,
       question,
       shareSummary,
+      infographicSrc,
       doc.body.textContent
     ].join(' ');
 
@@ -133,10 +167,11 @@ function extractTextFromHTML(filePath) {
       filename,
       title,
       date,
-      sortTime: getSortTime(filePath, stats),
+      sortTime: getSortTime(filePath, stats, rootDir),
       excerpt,
       question,
       shareSummary,
+      infographicSrc,
       fullText
     };
   } catch (error) {
@@ -146,8 +181,15 @@ function extractTextFromHTML(filePath) {
 }
 
 // メイン処理
-async function generateDashboard() {
-  const notesDir = path.join(__dirname, 'notes');
+async function generateDashboard(options = {}) {
+  const rootDir = options.rootDir || process.cwd();
+  const config = { ...loadConfig(rootDir), ...options.config };
+  const notesDir = path.join(rootDir, config.notesDir);
+
+  if (!fs.existsSync(notesDir)) {
+    fs.mkdirSync(notesDir, { recursive: true });
+  }
+
   const files = fs.readdirSync(notesDir).filter(f => f.endsWith('.html'));
 
   const logs = [];
@@ -155,7 +197,7 @@ async function generateDashboard() {
   // 各HTMLファイルを処理
   for (const file of files) {
     const filePath = path.join(notesDir, file);
-    const data = extractTextFromHTML(filePath);
+    const data = extractTextFromHTML(filePath, rootDir);
     
     if (data) {
       const tags = extractTags(data.fullText);
@@ -167,6 +209,7 @@ async function generateDashboard() {
         excerpt: data.excerpt || data.fullText.substring(0, 100),
         question: data.question,
         shareSummary: data.shareSummary,
+        infographicSrc: data.infographicSrc,
         tags: tags.length > 0 ? tags : ['#その他']
       });
 
@@ -174,6 +217,10 @@ async function generateDashboard() {
         console.warn(`⚠ Missing share summary: ${file}`);
       } else if (/内省ログ|ノート/.test(data.shareSummary)) {
         console.warn(`⚠ Share summary contains banned wording: ${file}`);
+      }
+
+      if (shouldRequireInfographic(data, config) && !data.infographicSrc) {
+        console.warn(`⚠ Missing infographic image: ${file}`);
       }
     }
   }
@@ -192,14 +239,16 @@ async function generateDashboard() {
   });
 
   // index.htmlを生成。sortTimeは並び替え専用なので公開データからは外す。
-  const publicLogs = logs.map(({ sortTime, shareSummary, ...log }) => log);
-  const html = generateHTML(publicLogs, allTags);
-  fs.writeFileSync(path.join(__dirname, 'index.html'), html);
+  const publicLogs = logs.map(({ sortTime, shareSummary, infographicSrc, ...log }) => log);
+  const html = generateHTML(publicLogs, allTags, config);
+  const outputFile = path.join(rootDir, config.outputFile);
+  fs.writeFileSync(outputFile, html);
 
   console.log(`✓ Dashboard generated with ${logs.length} logs and ${allTags.length} tags`);
+  return { logs, tags: allTags, outputFile };
 }
 
-function generateHTML(logs, tags) {
+function generateHTML(logs, tags, config = defaultConfig) {
   const logsJSON = JSON.stringify(logs, null, 2);
   const tagsJSON = JSON.stringify(tags, null, 2);
 
@@ -208,7 +257,7 @@ function generateHTML(logs, tags) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>パラ式　思考デバッガー</title>
+  <title>${escapeHTML(config.siteTitle)}</title>
   <style>
     * {
       margin: 0;
@@ -487,8 +536,8 @@ function generateHTML(logs, tags) {
 <body>
   <div class="container">
     <header>
-      <h1>パラ式　思考デバッガー</h1>
-      <p>思考の資産化 — 内省と言語化の記録</p>
+      <h1>${escapeHTML(config.siteTitle)}</h1>
+      <p>${escapeHTML(config.siteDescription)}</p>
     </header>
 
     <div class="filter-section">
@@ -618,8 +667,36 @@ function generateHTML(logs, tags) {
 </html>`;
 }
 
-// スクリプト実行
-generateDashboard().catch(error => {
-  console.error('Error generating dashboard:', error);
-  process.exit(1);
-});
+function shouldRequireInfographic(data, config) {
+  if (!config.requireInfographics) {
+    return false;
+  }
+
+  if (!config.infographicRequiredFrom) {
+    return true;
+  }
+
+  return data.date !== 'Unknown' && data.date >= config.infographicRequiredFrom;
+}
+
+function escapeHTML(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+if (require.main === module) {
+  generateDashboard().catch(error => {
+    console.error('Error generating dashboard:', error);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  generateDashboard,
+  extractTextFromHTML,
+  extractTags
+};
