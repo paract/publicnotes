@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>本線タスクより思考デバッガー改造が気になる</title>
+  <style>
+    :root {
+      --ink: #202327;
+      --muted: #687079;
+      --paper: #fbfaf6;
+      --surface: rgba(255,255,255,.84);
+      --line: #d8d1c5;
+      --teal: #0e7f76;
+      --blue: #4059a8;
+      --gold: #b56b2d;
+      --rust: #c4513d;
+      --shadow: rgba(32,35,39,.12);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; line-height: 1.75; color: var(--ink); background: linear-gradient(180deg, rgba(181,107,45,.13), transparent 34rem), var(--paper); }
+    main { width: min(940px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 64px; }
+    header { padding-bottom: 24px; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+    .eyebrow { margin: 0 0 8px; color: var(--gold); font-size: .9rem; font-weight: 700; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.35rem); line-height: 1.15; }
+    section, .source { margin-top: 26px; padding: 24px; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 12px 30px var(--shadow); }
+    .source { margin-top: 18px; border-left: 5px solid var(--gold); }
+    h2 { margin: 0 0 12px; font-size: 1.25rem; }
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: var(--blue); }
+    .debugger { border-top: 5px solid var(--rust); }
+    .question { border-top: 5px solid var(--blue); }
+    .infographic { border-top: 5px solid var(--teal); }
+    .arc { display: grid; gap: 14px; margin-top: 16px; }
+    .beat { display: grid; grid-template-columns: 112px 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); }
+    .beat:first-child { border-top: 0; padding-top: 0; }
+    .label { width: fit-content; padding: 2px 10px; border-radius: 999px; color: #fff; font-size: .82rem; font-weight: 700; white-space: nowrap; }
+    .task .label { background: var(--blue); }
+    .drift .label { background: var(--gold); }
+    .debug .label { background: var(--rust); }
+    .return .label { background: var(--teal); }
+    .note { color: var(--muted); font-size: .95rem; }
+    .infographic-frame { width: 100%; aspect-ratio: 16/9; margin-top: 16px; overflow: hidden; border: 1px solid var(--line); background: #f6f1e8; box-shadow: 0 10px 24px var(--shadow); }
+    .infographic-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 640px) { main { width: min(100% - 24px, 940px); padding-top: 32px; } section, .source { padding: 18px; } .beat { grid-template-columns: 1fr; gap: 8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-10</p>
+      <h1>本線タスクより思考デバッガー改造が気になる</h1>
+      <div class="source">
+        <p>動画編集やデジタルスタンプラリーなど、詰めなきゃいけないことがあるのに、思考デバッガーのバージョンアップが頭を占める。より面白く、効率良く、オートメーションでオリジナリティがあるアプリケーションを探そうとしている。思考が散らかってきた証拠だ。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>これはかなり正確な自己観察です。ただし「思考が散らかってきた」で終わらせると、少しだけ観察者ポジションに逃げられます。散らかりを見抜いた自分、ちょっとかっこいい。はい、そこにも小さな報酬があります。</p>
+      <p>天邪鬼に見るなら、思考デバッガー改造は単なる逃避ではなく、<strong>本線タスクを楽しく処理するための環境整備欲</strong>でもあります。ただし、環境整備が本線を食べ始めたら主従逆転です。包丁を研ぎ続けて、夕飯が出ないやつです。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>いま本当に欲しいのは、<strong>思考デバッガーの進化</strong>ですか、それとも動画編集やWeb3開発に戻るための<strong>着手の摩擦を下げる仕組み</strong>ですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat task"><span class="label">本線</span><p>動画編集やデジタルスタンプラリーなど、詰めるべきタスクがある。</p></div>
+        <div class="beat drift"><span class="label">逸れ</span><p>より面白く効率的な思考デバッガーの改造案に注意が吸われている。</p></div>
+        <div class="beat debug"><span class="label">検知</span><p>これは創造性でもあるが、思考が散らかり始めたサインでもある。</p></div>
+        <div class="beat return"><span class="label">戻す</span><p>まず本線タスクを一つだけ、次の具体行動に戻すのがよさそう。</p></div>
+      </div>
+      <p class="note">メモ: 改造欲は悪者ではない。ただし、今日の本線を進める燃料にならない改造は、いったん駐車場へ。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>やるべき作業があるのに、つい仕組みの改造や新しいアプリ探しに意識が向いてしまう。そんなとき、それは逃避なのか、環境整備なのか。創造性を否定せず、本線に戻るための見極め方を一緒に考える内容です。</p>
+    </section>
+
+    <section class="infographic" aria-labelledby="infographic-title">
+      <h2 id="infographic-title">図解</h2>
+      <div class="infographic-frame">
+        <img src="../assets/focus-drift-debugger-upgrade-2026-06-10.svg" alt="動画編集やWeb3ツール開発という本線から思考デバッガー改造欲へ注意が流れ、散らかり検知を経て本線の次の行動へ戻す図解" loading="lazy">
+      </div>
+    </section>
+  </main>
+</body>
+</html>
