@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>制服の裾上げと、緊急性が動かす力</title>
+  <style>
+    :root { --ink:#202327; --muted:#687079; --paper:#fbfaf6; --surface:rgba(255,255,255,.88); --line:#d8d1c5; --red:#b94a3a; --blue:#355c9b; --green:#26745f; --gold:#ad762f; --shadow:rgba(32,35,39,.12); }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.75; color:var(--ink); background:linear-gradient(180deg, rgba(173,118,47,.14), transparent 30rem), var(--paper); }
+    main { width:min(920px, calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--gold); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.25rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--gold); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .panic .label { background:var(--red); }
+    .backup .label { background:var(--green); }
+    .action .label { background:var(--blue); }
+    .learn .label { background:var(--gold); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px, 920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-11</p>
+      <h1>制服の裾上げと、緊急性が動かす力</h1>
+      <div class="source">
+        <p>息子が学校から帰ってきた後、制服のズボンを脱衣かごに出していた。そのまま気づかずに洗濯機で洗ってしまった。裾上げのテープが剥がれ、しかも当日濡れたまま登校しないといけない状況になった。幸い、洗い替えの制服のズボンを買っていたため代替できた。ただ、新しい制服のズボンも裾上げが必要で、人生で初めて取説を見ながら裾上げテープを貼る作業をした。緊急性が出たから短い時間で作業する必要があり可能になったが、余裕がある時だとなかなか動こうとしない。アクシデントだったが、逆にできないことに取り組めた結果オーライなのか、思考の転換なのか、いい経験ができた。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>これは生活感のある成功体験です。しかも、きれいな成功ではなく<strong>やらかし経由の成功</strong>。人生、たまに洗濯機が強制チュートリアルを起動してきます。</p>
+      <p>ただし「緊急性があればできる」で終わらせると、毎回アクシデント待ちになります。生活が火災報知器ベースのタスク管理になる。そこは少し危ない。</p>
+      <p>今回の本当の収穫は、追い込まれたことよりも、<strong>取説を見ながら初めての作業を進められた</strong>ことです。つまり、できないと思っていた作業の正体は「能力不足」ではなく、「着手条件が整っていなかった」可能性があります。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>余裕がある時に動けないのは、時間があるからですか。それとも、<strong>失敗してもいい小さな締切</strong>がないからですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat panic"><span class="label">焦り</span><p>制服のズボンを洗ってしまい、裾上げテープが剥がれる。朝の現実が急にバタつく。</p></div>
+        <div class="beat backup"><span class="label">救い</span><p>洗い替えを買っていたことで、最悪の事態は回避できた。過去の準備が今の自分を助けている。</p></div>
+        <div class="beat action"><span class="label">着手</span><p>新しいズボンに裾上げが必要になり、取説を見ながら初めての作業に取り組む。</p></div>
+        <div class="beat learn"><span class="label">転換</span><p>アクシデントが、できないと思っていたことへ触れるきっかけになった。</p></div>
+      </div>
+      <p class="note">メモ: 緊急性は強い着火剤。ただし、毎回火事にしなくても、小さな締切で同じ力を少しだけ借りられるかもしれない。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>制服をうっかり洗ってしまったアクシデントから、人生初の裾上げ作業に取り組むことになった話です。緊急性に押されると動ける自分を責めるのではなく、余裕がある時にも動ける小さな締切や仕組みをどう作るかを考えています。</p>
+    </section>
+  </main>
+</body>
+</html>
