@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>浅い眠りと、PCが起こした朝</title>
+  <style>
+    :root { --ink:#20242a; --muted:#69717b; --paper:#f8f7f2; --surface:rgba(255,255,255,.9); --line:#d5d0c7; --night:#283957; --blue:#456b91; --red:#a85247; --gold:#a97735; --green:#4f745f; --shadow:rgba(31,35,40,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(40,57,87,.18),transparent 32rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.2rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--night); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--night); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .sleep .label { background:var(--night); }
+    .drift .label { background:var(--gold); }
+    .trigger .label { background:var(--red); }
+    .forecast .label { background:var(--blue); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-17</p>
+      <h1>浅い眠りと、PCが起こした朝</h1>
+      <div class="source">
+        <p>就寝21:00。目が覚める1:30。そこからウダウダして3:30に二度寝。起床4:30。スッキリしない寝起き。5:20まで寝ようと思ったけど、強制的に起きたのは24時間可動しているPCが動いてなくて、気になって体を起こした。日中、眠くなるパターンだ。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>これは「早起きできた」ではあります。ありますが、少し天邪鬼に見ると、身体が起きたというより<strong>PC監視システムに召喚された朝</strong>です。目覚まし時計の新種としては近未来ですが、睡眠の質から見るとまあまあ強引です。</p>
+      <p>1:30に目が覚めてから3:30までウダウダした時点で、もう朝の勝負はかなり削られています。4:30に起きた自分を責める必要はないけれど、「起きられたからOK」にすると、日中の眠気という請求書があとから届きます。</p>
+      <p>今回のポイントは、起床時刻ではなく<strong>夜中に目が覚めた後の扱い方</strong>です。内を変えてみるなら、早起き根性を足すより、1:30に起きた時の小さなルールを変えるほうが効きそうです。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>次に1:30で目が覚めた時、スマホや思考に付き合う前に、<strong>何をしたら再入眠モードへ戻れる</strong>でしょうか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat sleep"><span class="label">就寝</span><p>21:00に寝る。時間だけ見れば良いスタートに見える。</p></div>
+        <div class="beat drift"><span class="label">中断</span><p>1:30に目が覚め、3:30までウダウダする。眠りの連続性が切れる。</p></div>
+        <div class="beat trigger"><span class="label">強制起動</span><p>5:20まで寝ようとしたが、24時間可動PCが動いていないことが気になり体を起こす。</p></div>
+        <div class="beat forecast"><span class="label">予報</span><p>スッキリしない寝起き。日中に眠くなるパターンだとすでに分かっている。</p></div>
+      </div>
+      <p class="note">メモ: 早起きの勝ち負けより、夜中に起きた後の復帰手順。ここを整えると、朝の自分にもう少し優しくなれそう。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>21時に寝たのに1時半に目が覚め、浅い眠りのまま朝を迎えた記録です。早起きできた事実だけを見ると成功に見えますが、日中の眠気まで含めると別の課題が見えてきます。起床時刻を責めるより、夜中に起きた後の復帰手順をどう作るか。睡眠と習慣の境目を静かに見直す内容です。</p>
+    </section>
+  </main>
+</body>
+</html>
