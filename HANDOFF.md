@@ -94,14 +94,9 @@ publicnotes build
 
 ## Current Known Good State
 
-Last successful note:
+Use `git log --oneline -5` for the latest successful commit and `index.html` for current note ordering.
 
-```text
-notes/focus-drift-debugger-upgrade-2026-06-10.html
-```
+## Visual Character Reference
 
-Last successful commit at handoff time:
+When creating diagrams or generated images, use `assets/references/main-character.png` as the main character reference: short brown hair, round black glasses, friendly smile, black T-shirt, denim, casual playful mood. Keep the core character impression while adapting pose, clothes, and scene to the topic.
 
-```text
-097126e Auto-sync log via Codex
-```
