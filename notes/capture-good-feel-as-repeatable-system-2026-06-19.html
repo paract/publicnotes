@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>「いい感じ」を再現できる仕組みに変える</title>
+  <style>
+    :root { --ink:#22252a; --muted:#68707a; --paper:#fbfaf6; --surface:rgba(255,255,255,.9); --line:#d9d2c6; --blue:#405d8f; --green:#4d7560; --gold:#ae7834; --red:#ad5245; --shadow:rgba(32,35,39,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(64,93,143,.13),transparent 34rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.25rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--gold); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .spark .label { background:var(--gold); }
+    .capture .label { background:var(--blue); }
+    .system .label { background:var(--green); }
+    .change .label { background:var(--red); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-19</p>
+      <h1>「いい感じ」を再現できる仕組みに変える</h1>
+      <div class="source">
+        <p>「いい感じ」を、偶然で終わらせたくなかった。良い文章が書けた。その瞬間に、「このテイストを継続して使いたい」と思って、すぐにGPTsを作成した。このスピード感は、自分でもちょっとびっくりした。今までなら、「いい感じに書けたな」で終わっていたかもしれない。でも今回は、その感覚をその場限りにせず、次にも使える形にしておきたいと思えた。良いものができたときに、それを再現できる仕組みに変える。こういう小さな行動の速さに、自分の変化が出ている気がする。あなたにも最近、「これは残しておきたい」と思って、すぐ形にしたものはありますか？</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>これはかなり良い変化です。「いい感じ」を感想で終わらせず、<strong>再利用できる型</strong>に変えた。つまり、偶然のヒットをスクリーンショットで眺めるだけでなく、道具箱に入れたわけです。ちょっと職人っぽい。いや、GPTsを即作る職人、令和の変な名工です。</p>
+      <p>ただし天邪鬼に突っ込むなら、「いい感じ」を仕組みにした瞬間、そのテイストが固定化されるリスクもあります。良い味だったからといって、毎回同じ出汁を入れれば名作になるとは限りません。再現性は武器ですが、<strong>変化し続ける余白</strong>まで閉じると、今度は型が檻になります。</p>
+      <p>今回の本質は、GPTsを作ったことだけではなく、良い感覚を見つけた直後に「残す」「使える形にする」と判断できたことです。内を変えてみる、という意味では、感性を消費する人から、感性を運用する人へ少し移動しています。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>今回残したかったのは、文章そのものですか。テイストの判断基準ですか。それとも、<strong>その文章を書けた時の自分の状態</strong>ですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat spark"><span class="label">手応え</span><p>良い文章が書けた。その瞬間に「これはいい」と感じる。</p></div>
+        <div class="beat capture"><span class="label">捕獲</span><p>偶然で終わらせず、このテイストを次にも使いたいと考える。</p></div>
+        <div class="beat system"><span class="label">仕組み化</span><p>すぐにGPTsを作り、感覚を再現できる道具へ変える。</p></div>
+        <div class="beat change"><span class="label">変化</span><p>以前なら流していた手応えを、行動へ変える速さに自分の変化を見る。</p></div>
+      </div>
+      <p class="note">メモ: 「いい感じ」は保存対象。ただし、保存するのは完成品だけでなく、そこに至る判断基準と余白もセットで。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>良い文章が書けた瞬間、その感覚を偶然で終わらせず、すぐGPTsとして残した話です。手応えを「いい感じだった」で流さず、次にも使える仕組みに変える。その小さな行動の速さから、自分の変化を感じています。ただし型に閉じ込めすぎず、判断基準と余白も一緒に残すことが大事です。</p>
+    </section>
+  </main>
+</body>
+</html>
