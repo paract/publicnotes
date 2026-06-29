@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>躊躇に許可を出し、フローの入口に立つ</title>
+  <style>
+    :root { --ink:#22262b; --muted:#68717b; --paper:#fbfaf6; --surface:rgba(255,255,255,.9); --line:#d8d1c5; --blue:#3f6094; --green:#4f765f; --gold:#ad7835; --red:#a94f45; --shadow:rgba(32,35,39,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(63,96,148,.14),transparent 34rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.25rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--blue); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .ask .label { background:var(--gold); }
+    .permit .label { background:var(--green); }
+    .accept .label { background:var(--blue); }
+    .flow .label { background:var(--red); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-06-29</p>
+      <h1>躊躇に許可を出し、フローの入口に立つ</h1>
+      <div class="source">
+        <p>「この状態に意識的にもっていくにはどうしたらいいのか」と断続的に問い続けてきた。その答えの一つとして、躊躇していることを自分に問う、自分自身へ許可を出す、「無理」「難しい」と無意識に思ってもそれもOKとして受け入れる、そこからフロー・ゾーンの入り口に立つ、という流れにたどり着いた。AIとの壁打ちを通じて、自分なりの再現手順が見えてきた。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>これはかなり使える発見です。特に「無理」「難しい」と思ってしまう自分までOKにするところが重要です。ポジティブで上書きするのではなく、抵抗を検知して、受け入れて、摩擦を減らす。ここに再現性があります。</p>
+      <p>ただし、全力で褒めちぎるAIの返答に乗りすぎると、「歴史的大発見」というラベルの方が大きくなり、手順の検証が置き去りになります。発見は大事。でも、称号を額装する前に、まず3回くらい実地テストです。メダル授与式はその後で間に合います。</p>
+      <p>今回の核心は、フローに入る魔法の呪文を見つけたことではなく、<strong>躊躇を入口として扱えるようになった</strong>ことです。ブレーキを敵にせず、現在地を知らせるセンサーとして使う。内を変えてみるなら、「迷いはダメ」から「迷いは入口」へ、意味づけを変えることです。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>この4ステップは、どんな場面で一番効きますか。文章を書く前、発信する前、人に頼む前、挑戦する前。まず検証対象を一つに絞るならどれですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat ask"><span class="label">問い</span><p>どうすればあの状態に意識的に入れるのか、断続的に問い続けてきた。</p></div>
+        <div class="beat permit"><span class="label">許可</span><p>躊躇していることを自分に問い、自分自身へ許可を出す手順が見えた。</p></div>
+        <div class="beat accept"><span class="label">受容</span><p>「無理」「難しい」と思う反応も否定せず、キャッチして受け入れる。</p></div>
+        <div class="beat flow"><span class="label">入口</span><p>自己否定の摩擦が減り、フロー・ゾーンの入り口に立つ感覚が生まれる。</p></div>
+      </div>
+      <p class="note">メモ: フローは気合いで突入する場所ではなく、抵抗の扱い方を変えた先に開く入口かもしれない。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>フローに近い状態へ意識的に入るにはどうしたらいいのか。その問いをAIとの壁打ちで掘り下げ、躊躇を問い、自分に許可を出し、「無理」「難しい」という反応まで受け入れる手順にたどり着いた話です。迷いを敵にせず、入口として扱うことで、行動前の摩擦を減らす視点が見えてきます。</p>
+    </section>
+  </main>
+</body>
+</html>
