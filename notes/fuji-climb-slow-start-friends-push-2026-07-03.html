@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>富士登山のスロースタートと、仲間に押される力</title>
+  <style>
+    :root { --ink:#22262b; --muted:#68717b; --paper:#fbfaf6; --surface:rgba(255,255,255,.9); --line:#d8d1c5; --blue:#3f6094; --green:#4f765f; --gold:#ad7835; --red:#a94f45; --shadow:rgba(32,35,39,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(63,96,148,.15),transparent 34rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.25rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--blue); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .slow .label { background:var(--gold); }
+    .risk .label { background:var(--red); }
+    .move .label { background:var(--green); }
+    .relation .label { background:var(--blue); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-03</p>
+      <h1>富士登山のスロースタートと、仲間に押される力</h1>
+      <div class="source">
+        <p>富士登山まで1ヶ月を切った。まだほとんど準備できていない。体作りや荷物点検まで。今年はスロースタート。ぶっちゃけ山をなめてる。新しいルートだからもう少し気合いがのってもいいんだろうけど。頂上は目指す。でもがんばり過ぎない。参加することが大切、ぐらいに思っている。現地に行ったり、当日になれば楽しいのは確定してるけどね。それでもスロースタート。ただ、仲間のおかげで重い腰があがった。なわ跳びした。背中を押したいし、押されて動き出せる。そういう関係がありがたい。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>「ぶっちゃけ山をなめてる」と自分で言えている時点で、完全にはなめていません。ちゃんと警告灯は点いています。ただ、その警告灯を見ながら「まあ当日楽しいし」と言っているので、車内BGMでアラーム音をかき消している感じはあります。</p>
+      <p>頂上は目指す。でもがんばり過ぎない。このバランス感覚は悪くありません。ただし富士登山は、気合いよりも準備がものを言うタイプのイベントです。<strong>がんばり過ぎない</strong>は良い方針ですが、<strong>準備しなさ過ぎる</strong>とは別物です。ここを混ぜると、山にツッコミを入れられます。わりと容赦なく。</p>
+      <p>今回の良いところは、仲間のおかげで最初の一歩が出たことです。なわ跳びした。小さいけれど、これは「準備モードに入った」という証拠です。内を変えてみるなら、「気合いが乗ったら始める」ではなく、<strong>仲間の力を借りて先に身体を動かす</strong>へ設定を変えることです。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>富士登山までの残り1ヶ月で、「がんばり過ぎないけど、山をなめない」ために最低限やる3つは何ですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat slow"><span class="label">遅れ</span><p>富士登山まで1ヶ月を切ったのに、体作りも荷物点検もまだ薄い。スロースタートの自覚がある。</p></div>
+        <div class="beat risk"><span class="label">警告</span><p>新しいルートなのに、どこか山を軽く見ている感覚がある。楽しみへの信頼が準備不足を隠している。</p></div>
+        <div class="beat move"><span class="label">着火</span><p>仲間のおかげで重い腰が上がり、なわ跳びをした。準備モードの最初のスイッチが入る。</p></div>
+        <div class="beat relation"><span class="label">関係</span><p>背中を押したいし、押されて動き出せる。そういう関係のありがたさを感じている。</p></div>
+      </div>
+      <p class="note">メモ: 参加することは大切。ただし、楽しむためにも最低限の準備はいる。山はノリで登れても、ノリだけでは下りられない。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>富士登山まで1ヶ月を切ったのに、準備はまだスロースタート。頂上は目指すけれど、がんばり過ぎない。その感覚の中にある油断と、仲間に背中を押されて動き出せたありがたさを見つめています。楽しむためにこそ、最低限の準備をどう始めるかを考える内容です。</p>
+    </section>
+  </main>
+</body>
+</html>
