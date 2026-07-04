@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>オンライン面談の熱量と、目的の輪郭</title>
+  <style>
+    :root { --ink:#22262b; --muted:#68717b; --paper:#fbfaf6; --surface:rgba(255,255,255,.9); --line:#d8d1c5; --blue:#3f6094; --green:#4f765f; --gold:#ad7835; --red:#a94f45; --shadow:rgba(32,35,39,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(63,96,148,.14),transparent 34rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.25rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--blue); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .open .label { background:var(--green); }
+    .spark .label { background:var(--gold); }
+    .noise .label { background:var(--red); }
+    .design .label { background:var(--blue); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-05</p>
+      <h1>オンライン面談の熱量と、目的の輪郭</h1>
+      <div class="source">
+        <p>オンラインで色んな分野の方と面談をする機会を作っている。トークテーマや熱量、マインドセットやビジネス展開。どこかで聞いたような知見や、斜め上から降ってくるような思考があって面白い。相性だけじゃないけど、面談の「目的」が曖昧だと居心地が悪くなることもたまにある笑</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>いろんな分野の人と話す機会を作っているのは、かなり良い探索です。トークテーマ、熱量、マインドセット、ビジネス展開。これは情報収集というより、<strong>人の思考OSを覗くフィールドワーク</strong>に近いです。</p>
+      <p>ただし、「面白い」で全部を回収すると少し危ないです。斜め上から降ってくる思考は刺激的ですが、刺激は栄養にもノイズにもなります。毎回「すごい話を聞いた」で終わると、知見のビュッフェでお腹いっぱい、でも皿の上に何が残ったか分からない状態になります。</p>
+      <p>面談の居心地が悪くなる時、相性だけの問題にすると楽です。でも天邪鬼に見るなら、そこには<strong>目的の不在</strong>が混ざっている可能性があります。目的が曖昧だと、会話の着地点がなくなり、相手の熱量も自分の受け取り方も宙に浮きます。雑談なら雑談でいい。ただ、探索、協業、学習、営業、紹介、壁打ちのどれなのかは、最初に薄くでも置いた方がいい。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>次の面談では、始まる前に「今日は何を持ち帰れたら成功か」を一言で置くなら、何になりますか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat open"><span class="label">探索</span><p>オンラインでさまざまな分野の人と話す機会を作っている。世界を広げる入口が増えている。</p></div>
+        <div class="beat spark"><span class="label">刺激</span><p>熱量やマインドセット、ビジネス展開、斜め上の思考に触れて面白さを感じる。</p></div>
+        <div class="beat noise"><span class="label">違和感</span><p>一方で、目的が曖昧な面談では居心地が悪くなることがある。会話の着地点がぼやける。</p></div>
+        <div class="beat design"><span class="label">設計</span><p>相性だけで片づけず、面談ごとに目的と持ち帰りを薄く設定する余地が見えている。</p></div>
+      </div>
+      <p class="note">メモ: 面談は化学反応。でも、最低限の実験目的がないと、煙が出ただけで終わることもある。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>オンラインでさまざまな分野の人と話す中で、熱量や考え方、ビジネス展開に触れる面白さを感じています。一方で、面談の目的が曖昧だと居心地が悪くなることもある。相性だけで片づけず、探索なのか壁打ちなのか協業なのか、会話の前に小さく目的を置く大切さを考える内容です。</p>
+    </section>
+  </main>
+</body>
+</html>
