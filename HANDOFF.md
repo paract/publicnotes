@@ -99,4 +99,19 @@ Use `git log --oneline -5` for the latest successful commit and `index.html` for
 ## Visual Character Reference
 
 When creating diagrams or generated images, use `assets/references/main-character.png` as the main character reference: short brown hair, round black glasses, friendly smile, black T-shirt, denim, casual playful mood. Keep the core character impression while adapting pose, clothes, and scene to the topic.
+## Diagram Design Selection
+
+When the user asks to create a diagram/image without specifying a style, do not generate immediately. Present the numbered choices below and ask for a number. If the user says "おまかせ", choose the best fit and briefly explain why. If the user already specifies a number or style, generate directly with that style.
+
+1. Cyber-Neon Aesthetics
+2. High-End Magazine Layout
+3. Ultra-Minimal Modern
+4. Bullet Journal & Hand-Drawn Sketch
+5. 80s City Pop Isometric
+6. Premium Corporate Flat
+7. Vintage Collage Texture
+8. Engineering Blueprint
+9. Minimal 3D Claymorphism
+10. Matte Black Minimalism
+11. Standard Editorial Infographic, the previous default style
 
