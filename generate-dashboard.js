@@ -491,6 +491,46 @@ function generateHTML(logs, tags, config = defaultConfig) {
       font-size: 1.1rem;
     }
 
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .page-btn {
+      min-width: 72px;
+      padding: 6px 12px;
+      border: 1px solid #8aa0b7;
+      background: rgba(255, 255, 255, 0.8);
+      color: #355875;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .page-btn:hover:not(:disabled) {
+      background: #0d2b4d;
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .page-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .page-status {
+      min-width: 64px;
+      color: #667078;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
     @media (max-width: 768px) {
       body {
         padding: 32px 16px;
@@ -551,18 +591,27 @@ function generateHTML(logs, tags, config = defaultConfig) {
     <div class="grid" id="cardGrid">
       <!-- Cards will be generated here -->
     </div>
+    <nav class="pagination" id="pagination" aria-label="ページ送り">
+      <button class="page-btn" id="prevPage" type="button">前へ</button>
+      <span class="page-status" id="pageStatus"></span>
+      <button class="page-btn" id="nextPage" type="button">次へ</button>
+    </nav>
   </div>
 
   <script>
     const logs = ${logsJSON};
     const allTags = ${tagsJSON};
+    const pageSize = 7;
     let activeFilter = 'all';
+    let currentPage = 1;
 
     // フィルターボタンを初期化
     function initializeFilters() {
       const allBtn = document.querySelector('[data-tag="all"]');
       const tagToggle = document.getElementById('tagToggle');
       const tagPanel = document.getElementById('tagPanel');
+      const prevPage = document.getElementById('prevPage');
+      const nextPage = document.getElementById('nextPage');
 
       allTags.forEach(tag => {
         const btn = document.createElement('button');
@@ -574,6 +623,8 @@ function generateHTML(logs, tags, config = defaultConfig) {
       });
 
       allBtn.addEventListener('click', () => filterCards('all', allBtn));
+      prevPage.addEventListener('click', () => changePage(-1));
+      nextPage.addEventListener('click', () => changePage(1));
       tagToggle.addEventListener('click', () => {
         const isOpen = tagPanel.classList.toggle('open');
         tagToggle.setAttribute('aria-expanded', String(isOpen));
@@ -584,6 +635,7 @@ function generateHTML(logs, tags, config = defaultConfig) {
     // カード表示/非表示の切り替え
     function filterCards(tag, button) {
       activeFilter = tag;
+      currentPage = 1;
 
       // ボタンのactive状態を更新
       document.querySelectorAll('.tag-btn').forEach(btn => {
@@ -591,37 +643,47 @@ function generateHTML(logs, tags, config = defaultConfig) {
       });
       button.classList.add('active');
 
-      // カードのフィルタリング
-      document.querySelectorAll('.card').forEach(card => {
-        if (tag === 'all') {
-          card.classList.remove('hidden');
-        } else {
-          const cardTags = card.getAttribute('data-tags').split(',');
-          card.classList.toggle('hidden', !cardTags.includes(tag));
-        }
-      });
+      renderCards();
+    }
 
-      // アニメーション
-      setTimeout(() => {
-        document.querySelectorAll('.card:not(.hidden)').forEach(card => {
-          card.style.animation = 'none';
-          setTimeout(() => {
-            card.style.animation = 'fadeIn 0.3s ease-out';
-          }, 10);
-        });
-      }, 50);
+    function getFilteredLogs() {
+      if (activeFilter === 'all') {
+        return logs;
+      }
+
+      return logs.filter(log => log.tags.includes(activeFilter));
+    }
+
+    function changePage(direction) {
+      const filteredLogs = getFilteredLogs();
+      const totalPages = Math.max(1, Math.ceil(filteredLogs.length / pageSize));
+      currentPage = Math.min(totalPages, Math.max(1, currentPage + direction));
+      renderCards();
     }
 
     // カードを描画
     function renderCards() {
       const grid = document.getElementById('cardGrid');
+      const pagination = document.getElementById('pagination');
+      const prevPage = document.getElementById('prevPage');
+      const nextPage = document.getElementById('nextPage');
+      const pageStatus = document.getElementById('pageStatus');
+      const filteredLogs = getFilteredLogs();
+      const totalPages = Math.max(1, Math.ceil(filteredLogs.length / pageSize));
 
-      if (logs.length === 0) {
+      grid.innerHTML = '';
+
+      if (filteredLogs.length === 0) {
         grid.innerHTML = '<div class="empty-state"><p>ログがまだありません</p></div>';
+        pagination.style.display = 'none';
         return;
       }
 
-      logs.forEach(log => {
+      currentPage = Math.min(currentPage, totalPages);
+      const startIndex = (currentPage - 1) * pageSize;
+      const pageLogs = filteredLogs.slice(startIndex, startIndex + pageSize);
+
+      pageLogs.forEach(log => {
         const card = document.createElement('a');
         card.href = \`notes/\${log.filename}\`;
         card.className = 'card';
@@ -657,6 +719,11 @@ function generateHTML(logs, tags, config = defaultConfig) {
 
         grid.appendChild(card);
       });
+
+      pagination.style.display = totalPages > 1 ? 'flex' : 'none';
+      prevPage.disabled = currentPage <= 1;
+      nextPage.disabled = currentPage >= totalPages;
+      pageStatus.textContent = \`\${currentPage} / \${totalPages}\`;
     }
 
     // 初期化
