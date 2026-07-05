@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>眠っていたGAS予約フォームが、いま必要になった</title>
+  <style>
+    :root { --ink:#22262b; --muted:#68717b; --paper:#fbfaf6; --surface:rgba(255,255,255,.9); --line:#d8d1c5; --blue:#3f6094; --green:#4f765f; --gold:#ad7835; --red:#a94f45; --shadow:rgba(32,35,39,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(173,120,53,.15),transparent 34rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--gold); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.25rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--gold); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .past .label { background:var(--gold); }
+    .need .label { background:var(--green); }
+    .debug .label { background:var(--blue); }
+    .drift .label { background:var(--red); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-05</p>
+      <h1>眠っていたGAS予約フォームが、いま必要になった</h1>
+      <div class="source">
+        <p>昨年の11月に面談予約フォームをGASで自作していた。プログラミングに興味を持ち出しはじめたときだった。作ったはいいけど活用まではできてなくて。今、やっと必要になって、ドライブから引っ張りだしてきた。色んな不具合があってそれも修正。時間がかかったけど、それすら楽しんでいる。本線からズレてるのを実感しながら笑、少しずつ作業をしていく。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>これはかなり良い「過去の自分からの仕送り」です。昨年11月、プログラミングに興味を持ち始めた時期に作った面談予約フォームが、時間差で実用品になっている。作った当時に活用できなかったから失敗、ではなく、<strong>必要になる未来へ先に置いていた試作品</strong>だった可能性があります。</p>
+      <p>ただし、本線からズレている自覚があるなら、そこは笑って済ませつつも管理対象です。楽しい修正作業は、気づくと「業務改善」という名の寄り道テーマパークになります。入園料は時間です。わりと高い。</p>
+      <p>今回の強さは、不具合修正すら楽しめていることです。これは単なる作業ではなく、過去の自分の未完成物を、今の自分が回収して使える形にしている状態です。内を変えてみるなら、「また脱線している」ではなく、<strong>脱線を本線に戻す条件を決める</strong>ことです。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>この予約フォーム修正は、どこまで進めたら「今回の目的には十分」と言えますか？完成度ではなく、運用開始ラインを一言で決めるなら何ですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat past"><span class="label">過去</span><p>昨年11月、プログラミングに興味を持ち始めた頃にGASで面談予約フォームを自作していた。</p></div>
+        <div class="beat need"><span class="label">再発見</span><p>今になって必要になり、ドライブから引っ張り出す。眠っていた試作品が用途を持ち始める。</p></div>
+        <div class="beat debug"><span class="label">修正</span><p>不具合がいろいろ出てきたが、それを直す時間すら楽しめている。</p></div>
+        <div class="beat drift"><span class="label">脱線</span><p>本線からズレている自覚もある。だからこそ、運用開始ラインを決めて戻る必要がある。</p></div>
+      </div>
+      <p class="note">メモ: 過去の試作品は、未来の自分への素材になる。ただし、素材磨きが趣味化したら、タイマーを置く。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>昨年、プログラミングに興味を持ち始めた頃にGASで作った面談予約フォームが、今になって必要になった話です。当時は活用しきれなかったものが、時間差で実用品として戻ってくる。不具合修正すら楽しみながら、過去の試作品を今の運用に接続していく感覚を見つめています。</p>
+    </section>
+  </main>
+</body>
+</html>
