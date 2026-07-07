@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>かゆいところに手が届く「まごの手」こそアイデア</title>
+  <style>
+    :root { --ink:#22262b; --muted:#68717b; --paper:#fbfaf6; --surface:rgba(255,255,255,.9); --line:#d8d1c5; --blue:#3f6094; --green:#4f765f; --gold:#ad7835; --red:#a94f45; --shadow:rgba(32,35,39,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(79,118,95,.14),transparent 34rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.25rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--green); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .itch .label { background:var(--gold); }
+    .make .label { background:var(--green); }
+    .soften .label { background:var(--blue); }
+    .scope .label { background:var(--red); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-08</p>
+      <h1>かゆいところに手が届く「まごの手」こそアイデア</h1>
+      <div class="source">
+        <p>かゆいところに手が届く「まごの手」こそアイデア。ZoomやGoogle Meetで日程調整した後、すぐリンクを発行したり、スケジューリングしたい。これをGoogle拡張機能で自作。日時を指定しなければブラウザから2タップでリンクを発行。オリジナルサイトにいかなくていい。きっと、そういうツールは探したらあるだろう。でも、探すより作ったほうが早い。カスタマイズできるし。みたいな発想になってきた。開発はむずかしいってイメージがすこしずつ、やわらかくなってきた。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>これはかなり良い変化です。「便利なツールを探す人」から、<strong>自分の手元の摩擦を削る人</strong>へ視点が移っています。大発明というより、日常の小さな引っかかりを見つける感度。まさに、まごの手です。地味だけど、かゆい場所に届くやつは強い。</p>
+      <p>ただし、ここで天邪鬼チェックです。「探すより作ったほうが早い」は、条件付きで正しいです。2タップでリンク発行する最小機能なら早い。でも、認証、権限、Google Meet連携、Zoom API、予定作成、例外処理まで全部抱えると、まごの手がいつの間にか介護ベッドになります。便利だけど急に大工事です。</p>
+      <p>今回の本質は、開発が簡単になったことではなく、<strong>開発への心理的な硬さがやわらかくなってきた</strong>ことです。「自分には無理」から「小さくなら作れるかも」へ変わっている。内を変えてみるなら、アイデアを壮大にしすぎず、最初の一手を「日時指定なしで2タップ発行」に固定することです。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>この拡張機能の最初の成功条件を一つに絞るなら、Zoom/Meet連携まで含めた完成ですか。それとも、<strong>ブラウザから2タップで使えるリンクを発行できる</strong>ことですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat itch"><span class="label">不便</span><p>日程調整後、ZoomやGoogle Meetのリンク発行やスケジューリングまでの小さな手間が気になる。</p></div>
+        <div class="beat make"><span class="label">自作</span><p>既存ツールを探すより、自分用にGoogle拡張機能で作ったほうが早いかもしれないと考える。</p></div>
+        <div class="beat soften"><span class="label">変化</span><p>開発はむずかしいというイメージが少しずつやわらぎ、小さな道具なら作れる感覚が出てくる。</p></div>
+        <div class="beat scope"><span class="label">範囲</span><p>最初は「日時指定なしで2タップ発行」まで絞る。広げすぎず、まごの手サイズで始める。</p></div>
+      </div>
+      <p class="note">メモ: 良いアイデアは、壮大な構想より先に「いま面倒な2タップ」を減らすところに出る。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>ZoomやGoogle Meetのリンク発行を、ブラウザから2タップで済ませたい。そんな小さな不便から、Google拡張機能を自作する発想が出てきた話です。既存ツールを探すより、自分の使い方に合わせて作る。開発への心理的なハードルが少しずつ下がり、日常の摩擦を道具化する視点が育っています。</p>
+    </section>
+  </main>
+</body>
+</html>
