@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>散らかるプロジェクトと、完遂のゴールを下げる</title>
+  <style>
+    :root { --ink:#22262b; --muted:#68717b; --paper:#fbfaf6; --surface:rgba(255,255,255,.9); --line:#d8d1c5; --blue:#3f6094; --green:#4f765f; --gold:#ad7835; --red:#a94f45; --shadow:rgba(32,35,39,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(63,96,148,.14),transparent 34rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.25rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--blue); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .spark .label { background:var(--gold); }
+    .scatter .label { background:var(--red); }
+    .sort .label { background:var(--blue); }
+    .finish .label { background:var(--green); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-09</p>
+      <h1>散らかるプロジェクトと、完遂のゴールを下げる</h1>
+      <div class="source">
+        <p>思考が散らかっている。新しいプロジェクトを考えるのが楽しい。立ち上げて少し進めると、飽きるかのように中途半端で手つけずになる。頓挫はしていないけれど放置気味。1つずつ完遂させたいと思っている。AIに相談すると、0から1を作るのが得意な人にはよくある悩みだと言われ、完遂のゴールを下げること、放置中のプロジェクトを仕分けること、15分だけ触る仕組みや人を巻き込む締め切りを作ることを提案された。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>新しいプロジェクトを考えるのが楽しいのは、かなり自然です。0から1は脳内で花火が上がります。問題は、花火大会のあとに会場の片付けが待っていることです。企画は浴衣で来るのに、完遂は軍手で来ます。</p>
+      <p>AIの回答にある「意志が弱いわけではない」は半分その通りです。ただし、ここで安心しすぎると「自分は0→1タイプだから」と、未完を美しい特性に変換できます。便利な免罪符です。でも未完プロジェクトは、頓挫していなくても脳内メモリを食います。タブを閉じていないブラウザみたいに、静かに重い。</p>
+      <p>今回の本質は、熱量を責めることではなく、<strong>完遂の定義を小さく設計する</strong>ことです。完成を100点に置くと、途中の地味作業で失速します。まずは「人に見せられるベータ版」「1回だけ使える状態」「説明ページだけ公開」くらいまでゴールを下げる。完遂のハードルを下げるのは妥協ではなく、前に進むための足場です。</p>
+      <p>内を変えてみるなら、「どれも頓挫していない」から「いま動かすもの以外は一時停止にする」へ。全部を大事に持つより、今作を一つ選ぶ方が、結果的にアイデアを救います。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>いま放置気味のプロジェクトを全部並べたとき、次の7日間だけ「今作」として扱う一つはどれですか？そして、その7日後の最低限の完遂ラインは何ですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat spark"><span class="label">高揚</span><p>新しいプロジェクトを考えるのは楽しい。立ち上げ時のワクワクが強い。</p></div>
+        <div class="beat scatter"><span class="label">散乱</span><p>少し進むと熱量が落ち、未完のまま放置気味のものが増えていく。</p></div>
+        <div class="beat sort"><span class="label">仕分け</span><p>今すぐやる、いつかやる、熱が冷めたものに分ける必要がある。</p></div>
+        <div class="beat finish"><span class="label">完遂</span><p>100点の完成ではなく、ベータ版や1回使える状態をゴールにして前へ進める。</p></div>
+      </div>
+      <p class="note">メモ: 0→1の才能を守るには、1→1.1の地味な足場がいる。花火のあとに、軍手を一つだけ持つ。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>新しいプロジェクトを考えるのは楽しいけれど、少し進めると中途半端なまま放置気味になる。その悩みを、0から1の高揚と、完遂に必要な地味な作業の違いから見つめています。大切なのは意志の強さより、今作を一つ選び、7日後の最低限の完成ラインを小さく決めることです。</p>
+    </section>
+  </main>
+</body>
+</html>
