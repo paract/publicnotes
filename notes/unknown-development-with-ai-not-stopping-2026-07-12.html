@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>苦手だったのは開発か、一人で未知を進むことか</title>
+  <style>
+    :root { --ink:#22262b; --muted:#68717b; --paper:#fbfaf6; --surface:rgba(255,255,255,.9); --line:#d8d1c5; --blue:#3f6094; --green:#4f765f; --gold:#ad7835; --red:#a94f45; --shadow:rgba(32,35,39,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(79,118,95,.14),transparent 34rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.25rem); line-height:1.15; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--green); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .fear .label { background:var(--red); }
+    .explain .label { background:var(--gold); }
+    .test .label { background:var(--blue); }
+    .ability .label { background:var(--green); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:640px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-12</p>
+      <h1>苦手だったのは開発か、一人で未知を進むことか</h1>
+      <div class="source">
+        <p>苦手だったことが得意になったというより、苦手でも前に進める方法を手に入れたのかもしれない。以前は認証、Developer設定、APIキー、環境変数にぶつかると、よく分からない、壊しそう、触らない、で止まっていた。今はAIに状況を説明し、エラーを切り分け、試し、少し理解する流れに変わっている。成長したのは開発知識だけではなく、分からない場所で停止しない力だ。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>これは「開発が得意になった」という華やかな話より、ずっと実用的です。未知の画面やエラーに出会っても、逃げずに状況を言葉へ変えられる。分からない場所で止まらない力は、知識が増えたこと以上に再利用できます。</p>
+      <p>ただし、AIが解決してくれたことで、自分も理解した気になっていないかは点検が必要です。動いたコードは、理解証明書ではありません。機械は動いた。でも本人の頭には「なんか直った」が残る。これは開発あるあるの、かなり感じのいい落とし穴です。</p>
+      <p>自分の力になったかを見るなら、次に似た問題が出た時、前回より早く<strong>見る場所、違い、重要なエラー文、AIへ渡す情報</strong>を選べるかどうかです。全部を暗記する必要はない。正解を覚えるより、問題の住所を絞れる方が強い。</p>
+      <p>内を変えてみるなら、「自分は開発が苦手」から「一人で未知を抱えると止まりやすい」へ、問題の定義を変えることです。AIは答え係というより、未知を一緒に分解する相棒として使う方が、力が残ります。</p>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>次に同じような認証エラーが出た時、AIへ質問する前に、自分だけで特定できそうな「問題の住所」はどこまでですか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat fear"><span class="label">停止</span><p>設定や認証が分からず、壊しそうという不安から触らない選択をしていた。</p></div>
+        <div class="beat explain"><span class="label">説明</span><p>今は分からない状況をAIへ説明し、エラーを一緒に切り分けられる。</p></div>
+        <div class="beat test"><span class="label">試行</span><p>提案を試し、結果を返し、少しずつ問題の場所と仕組みを理解する。</p></div>
+        <div class="beat ability"><span class="label">成長</span><p>未知を消すのではなく、未知のまま扱い、停止せず前へ進めるようになってきた。</p></div>
+      </div>
+      <p class="note">メモ: 成長の証拠は、全部覚えたことではない。次に迷った時、前より早く問題の住所を絞れること。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>認証やAPI設定にぶつかると、壊しそうで手を止めていた。今はAIに状況を説明し、エラーを切り分け、試しながら少しずつ理解できるようになっています。得意になったというより、苦手でも前へ進む方法を得た。未知をなくすのではなく、未知のまま扱える力について考える内容です。</p>
+    </section>
+  </main>
+</body>
+</html>
