@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>自分をAIに伝えることは、止まらないための仕組みになるか</title>
+  <style>
+    :root { --ink:#24262b; --muted:#687078; --paper:#f8f7f2; --surface:rgba(255,255,255,.92); --line:#d8d3c9; --blue:#426892; --green:#507761; --gold:#a87635; --red:#a64f4a; --shadow:rgba(32,36,40,.11); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; color:var(--ink); background:linear-gradient(180deg,rgba(66,104,146,.14),transparent 34rem),var(--paper); }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; max-width:820px; font-size:clamp(2rem,5vw,3.2rem); line-height:1.18; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { margin-top:18px; border-left:5px solid var(--blue); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--gold); }
+    .protocol { border-top:5px solid var(--green); }
+    .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+    .step { padding:16px; border:1px solid var(--line); background:#fff; }
+    .step b { display:block; margin-bottom:5px; color:var(--green); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { border-top:0; padding-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .expect .label { background:var(--blue); }
+    .unease .label { background:var(--red); }
+    .design .label { background:var(--gold); }
+    .trust .label { background:var(--green); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:700px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .steps { grid-template-columns:1fr; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-14</p>
+      <h1>自分をAIに伝えることは、止まらないための仕組みになるか</h1>
+      <div class="source">
+        <p>自分をAIに伝えることで、よりスムーズに作業を進めつつ、止まりそうになったときの対策になるだろう。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>これはかなり相性のよい使い方だと思う。僕は可能性を見つけると、完成形まで一気に構想が広がる。一方で、現実の進捗がそこへ追いつかないと、手が止まったり、活動そのものの意味まで疑ったりしやすい。AIがこの傾向を知っていれば、「もっと案を出しましょう」ではなく、<strong>いま着手する一つと、今日試す最小単位</strong>へ戻してもらえる。</p>
+      <p>相手の反応を自分の価値への判決に変えそうなときも、「反応は仮説へのデータ」と切り分けてもらえる。大きな未来像に比べてDM一通やヒアリング一件が小さく見えたときは、それを一人の状態を変えるための本線として接続してもらう。自分の特性をAIへ伝えることは、会話を速くするだけでなく、止まり方に合わせたガードレールを置くことになる。</p>
+      <p>ただし、ここで少し天邪鬼な注意を一つ。AIに渡したプロフィールは「自分の取扱説明書」ではあっても、永久保存版の人格証明書ではない。古い説明を信じすぎると、AIが毎回「あなたはアイデアが多すぎます」と言い、本人より先にキャラを固定してくる。せっかく成長しても、AIだけが旧型パラを大切に保管していたら、少々ありがた迷惑だ。</p>
+      <p>だから、保存するべきなのは性格だけではない。<strong>どんな兆候で止まり、どんな介入なら再び動けたか</strong>という観測可能な履歴である。自己理解を答えとして固めるのではなく、使いながら更新する仮説にする。それならAIは、僕を決めつける装置ではなく、僕が自分の扱い方を改善する共同編集者になる。</p>
+    </section>
+
+    <section class="protocol" aria-labelledby="protocol-title">
+      <h2 id="protocol-title">止まりそうなときの運用ルール</h2>
+      <div class="steps">
+        <div class="step"><b>1. 停止の種類を分ける</b>情報不足、選択過多、疲労、価値不安のどれかを先に判定する。</div>
+        <div class="step"><b>2. 解釈と事実を分ける</b>反応がない事実と、「価値がない」という自分の解釈を混ぜない。</div>
+        <div class="step"><b>3. 一人への実験に戻す</b>主プロジェクトを一つに絞り、7日以内にできる最小の接触や検証を決める。</div>
+      </div>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>AIに知っておいてほしいのは「自分はどんな人か」だけだろうか。それとも、本当に役立つのは「止まる直前に何が起こり、どんな一言や行動で再び動けたか」という具体的な履歴ではないだろうか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat expect"><span class="label">期待</span><p>自分をAIへ伝えれば、説明の手間が減り、作業が滑らかに進みそうだと感じる。</p></div>
+        <div class="beat unease"><span class="label">警戒</span><p>保存した特性が固定観念になり、現在の自分より古い説明に誘導される危うさにも気づく。</p></div>
+        <div class="beat design"><span class="label">設計</span><p>性格の説明だけでなく、停止の兆候と有効だった対策を運用ルールとして渡す。</p></div>
+        <div class="beat trust"><span class="label">前進</span><p>AIに決めてもらうのではなく、自分の扱い方を一緒に更新することで、止まっても戻れる感覚を持つ。</p></div>
+      </div>
+      <p class="note">メモ: 自己理解は完成品ではない。行動の結果で更新し続ける設定ファイルに近い。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>自分の強みや止まりやすい場面をAIへ伝えておけば、毎回ゼロから説明せず、必要なときに適切な軌道修正を受けやすくなります。ただし、保存した人物像が自分を縛る設定になっては本末転倒。性格を固定するのではなく、止まる兆候と再び動けた方法を更新し続ける。AIを、自分を決めつける装置ではなく、自分の扱い方を一緒に改善する共同編集者として使う考察です。</p>
+    </section>
+  </main>
+</body>
+</html>
