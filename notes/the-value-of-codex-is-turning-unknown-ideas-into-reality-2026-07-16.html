@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codexの価値は、分からないままでも形にできること</title>
+  <style>
+    :root { --ink:#23272b; --muted:#697178; --paper:#f8f7f3; --surface:#fff; --line:#d9d4ca; --blue:#416b96; --green:#52775f; --gold:#a97836; --red:#a64f48; --shadow:rgba(32,36,40,.1); }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,rgba(65,107,150,.14),transparent 34rem),var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; }
+    main { width:min(920px,calc(100% - 32px)); margin:auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { max-width:850px; margin:0; font-size:clamp(2rem,5vw,3.2rem); line-height:1.18; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:rgba(255,255,255,.92); box-shadow:0 12px 30px var(--shadow); }
+    .source { border-left:5px solid var(--blue); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--gold); }
+    .shift { border-top:5px solid var(--green); }
+    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:16px; }
+    .item { padding:16px; border:1px solid var(--line); background:var(--surface); }
+    .item b { display:block; margin-bottom:4px; color:var(--green); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { padding-top:0; border-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .fog .label { background:var(--muted); }
+    .stop .label { background:var(--red); }
+    .talk .label { background:var(--gold); }
+    .move .label { background:var(--green); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:680px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .grid { grid-template-columns:1fr; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-16</p>
+      <h1>Codexの価値は、分からないままでも形にできること</h1>
+      <div class="source">
+        <p>何でもできると聞かされても、そもそも何ができるのか分からないCodexやClaude Code。この答えは「やりたいことを分からないまま止めずに形にできること」だと思う。</p>
+        <p>アイデアはあるけれど作り方が分からない。エラーが出ると止まる。外注するほどではないが、自分ではできない。毎回同じ作業に時間を取られる。そうした状態から、AIと相談しながら、実際に作る、直す、自動化するところまで進められる。</p>
+        <p>単にコードを書いてもらうのではなく、「できないから諦める」を減らして、思いついたことを試せるようになる。時間や外注費の節約以上に、自分一人なら止まっていたことが前へ進む。そのことに大きな価値を感じている。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>「何でもできます」は、便利そうでいて、初心者にはほとんど何も説明していない。工具箱を渡して「家でも宇宙船でも作れます」と言われても、まず何を握ればいいのか分からない。CodexやClaude Codeの価値を、機能一覧ではなく<strong>止まっていた状態がどう変わるか</strong>で捉えたのは、かなり実用的だ。</p>
+      <p>AIが埋めるのは、知識の不足だけではない。曖昧なアイデアを言葉にし、作業を小さく分け、エラーの場所を探し、修正して、実際に動くところまで付き合う。つまり「分からない」を消してから始めるのではなく、分からないものを抱えたまま進めるようになる。</p>
+      <p>ただし、「止めずに形にできる」は少しだけ盛っている。AIは前進を助けるが、方向が曖昧なら迷走も高速化する。可能性を見つけやすい人ほど、アプリ、LP、自動化、発信へ枝を増やし、全部が半歩ずつ進むという器用な停滞もできてしまう。AIまで巻き込んだ豪華な寄り道である。</p>
+      <p>だから必要なのは、「何を作れるか」より先に、<strong>誰のどんな停止を、どこまで変えれば今回は完成か</strong>を決めること。内を変えてみるなら、「自分にはできない」から「次に何を試せばよいか、まだ分解できていない」へ言い換える。AIは万能な代行者ではなく、諦める前に一回試せる状態を作る実行パートナーなのだと思う。</p>
+    </section>
+
+    <section class="shift" aria-labelledby="shift-title">
+      <h2 id="shift-title">「できない」を試せる形へ変える</h2>
+      <div class="grid">
+        <div class="item"><b>作り方が分からない</b>目的を伝え、必要な作業と最初の一歩へ分解する。</div>
+        <div class="item"><b>エラーで止まる</b>状況とエラー文を渡し、原因を切り分けて一つずつ試す。</div>
+        <div class="item"><b>自分では作れない</b>小さな成果物を一緒に作り、使えるところまで確かめる。</div>
+        <div class="item"><b>同じ作業が続く</b>まず手作業を整理し、繰り返す部分だけを自動化する。</div>
+      </div>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>いま「自分ではできない」として止めていることを一つ選ぶなら、それは誰のどんな状態を変えるもので、どこまで動けば最初の完成と呼べるだろうか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat fog"><span class="label">戸惑い</span><p>何でもできると言われるほど、具体的に何を頼めばよいのか分からなくなる。</p></div>
+        <div class="beat stop"><span class="label">停止</span><p>作り方、エラー、費用、反復作業が壁になり、アイデアを諦めそうになる。</p></div>
+        <div class="beat talk"><span class="label">対話</span><p>分からない状態のままAIへ渡し、目的と問題を小さな作業へ分解していく。</p></div>
+        <div class="beat move"><span class="label">実感</span><p>作る、直す、自動化するところまで進み、諦める前に試せる範囲が広がる。</p></div>
+      </div>
+      <p class="note">メモ: AIの価値は万能さではなく、「分からない」を次の一手へ翻訳できること。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>「何でもできる」と言われても、何を頼めばよいのか分からないCodexやClaude Code。その価値はコードを書かせることだけではなく、作り方が分からない、エラーで止まる、自分ではできないという状態を、次に試せる作業へ変えることにあります。万能な魔法ではないけれど、諦める前に一回作り、直し、動かせる。AIと進む意味を、機能ではなく変化から考えています。</p>
+    </section>
+  </main>
+</body>
+</html>
