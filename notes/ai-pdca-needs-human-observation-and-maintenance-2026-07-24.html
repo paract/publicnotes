@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIでPDCAを回すなら、AIを監督するPDCAも必要</title>
+  <style>
+    :root { --ink:#23272b; --muted:#687179; --paper:#f8f7f2; --surface:#fff; --line:#d8d3ca; --blue:#426b95; --green:#53775f; --gold:#a77737; --red:#a64f48; --shadow:rgba(32,36,40,.1); }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,rgba(167,119,55,.15),transparent 34rem),var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; }
+    main { width:min(920px,calc(100% - 32px)); margin:auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 8px; color:var(--gold); font-size:.9rem; font-weight:700; }
+    h1 { max-width:850px; margin:0; font-size:clamp(2rem,5vw,3.2rem); line-height:1.18; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:rgba(255,255,255,.92); box-shadow:0 12px 30px var(--shadow); }
+    .source { border-left:5px solid var(--gold); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .ops { border-top:5px solid var(--green); }
+    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:16px; }
+    .item { padding:16px; border:1px solid var(--line); background:var(--surface); }
+    .item b { display:block; margin-bottom:4px; color:var(--green); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { padding-top:0; border-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .vision .label { background:var(--blue); }
+    .joy .label { background:var(--green); }
+    .error .label { background:var(--red); }
+    .realism .label { background:var(--gold); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:680px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .grid { grid-template-columns:1fr; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-24</p>
+      <h1>AIでPDCAを回すなら、AIを監督するPDCAも必要</h1>
+      <div class="source">
+        <p>SNSの自動投稿から反応の分析、内容のブラッシュアップ、商品を認知してもらうところまで、PDCAをAIで回す。プログラムを作ったときは「できた」と喜んだのも束の間、自分の目で確かめたらエラーが出まくっていた。</p>
+        <p>フルオートにするには、まだ度々テコ入れが必要だと思った。ポンと出せば願いを叶えてくれる「ドラえもん」は、もう少し先かもしれない。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>「プログラムが完成した」と「仕組みが安定して働く」は、似た顔をしているけれど別人だ。投稿できた一回は動作確認であり、曜日、通信障害、API制限、入力の揺れが混ざっても回り続けて、ようやく運用になる。完成祝いのクラッカーを鳴らした直後、ログ画面が赤一色。自動化界ではわりと正装である。</p>
+      <p>とはいえ、自分の目で確認したからエラーに気づけた。これはフルオートに失敗した話というより、<strong>監視なしの自動化は信用しない</strong>という次の設計条件を手に入れた話だと思う。必要なのは、人間が毎回すべてを確認することではない。どこで止まったかが分かるログ、異常時の通知、安全な再実行、必要なときだけ手を入れられる逃げ道である。</p>
+      <p>もう一つ天邪鬼に見ると、AIでPDCAが高速化しても、そもそもの目的が曖昧なら「投稿数だけ増えた」「反応を分析した気になった」という高速足踏みも起こる。商品を認知してもらうなら、見るべきは自動投稿の成功数だけではなく、誰に届き、どんな反応があり、次の接点へ進んだかだ。</p>
+      <p>ドラえもんがまだ来ないなら、今はAIを優秀な実務担当として迎え、人間は目的、合格条件、例外対応を持つ。完全放置を目指すより、<strong>問題が起きても早く気づき、小さく直して再開できる半自動</strong>の方が、先に価値を生みやすい。</p>
+    </section>
+
+    <section class="ops" aria-labelledby="ops-title">
+      <h2 id="ops-title">自動化を運用へ変える4つの仕組み</h2>
+      <div class="grid">
+        <div class="item"><b>観測する</b>投稿、分析、改善の各工程が成功したかをログへ残す。</div>
+        <div class="item"><b>知らせる</b>停止や異常値が出たときだけ、人へ通知する。</div>
+        <div class="item"><b>戻せる</b>同じ投稿の重複を防ぎながら、安全に再実行できるようにする。</div>
+        <div class="item"><b>目的を測る</b>投稿数ではなく、反応、接点、商品認知への変化を見る。</div>
+      </div>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>この仕組みを「ちゃんと動いている」と判断するために、人間が毎日一つだけ確認するとしたら、どの数字や状態を見ればよいだろうか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat vision"><span class="label">構想</span><p>投稿、分析、改善、商品認知までAIで回す未来に期待が膨らむ。</p></div>
+        <div class="beat joy"><span class="label">達成感</span><p>プログラムが形になり、「できた」と喜ぶ。</p></div>
+        <div class="beat error"><span class="label">発覚</span><p>実際の動きを自分で確かめると、エラーが続いていることに気づく。</p></div>
+        <div class="beat realism"><span class="label">再設計</span><p>完全放置ではなく、観測しながら直せる半自動を現実的な次の完成形にする。</p></div>
+      </div>
+      <p class="note">メモ: 自動化の完成は、手を離せることではなく、異常が起きても戻れること。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>SNS投稿から反応分析、改善までをAIで自動化し、「できた」と喜んだ直後にエラーの山を発見。そこで見えてきたのは、自動化にはログ、異常通知、再実行、手動介入という監督の仕組みも必要だということでした。完全放置の夢を急ぐより、問題へ早く気づき、小さく直して再開できる半自動から価値を生む。AI運用の現実と次の設計を考えています。</p>
+    </section>
+  </main>
+</body>
+</html>
