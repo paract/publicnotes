@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>旅支度は、最初の一手で一気に動き出す</title>
+  <style>
+    :root { --ink:#25282b; --muted:#697078; --paper:#f8f6ef; --surface:rgba(255,255,255,.92); --line:#d9d1c4; --blue:#47719a; --green:#517763; --gold:#ab7b38; --red:#a5544c; --shadow:rgba(35,38,41,.11); }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,rgba(81,119,99,.15),transparent 34rem),var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; }
+    main { width:min(920px,calc(100% - 32px)); margin:auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:.9rem; font-weight:700; }
+    h1 { max-width:820px; margin:0; font-size:clamp(2rem,5vw,3.2rem); line-height:1.18; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { border-left:5px solid var(--green); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--blue); }
+    .steps { border-top:5px solid var(--gold); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+    .item { padding:16px; border:1px solid var(--line); background:#fff; }
+    .item b { display:block; margin-bottom:4px; color:var(--green); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { padding-top:0; border-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .delay .label { background:var(--muted); }
+    .weight .label { background:var(--red); }
+    .start .label { background:var(--gold); }
+    .relief .label { background:var(--green); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:680px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .grid { grid-template-columns:1fr; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-07-30</p>
+      <h1>旅支度は、最初の一手で一気に動き出す</h1>
+      <div class="source">
+        <p>明日から旅に出るのに、パッキングや日程確認をなかなかしない。「まだ時間はある」と後回しにしているうちに、小さなストレスが積み上がっていく。</p>
+        <p>そこで行動を細分化してみた。必要物品をリストアップするだけ。キャリーケースをリビングに出してくるだけ。その一過程を踏み出すと、一気に準備が整った。仕事終わりで疲れていても、お酒を飲んでだるくなっていても。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>「まだ時間はある」は、時間の見積もりというより、始めると面倒な全体像が見えてしまうことへの回避かもしれない。パッキング、日程、忘れ物、移動。頭の中で一括請求されると、脳は見積書を閉じたくなる。後回しは怠けというより、巨大なタスクを一つの塊で受け取ったときの自然な防御反応でもある。</p>
+      <p>今回効いたのは、気合いを足したことではなく、<strong>開始の単位を小さくしたこと</strong>だ。リストを書く、キャリーケースを出す。この二つは準備を完了させる作業ではないけれど、「未着手」の状態を終わらせるには十分だった。着手すると次に必要なものが目に入り、行動が連鎖する。準備が進んだというより、準備が見える状態になったのだと思う。</p>
+      <p>ただし、お酒を飲んだ後でも動けたことを万能ルールにはしない方がよさそうだ。荷物を出す、服を並べる、持ち物をメモするのは問題ない。一方で、予約の変更、パスポートや財布の最終確認、旅行保険の手続きまで勢いで進めると、翌朝の自分に引き継ぎ事故が起きる。だるい夜は着手、明るい頭では確認。この分業がちょうどいい。</p>
+      <p>内を変えてみるなら、「時間があるから後でやる」ではなく、「小さなストレスが利息をつける前に、二分だけ未着手を終わらせる」と捉え直す。旅の準備は、完璧に始める必要がない。キャリーケースがリビングに出た時点で、もう半分は始まっている。</p>
+    </section>
+
+    <section class="steps" aria-labelledby="steps-title">
+      <h2 id="steps-title">準備を動かす最小の設計</h2>
+      <div class="grid">
+        <div class="item"><b>見える化</b>必要物品を、思いつく範囲で箇条書きにする。</div>
+        <div class="item"><b>物理的に着手</b>キャリーケースを出し、入れる場所を作る。</div>
+        <div class="item"><b>確認を分ける</b>夜は準備、翌朝は予約や貴重品を落ち着いて確認する。</div>
+      </div>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>次に「まだ時間はある」と思ったとき、その作業の未着手を終わらせるために、二分でできる最初の物理的な一手は何だろうか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat delay"><span class="label">先送り</span><p>明日から出発なのに、「まだ時間はある」と準備を見送る。</p></div>
+        <div class="beat weight"><span class="label">重さ</span><p>やるべきことが頭の中で増え、未着手のまま小さなストレスになる。</p></div>
+        <div class="beat start"><span class="label">着手</span><p>リストを書く、キャリーケースを出すだけに行動を縮める。</p></div>
+        <div class="beat relief"><span class="label">解放</span><p>一歩がきっかけになり、疲れていても準備が一気に整っていく。</p></div>
+      </div>
+      <p class="note">メモ: 未着手を終わらせる最小行動は、作業を完了させるより先に、心の占有面積を減らす。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>出発前なのに準備が進まない。そんなときは、パッキングを完璧に始めようとせず、持ち物を箇条書きにする、キャリーケースを出すだけで十分です。小さな一手で「未着手」が終わると、次に必要な行動が見え、準備は意外なほど動き出します。疲れた夜は着手、翌朝は予約や貴重品を確認する。先送りのストレスを軽くする実践記です。</p>
+    </section>
+  </main>
+</body>
+</html>
