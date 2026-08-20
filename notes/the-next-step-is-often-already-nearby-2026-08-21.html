@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>次の一歩は、案外すぐ近くにある</title>
+  <style>
+    :root { --ink:#25282b; --muted:#687078; --paper:#f8f7f1; --surface:rgba(255,255,255,.92); --line:#d8d3c8; --blue:#48749a; --green:#537961; --gold:#aa7b3a; --red:#a6534c; --shadow:rgba(35,38,41,.11); }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,rgba(72,116,154,.14),transparent 34rem),var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; }
+    main { width:min(920px,calc(100% - 32px)); margin:auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { max-width:820px; margin:0; font-size:clamp(2rem,5vw,3.2rem); line-height:1.18; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { border-left:5px solid var(--blue); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--gold); }
+    .nearby { border-top:5px solid var(--green); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+    .item { padding:16px; border:1px solid var(--line); background:#fff; }
+    .item b { display:block; margin-bottom:4px; color:var(--green); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { padding-top:0; border-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .far .label { background:var(--muted); }
+    .stuck .label { background:var(--red); }
+    .notice .label { background:var(--gold); }
+    .move .label { background:var(--green); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:680px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .grid { grid-template-columns:1fr; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-08-21</p>
+      <h1>次の一歩は、案外すぐ近くにある</h1>
+      <div class="source">
+        <p>悩んでいるときほど、答えを遠くに探しにいってしまう。もっと良い方法、もっと詳しい人、もっと整った環境、もっと自信のある自分。</p>
+        <p>でも、今を前に進めるものは案外すぐ近くにある。机の上のメモ。一度相談できる人。まだ使い切れていないAI。今日なら10分だけ確保できる時間。そして、本当はこうしたいと薄々わかっている自分の気持ち。</p>
+        <p>大きな答えを探す前に、いま使える道具、頼れる人、自分にできる最小の一歩を見てみる。人生を一気に変える答えがなくても、一つ使ってみることで思っていたより先へ進めるかもしれない。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>遠くに答えを探すこと自体は悪くない。より良い方法や、詳しい人を探すことで視野が広がることもある。ただし、遠くの正解が見つかるまで動かないなら、それは探究というより、かなり上品な先延ばしになりやすい。理想の環境が整うまで待つ作戦は、だいたい理想の環境のほうが先に引っ越していく。</p>
+      <p>今回の核は「近くで妥協する」ことではない。遠い目標へ進むための<strong>足場を、今すでに持っている資源で作る</strong>ことだ。メモは考えを外に出す足場になる。相談相手は視点を増やす足場になる。AIは試作や整理の足場になる。10分は、問題を解決する時間ではなく、問題の住所を少し絞る時間になる。</p>
+      <p>一方で、「本当はこうしたい」という気持ちも、いつでも正解とは限らない。疲労、焦り、他人との比較が混ざると、声の大きい欲求が本音のふりをすることがある。だから気持ちを信じ切るより、近くの資源を使って小さく試す。その結果で、自分が本当に進みたい方向を確かめればいい。</p>
+      <p>内を変えてみるなら、「答えがないから動けない」ではなく、「答えを探す前に、手元の何を一つ使うか」と問う。大きな一歩を待たず、近いものを使って次の一歩を作る。その小ささは遠回りではなく、止まらないための技術だ。</p>
+    </section>
+
+    <section class="nearby" aria-labelledby="nearby-title">
+      <h2 id="nearby-title">近くにある足場を使う</h2>
+      <div class="grid">
+        <div class="item"><b>道具を見る</b>メモ、AI、テンプレートなど、すでに使えるものを一つ開く。</div>
+        <div class="item"><b>人を見る</b>答えを持つ人ではなく、まず一度話せる人へ現状を渡す。</div>
+        <div class="item"><b>時間を見る</b>10分で終わる最小実験を決め、結果から次を判断する。</div>
+      </div>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>いま遠くに探している答えを一つ挙げるなら、その答えが来る前でも使える「机の上・連絡先・10分」のどれが、最初の足場になりそうだろうか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat far"><span class="label">遠望</span><p>もっと良い方法や環境、もっと自信のある自分を遠くに探す。</p></div>
+        <div class="beat stuck"><span class="label">停滞</span><p>大きな答えが見つからず、いま使えるものまで見えにくくなる。</p></div>
+        <div class="beat notice"><span class="label">発見</span><p>メモ、相談相手、AI、10分、自分の気持ちという近くの資源に目を向ける。</p></div>
+        <div class="beat move"><span class="label">前進</span><p>一つを使って小さく試し、次の一歩を実際の結果から決めていく。</p></div>
+      </div>
+      <p class="note">メモ: 近くを見るのは視野を狭めることではない。遠くへ進むために、足元を固めること。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>悩むほど、もっと良い方法や整った環境を遠くに探したくなります。でも前へ進む足場は、机の上のメモ、相談できる人、使い切れていないAI、今日の10分など、すでに近くにあることも少なくありません。大きな答えを待つ前に一つだけ使ってみる。妥協ではなく、遠い目標へ進むための現実的な始め方を考える内容です。</p>
+    </section>
+  </main>
+</body>
+</html>
