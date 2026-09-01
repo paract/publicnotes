@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>「タイトルどうする？」を、提案の入口に変える</title>
+  <style>
+    :root { --ink:#25282b; --muted:#687078; --paper:#f8f7f1; --surface:rgba(255,255,255,.92); --line:#d8d3c8; --blue:#49749a; --green:#537961; --gold:#aa7b3a; --red:#a6534c; --shadow:rgba(35,38,41,.11); }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,rgba(83,121,97,.14),transparent 34rem),var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; }
+    main { width:min(920px,calc(100% - 32px)); margin:auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:.9rem; font-weight:700; }
+    h1 { max-width:820px; margin:0; font-size:clamp(2rem,5vw,3.2rem); line-height:1.18; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { border-left:5px solid var(--green); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--gold); }
+    .proposal { border-top:5px solid var(--blue); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+    .item { padding:16px; border:1px solid var(--line); background:#fff; }
+    .item b { display:block; margin-bottom:4px; color:var(--green); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { padding-top:0; border-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .irritation .label { background:var(--red); }
+    .interpret .label { background:var(--gold); }
+    .offer .label { background:var(--blue); }
+    .connection .label { background:var(--green); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:680px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .grid { grid-template-columns:1fr; } .beat { grid-template-columns:1fr; gap:8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Introspection Debug Log / 2026-09-01</p>
+      <h1>「タイトルどうする？」を、提案の入口に変える</h1>
+      <div class="source">
+        <p>音声LIVE配信のパートナーであるとも先生から、今週のWAくプットのタイトルを何にするか聞かれた。とも先生は基本的にタイトルを考えない。でも、僕の意見を聞いてから決める配慮があることもわかる。</p>
+        <p>最近は視聴者へテーマを尋ねることもあり、提案が上がってくると素直にうれしい。ならば、とも先生へ目くじらを立てるのではなく、気持ちよく提案する方が、とも先生もうれしくなるのではないかと思った。</p>
+      </div>
+    </header>
+
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>「タイトルを考えない」は、たしかに役割の丸投げに見える瞬間がある。こちらに毎週アイデア出しの球が飛んでくるなら、眉間に少し力が入るのも自然だ。ただ、同じ行為でも「決める前にあなたの意見を聞きたい」という参加の招待である可能性もある。受け取る側の解釈ひとつで、依頼は負担にも共同制作にも化ける。</p>
+      <p>今回の気づきは、我慢して気持ちよく対応しようという話ではない。視聴者からテーマが届くとうれしい自分に気づいたことで、<strong>提案を受け取る側の喜び</strong>を相手にも渡せると考えられた。ならば、タイトルを一つ提出して終わるより、「今週はAとBならどちらが話したくなりますか？」と選択肢を添える方が、二人の配信に参加感が生まれる。</p>
+      <p>ただし、相手の配慮をこちらだけで美談にして、役割の偏りまで見逃すのは別問題だ。毎回こちらが考えることに疲れが出るなら、「タイトル案は交互に一つずつ出す」「視聴者募集は月に一度行う」といった運用を決めればいい。優しさは、曖昧な献身ではなく、続けられる仕組みにした方が長持ちする。</p>
+      <p>内を変えてみるなら、「なぜ考えてくれないのか」ではなく、「この問いを二人や視聴者が参加できる形にすると、どんな場になるか」と問う。目くじらを立てないのは、相手を甘やかすことではない。自分の希望を提案として出し、共同で育てる選択でもある。</p>
+    </section>
+
+    <section class="proposal" aria-labelledby="proposal-title">
+      <h2 id="proposal-title">依頼を、気持ちよい共同制作へ変える</h2>
+      <div class="grid">
+        <div class="item"><b>意図を分ける</b>負担の丸投げか、意見を聞きたい招待かを、決めつけずに見る。</div>
+        <div class="item"><b>選択肢を添える</b>タイトル案を二つ出し、相手が選びやすい余白を作る。</div>
+        <div class="item"><b>運用を決める</b>偏りが続くなら、担当や視聴者募集の頻度を先に合意する。</div>
+      </div>
+    </section>
+
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>自分が最近「また自分が考えるのか」と感じた場面で、相手に渡すとしたら、どんな選択肢や参加の入口なら自分も無理なく続けられるだろうか？</p>
+    </section>
+
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">感情の起伏</h2>
+      <div class="arc">
+        <div class="beat irritation"><span class="label">引っかかり</span><p>タイトルを考える役割がこちらへ来ることに、少しだけ負担を感じる。</p></div>
+        <div class="beat interpret"><span class="label">見直し</span><p>意見を聞いてから決める、とも先生なりの配慮にも目を向ける。</p></div>
+        <div class="beat offer"><span class="label">提案</span><p>視聴者からの提案がうれしい体験を手がかりに、選びやすい案を渡す。</p></div>
+        <div class="beat connection"><span class="label">共創</span><p>一方的な依頼ではなく、二人と視聴者が関われるテーマ作りへ変えていく。</p></div>
+      </div>
+      <p class="note">メモ: 提案は正解を押しつけることではない。相手が参加しやすい入口を作ることでもある。</p>
+    </section>
+
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>「タイトルどうする？」と尋ねられたとき、負担を渡されたように感じることもあります。けれど、意見を聞きたいという参加の招待かもしれません。視聴者からテーマ案が届くとうれしい感覚を手がかりに、相手へも選びやすい提案を渡す。ただし偏りが続くなら、役割や頻度は仕組みとして決める。依頼を共同制作へ変える視点を考えます。</p>
+    </section>
+  </main>
+</body>
+</html>
