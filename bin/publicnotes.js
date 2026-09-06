@@ -91,8 +91,8 @@ function initProject() {
   console.log('3. Publish the folder with GitHub Pages or any static host');
 }
 
-async function buildProject() {
-  await generateDashboard({ rootDir });
+async function buildProject(check = false) {
+  await generateDashboard({ rootDir, check });
 }
 
 function printHelp() {
@@ -101,6 +101,7 @@ function printHelp() {
 Usage:
   publicnotes init    Create a new public notes project scaffold
   publicnotes build   Generate index.html from notes/*.html
+  publicnotes check   Validate articles and dashboard without writing files
   publicnotes help    Show this help
 `);
 }
@@ -118,6 +119,10 @@ async function main() {
 
   if (command === 'help' || command === '--help' || command === '-h') {
     printHelp();
+    return;
+  }
+  if (command === 'check') {
+    await buildProject(true);
     return;
   }
 

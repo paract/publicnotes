@@ -40,7 +40,6 @@ const tagDefinitions = {
 
 // テキストからタグを自動生成
 function extractTags(text) {
-  const tags = [];
   const tagScores = {};
 
   // 各タグについてスコアを計算
@@ -66,24 +65,26 @@ function extractTags(text) {
 }
 
 // Gitに追加された時刻を優先し、未コミットの新規ファイルは更新時刻を使う
-function getSortTime(filePath, stats, rootDir) {
+function getAddedTimes(rootDir, notesDir) {
+  const times = new Map();
   try {
-    const relativePath = path.relative(rootDir, filePath);
     const output = execFileSync(
       'git',
-      ['log', '--diff-filter=A', '--format=%ct', '--', relativePath],
-      { cwd: rootDir, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] }
-    ).trim();
-
-    const firstTimestamp = output.split('\n').filter(Boolean).pop();
-    if (firstTimestamp) {
-      return Number(firstTimestamp) * 1000;
+      ['-c', 'core.quotePath=false', 'log', '--diff-filter=A', '--format=@%ct',
+        '--name-only', '--no-renames', '--', path.relative(rootDir, notesDir)],
+      { cwd: rootDir, encoding: 'utf-8', timeout: 5000,
+        maxBuffer: 8 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] }
+    );
+    let timestamp;
+    for (const line of output.split('\n')) {
+      if (/^@\d+$/.test(line)) timestamp = Number(line.slice(1)) * 1000;
+      else if (line && timestamp) times.set(path.resolve(rootDir, line), timestamp);
     }
-  } catch {
-    // Git情報が取れない環境ではファイル更新時刻にフォールバックする
+  } catch (error) {
+    // A new non-Git project can still be built. Do not hide timeouts.
+    if (error.code === 'ETIMEDOUT') throw new Error('Git history timed out after 5 seconds');
   }
-
-  return stats.mtimeMs;
+  return times;
 }
 
 function loadConfig(rootDir) {
@@ -101,11 +102,12 @@ function loadConfig(rootDir) {
 }
 
 // HTMLファイルからテキストを抽出
-function extractTextFromHTML(filePath, rootDir = process.cwd()) {
+function extractTextFromHTML(filePath, rootDir = process.cwd(), addedTimes) {
+  let dom;
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
     const stats = fs.statSync(filePath);
-    const dom = new jsdom(content);
+    dom = new jsdom(content);
     const doc = dom.window.document;
 
     // タイトル取得
@@ -167,37 +169,41 @@ function extractTextFromHTML(filePath, rootDir = process.cwd()) {
       filename,
       title,
       date,
-      sortTime: getSortTime(filePath, stats, rootDir),
+      sortTime: (addedTimes || getAddedTimes(rootDir, path.dirname(filePath)))
+        .get(path.resolve(filePath)) || stats.mtimeMs,
       excerpt,
       question,
       shareSummary,
       infographicSrc,
+      homeLink: doc.querySelector('[data-publicnotes-home-link] a')?.getAttribute('href'),
       fullText
     };
   } catch (error) {
-    console.error(`Error processing ${filePath}:`, error.message);
-    return null;
+    throw new Error(`Error processing ${filePath}: ${error.message}`);
+  } finally {
+    dom?.window.close();
   }
 }
 
 // メイン処理
 async function generateDashboard(options = {}) {
-  const rootDir = options.rootDir || process.cwd();
+  const rootDir = path.resolve(options.rootDir || process.cwd());
   const config = { ...loadConfig(rootDir), ...options.config };
   const notesDir = path.join(rootDir, config.notesDir);
 
-  if (!fs.existsSync(notesDir)) {
-    fs.mkdirSync(notesDir, { recursive: true });
-  }
-
-  const files = fs.readdirSync(notesDir).filter(f => f.endsWith('.html'));
+  const files = fs.existsSync(notesDir)
+    ? fs.readdirSync(notesDir).filter(f => f.endsWith('.html')) : [];
+  const addedTimes = getAddedTimes(rootDir, notesDir);
+  const problems = [];
+  const outputFile = path.join(rootDir, config.outputFile);
+  const expectedHome = path.relative(notesDir, outputFile).split(path.sep).join('/');
 
   const logs = [];
 
   // 各HTMLファイルを処理
   for (const file of files) {
     const filePath = path.join(notesDir, file);
-    const data = extractTextFromHTML(filePath, rootDir);
+    const data = extractTextFromHTML(filePath, rootDir, addedTimes);
     
     if (data) {
       const tags = extractTags(data.fullText);
@@ -214,19 +220,26 @@ async function generateDashboard(options = {}) {
       });
 
       if (!data.shareSummary) {
-        console.warn(`⚠ Missing share summary: ${file}`);
+        problems.push(`Missing share summary: ${file}`);
       } else if (/内省ログ|ノート/.test(data.shareSummary)) {
-        console.warn(`⚠ Share summary contains banned wording: ${file}`);
+        problems.push(`Share summary contains banned wording: ${file}`);
       }
+      if (Array.from(data.shareSummary).length > 280)
+        problems.push(`Share summary exceeds 280 characters: ${file}`);
+      if (data.homeLink !== expectedHome)
+        problems.push(`Missing or incorrect home link: ${file} (expected ${expectedHome})`);
 
       if (shouldRequireInfographic(data, config) && !data.infographicSrc) {
-        console.warn(`⚠ Missing infographic image: ${file}`);
+        problems.push(`Missing infographic image: ${file}`);
       }
     }
   }
 
   // Gitに追加された時刻でソート（新しい順）。一括編集で順番が崩れないようにする。
-  logs.sort((a, b) => b.sortTime - a.sortTime);
+  logs.sort((a, b) => b.sortTime - a.sortTime || a.filename.localeCompare(b.filename));
+  if (problems.length && (options.strict || options.check))
+    throw new Error(problems.join('\n'));
+  problems.forEach(problem => console.warn(problem));
 
   // 全タグを収集してユニーク化
   const allTags = [];
@@ -241,15 +254,20 @@ async function generateDashboard(options = {}) {
   // index.htmlを生成。sortTimeは並び替え専用なので公開データからは外す。
   const publicLogs = logs.map(({ sortTime, shareSummary, infographicSrc, ...log }) => log);
   const html = generateHTML(publicLogs, allTags, config);
-  const outputFile = path.join(rootDir, config.outputFile);
-  fs.writeFileSync(outputFile, html);
-
-  console.log(`✓ Dashboard generated with ${logs.length} logs and ${allTags.length} tags`);
-  return { logs, tags: allTags, outputFile };
+  const changed = !fs.existsSync(outputFile) || fs.readFileSync(outputFile, 'utf8') !== html;
+  if (options.check && changed) throw new Error('Dashboard is stale. Run npm run build-dashboard.');
+  if (!options.check && changed) {
+    fs.mkdirSync(path.dirname(outputFile), { recursive: true });
+    const temporary = outputFile + '.tmp';
+    fs.writeFileSync(temporary, html);
+    fs.renameSync(temporary, outputFile);
+  }
+  console.log(`✓ ${options.check ? 'Checked' : 'Built'} ${logs.length} logs; dashboard ${changed ? 'updated' : 'unchanged'}`);
+  return { logs, tags: allTags, outputFile, changed };
 }
 
 function generateHTML(logs, tags, config = defaultConfig) {
-  const logsJSON = JSON.stringify(logs, null, 2);
+  const logsJSON = JSON.stringify(logs, null, 2).replace(/</g, '\\u003c');
   const tagsJSON = JSON.stringify(tags, null, 2);
 
   return `<!doctype html>
@@ -756,8 +774,9 @@ function escapeHTML(value) {
 }
 
 if (require.main === module) {
-  generateDashboard().catch(error => {
-    console.error('Error generating dashboard:', error);
+  generateDashboard({ check: process.argv.includes('--check'),
+    strict: process.argv.includes('--strict') }).catch(error => {
+    console.error(error.message);
     process.exit(1);
   });
 }

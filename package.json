@@ -9,13 +9,17 @@
   "scripts": {
     "build": "node generate-dashboard.js",
     "build-dashboard": "node generate-dashboard.js",
-    "check": "node generate-dashboard.js"
+    "check": "node generate-dashboard.js --check",
+    "prepare-note": "node generate-dashboard.js --strict",
+    "publish-note": "node scripts/publish-note.js",
+    "deploy-status": "node scripts/deploy-status.js",
+    "test": "node --test tests/*.test.js"
   },
   "files": [
     "bin/",
     "templates/",
     "generate-dashboard.js",
-    "README.md"
+    "scripts/"
   ],
   "keywords": [
     "codex",

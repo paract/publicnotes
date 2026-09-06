@@ -4,9 +4,11 @@ This repository is the user's `publicnotes` project.
 
 ## Where to Work
 
-```bash
-cd ~/publicnotes
-```
+Use the existing checkout containing this file. The chat directory can be empty.
+Current working checkout:
+`/Users/nao/.codex/visualizations/2026/06/07/019e9f7c-fd41-7ef1-8862-83eb73968e52/publicnotes-workspace`
+Confirm it exists and inspect Git status. Do not repeatedly scan the entire home
+folder or depend on the old `~/publicnotes` location.
 
 Always read `AGENTS.md` before doing note work.
 
@@ -17,8 +19,8 @@ This is a Codex-assisted static notes app:
 - User sends an introspection log from chat or phone.
 - Codex creates a styled HTML note in `notes/`.
 - Codex adds a share summary.
-- Codex runs `npm run build-dashboard`.
-- Codex commits and pushes to GitHub.
+- Codex runs `npm run publish-note -- notes/filename.html`.
+- This validates articles, builds once, commits explicit paths, and pushes.
 - GitHub Pages serves the public site.
 
 Public site:
@@ -55,6 +57,7 @@ Prefer:
 Each note should include:
 
 - Source/introspection text
+- Home link with `data-publicnotes-home-link` and `href="../index.html"`
 - 思考のデバッガーからの突っ込み
 - 一段深掘りする問い
 - 感情の起伏
@@ -65,14 +68,17 @@ The share summary must not use the words `内省ログ` or `ノート`.
 ## Commands
 
 ```bash
-npm run build-dashboard
-git status --short
-git add .
-git commit -m "Auto-sync log via Codex"
-git push
+npm run publish-note -- notes/filename.html
+npm run deploy-status
 ```
 
-`git push` may require network escalation.
+For local-only work: `npm run prepare-note`. Read-only check: `npm run check`.
+Push can require network escalation. A push failure leaves the commit saved;
+rerun the same publish command after resolving the error. Never force-push.
+Git waits are bounded (local: 5s; push: 30s); the status API has a 10s timeout.
+Status checks HEAD, not an unrelated latest run. See AGENTS.md for bounded
+polling and for distinguishing approval wait from network execution.
+For code changes, run `npm test`; ordinary note additions do not need the suite.
 
 ## Package/App State
 
@@ -114,4 +120,3 @@ When the user asks to create a diagram/image without specifying a style, do not 
 9. Minimal 3D Claymorphism
 10. Matte Black Minimalism
 11. Standard Editorial Infographic, the previous default style
-
