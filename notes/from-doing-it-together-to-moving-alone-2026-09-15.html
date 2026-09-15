@@ -5,22 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>「やってみましょ」の先に、一人で進める体験を</title>
   <style>
-    *{box-sizing:border-box}
-    body{margin:0;background:#f7f9fa;color:#263237;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;line-height:1.9}
-    main,.home{width:min(800px,calc(100% - 40px));margin:auto}
-    .home{padding-top:20px}.home a{display:inline-flex;align-items:center;min-height:44px;color:#285c70}
-    main{padding:30px 0 60px}header{padding-bottom:28px;border-bottom:2px solid #497d89}
-    .eyebrow{font-size:14px;color:#526c78}h1{font-size:32px;line-height:1.5;margin:12px 0 24px}
-    h2{font-size:21px;line-height:1.6;margin:0 0 18px}p{margin:0 0 18px}
-    section{padding:30px 0;border-bottom:1px solid #d5dfe2}
-    strong{color:#285c70}.debugger strong{color:#944e58}
-    .question{border-left:4px solid #bc9456;padding-left:22px}
-    .arc{padding-left:24px}.arc li{padding:8px 0 12px 8px}
-    .arc b{display:block}.arc li:nth-child(1)::marker{color:#69778b}
-    .arc li:nth-child(2)::marker{color:#397b79}.arc li:nth-child(3)::marker{color:#a96560}
-    .arc li:nth-child(4)::marker{color:#83733e}
-    .annotation{font-size:13px;color:#637078}footer{margin-top:28px}
-    @media(max-width:600px){h1{font-size:26px}h2{font-size:20px}main{padding-top:20px}}
+    :root { --ink:#25282b; --muted:#687078; --paper:#f8f7f1; --surface:rgba(255,255,255,.92); --line:#d8d3c8; --blue:#49749a; --green:#537961; --gold:#aa7b3a; --red:#a6534c; --shadow:rgba(35,38,41,.11); }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,rgba(83,121,97,.14),transparent 34rem),var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.78; }
+    main { width:min(920px,calc(100% - 32px)); margin:auto; padding:48px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:.9rem; font-weight:700; }
+    h1 { max-width:820px; margin:0; font-size:2.6rem; line-height:1.18; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); box-shadow:0 12px 30px var(--shadow); }
+    .source { border-left:5px solid var(--green); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--gold); }
+    .proposal { border-top:5px solid var(--blue); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+    .item { padding:16px; border:1px solid var(--line); background:#fff; }
+    .item b { display:block; margin-bottom:4px; color:var(--green); }
+    .arc { display:grid; gap:14px; margin-top:16px; }
+    .beat { display:grid; grid-template-columns:112px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+    .beat:first-child { padding-top:0; border-top:0; }
+    .label { width:fit-content; padding:2px 10px; border-radius:999px; color:#fff; font-size:.82rem; font-weight:700; white-space:nowrap; }
+    .irritation .label { background:var(--red); }
+    .interpret .label { background:var(--gold); }
+    .offer .label { background:var(--blue); }
+    .connection .label { background:var(--green); }
+    .note { color:var(--muted); font-size:.95rem; }
+    @media (max-width:680px) { main { width:min(100% - 24px,920px); padding-top:32px; } section,.source { padding:18px; } .grid { grid-template-columns:1fr; } .beat { grid-template-columns:1fr; gap:8px; } }
+    .home { width:min(920px,calc(100% - 32px)); margin:24px auto 0; display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
+    .home > a { display:inline-flex; align-items:center; min-height:44px; padding:0 8px; color:#355875; background:#fff; border:1px solid #d8d3c8; border-radius:4px; font-weight:700; }
+    ol.arc { padding-left:24px; }
+    .arc li { padding:10px 0; border-bottom:1px solid var(--line); }
+    .arc b { display:block; color:var(--green); }
+    .annotation { color:var(--muted); font-size:.9rem; }
+    @media(max-width:680px) { h1 { font-size:2rem; } }
   </style>
 <!-- publicnotes:metadata:start -->
 <link rel="canonical" href="https://paract.github.io/publicnotes/notes/from-doing-it-together-to-moving-alone-2026-09-15.html">
@@ -47,7 +67,7 @@
 <!-- publicnotes:metadata:end -->
 </head>
 <body>
-  <nav class="home" data-publicnotes-home-link aria-label="ページ移動"><a href="../index.html">← トップページへ戻る</a></nav>
+  <nav class="home" data-publicnotes-home-link aria-label="ページ移動"><a href="../index.html">← トップページへ戻る</a><span data-publicnotes-share-top><a href="https://twitter.com/intent/tweet?text=%E3%80%8C%E3%82%84%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%BE%E3%81%97%E3%82%87%E3%80%8D%E3%81%AE%E5%85%88%E3%81%AB%E3%80%81%E4%B8%80%E4%BA%BA%E3%81%A7%E9%80%B2%E3%82%81%E3%82%8B%E4%BD%93%E9%A8%93%E3%82%92&amp;url=https%3A%2F%2Fparact.github.io%2Fpublicnotes%2Fnotes%2Ffrom-doing-it-together-to-moving-alone-2026-09-15.html" target="_blank" rel="noopener noreferrer" aria-label="Xでシェア（新しいタブ）" style="display:inline-block;padding:5px 9px;border:1px solid #c8cdd2;border-radius:4px;font:12px/1.5 sans-serif;color:#30363b;background:#fff;text-decoration:none">Xでシェア</a></span></nav>
   <main>
     <header>
       <p class="eyebrow">2026-09-15 / 伴走・小さな不便・自走</p>

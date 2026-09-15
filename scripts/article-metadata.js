@@ -147,15 +147,18 @@ function syncArticleMetadata(root, config, logs, check = false) {
     let updated = replaceMetadata(html, block);
     const shareURL = 'https://twitter.com/intent/tweet?' +
       new URLSearchParams({ text: log.title, url: articleURL });
+    const shareLink = '<a href="' + escape(shareURL) + '" target="_blank" rel="noopener noreferrer" ' +
+      'aria-label="Xでシェア（新しいタブ）" ' +
+      'style="display:inline-block;padding:5px 9px;border:1px solid #c8cdd2;border-radius:4px;font:12px/1.5 sans-serif;color:#30363b;background:#fff;text-decoration:none">Xでシェア</a>';
     const share = '<!-- publicnotes:share:start -->\n' +
       '<div data-publicnotes-share style="width:min(920px,calc(100% - 32px));margin:20px auto 32px">' +
-      '<a href="' + escape(shareURL) + '" target="_blank" rel="noopener noreferrer" ' +
-      'aria-label="Xでシェア（新しいタブ）" ' +
-      'style="display:inline-block;padding:5px 9px;border:1px solid #c8cdd2;border-radius:4px;font:12px/1.5 sans-serif;color:#30363b;background:#fff;text-decoration:none">Xでシェア</a></div>\n' +
+      shareLink + '</div>\n' +
       '<!-- publicnotes:share:end -->';
     if (updated.includes('<!-- publicnotes:share:start -->')) {
       updated = updated.replace(/<!-- publicnotes:share:start -->[\s\S]*?<!-- publicnotes:share:end -->/, share);
     } else updated = updated.replace(/<\/body\s*>/i, share + '\n</body>');
+    updated = updated.replace(/<span data-publicnotes-share-top>[\s\S]*?<\/span>/,
+      () => '<span data-publicnotes-share-top>' + shareLink + '</span>');
     if (updated !== html) {
       if (check) throw new Error('Stale article metadata: ' + articlePath);
       const stat = fs.statSync(file);
