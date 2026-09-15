@@ -240,6 +240,8 @@ async function generateDashboard(options = {}) {
   if (problems.length && (options.strict || options.check))
     throw new Error(problems.join('\n'));
   problems.forEach(problem => console.warn(problem));
+  const metadataFiles = require('./scripts/article-metadata')
+    .syncArticleMetadata(rootDir, config, logs, options.check);
 
   // 全タグを収集してユニーク化
   const allTags = [];
@@ -263,7 +265,7 @@ async function generateDashboard(options = {}) {
     fs.renameSync(temporary, outputFile);
   }
   console.log(`✓ ${options.check ? 'Checked' : 'Built'} ${logs.length} logs; dashboard ${changed ? 'updated' : 'unchanged'}`);
-  return { logs, tags: allTags, outputFile, changed };
+  return { logs, tags: allTags, outputFile, changed, metadataFiles };
 }
 
 function generateHTML(logs, tags, config = defaultConfig) {

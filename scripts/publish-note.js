@@ -27,17 +27,20 @@ async function publish(rootDir, files) {
         file.split(path.sep).includes('..') || !fs.statSync(path.join(root, file)).isFile())
       throw new Error('Expected an existing article or asset: ' + file);
   }
+  const isSelectedCover = file => selected.some(note => note.startsWith('notes/') &&
+    file.startsWith('assets/ogp/' + path.basename(note, '.html') + '-') &&
+    /-[a-f0-9]{12}-eyecatch\.png$/.test(file));
   const changedContent = [
     ...git(['diff', '--name-only', '-z', 'HEAD'], root).split('\0'),
     ...git(['ls-files', '--others', '--exclude-standard', '-z'], root).split('\0')
-  ].filter(file => /^(notes|assets)\//.test(file) && !selected.includes(file));
+  ].filter(file => /^(notes|assets)\//.test(file) && !selected.includes(file) && !isSelectedCover(file));
   if (changedContent.length)
     throw new Error('Other content changes must be reviewed and included explicitly: ' +
       [...new Set(changedContent)].join(', '));
-  const { outputFile } = await generateDashboard({ rootDir: root, strict: true });
+  const { outputFile, metadataFiles } = await generateDashboard({ rootDir: root, strict: true });
   const output = path.relative(root, outputFile);
   // Explicit pathspecs keep unrelated edits out of the commit.
-  const scope = [...new Set([...selected, output])];
+  const scope = [...new Set([...selected, output, ...metadataFiles])];
   git(['diff', '--check', '--', ...scope], root);
   git(['add', '--', ...scope], root);
   if (git(['diff', '--cached', '--name-only'], root)) {

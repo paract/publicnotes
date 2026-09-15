@@ -82,6 +82,12 @@ For code changes, run `npm test`; ordinary note additions do not need the suite.
 
 ## Package/App State
 
+Article sharing metadata is generated during build when config has siteUrl and
+authorName. OGP/Twitter tags and BlogPosting/BreadcrumbList JSON-LD are embedded
+in each article head. Covers are PNGs under assets/ogp; Japanese rendering needs
+Hiragino Sans or Noto Sans JP installed locally. publish-note stages generated
+covers with the articles. check verifies metadata without changing files.
+
 The project has been packaged as `@paract/publicnotes`.
 
 Useful files:

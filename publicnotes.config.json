@@ -1,5 +1,7 @@
 {
   "siteTitle": "パラ式　思考デバッガー",
+  "siteUrl": "https://paract.github.io/publicnotes/",
+  "authorName": "なお（パラ）",
   "siteDescription": "思考の資産化 — 内省と言語化の記録",
   "notesDir": "notes",
   "outputFile": "index.html",

@@ -75,23 +75,29 @@ test('dashboard renders seven cards and changes pages; all current navigation pa
   for (const name of fs.readdirSync(noteDir).filter(n => n.endsWith('.html'))) {
     const page = new JSDOM(fs.readFileSync(path.join(noteDir, name), 'utf8'));
     const nav = page.window.document.querySelector('[data-publicnotes-home-link]');
-    assert.deepEqual(nav.getAttributeNames().sort(), ['aria-label', 'data-publicnotes-home-link', 'style']);
+    assert.ok(nav.getAttributeNames().every(name =>
+      ['aria-label', 'data-publicnotes-home-link', 'style', 'class'].includes(name)));
     assert.equal(nav.querySelector('a').getAttribute('href'), '../index.html');
-    assert.ok(nav.querySelector('a').style.minHeight);
+    assert.equal(page.window.getComputedStyle(nav.querySelector('a')).minHeight, '44px');
     page.window.close();
   }
 });
 
 test('publish retries saved commit and never stages unrelated changes', async t => {
   const { root, git, write } = fixture(t);
+  fs.writeFileSync(path.join(root, 'publicnotes.config.json'), JSON.stringify({
+    siteUrl: 'https://example.com/publicnotes/', authorName: 'なお'
+  }));
   fs.writeFileSync(path.join(root, 'unrelated.txt'), 'original');
   git(['add', '.']); git(['commit', '-m', 'initial']);
   fs.writeFileSync(path.join(root, 'unrelated.txt'), 'local edit');
   git(['remote', 'add', 'origin', path.join(root, 'not-created.git')]);
   write('first-2026-09-01.html');
+  await generateDashboard({ rootDir: root, strict: true });
   await assert.rejects(publish(root, ['notes/first-2026-09-01.html']), /Commit is saved/);
   const commit = git(['rev-parse', 'HEAD']);
   assert.equal(git(['show', 'HEAD:unrelated.txt']), 'original');
+  assert.match(git(['ls-tree', '-r', '--name-only', 'HEAD']), /assets\/ogp\/.+-eyecatch\.png/);
   execFileSync('git', ['init', '--bare', path.join(root, 'not-created.git')], { stdio: 'ignore' });
   await publish(root, ['notes/first-2026-09-01.html']);
   assert.equal(git(['rev-parse', 'HEAD']), commit);
