@@ -24,6 +24,13 @@ test('all published articles have matching static metadata and valid dedicated P
     assert.equal(meta('twitter:card'), 'summary_large_image');
     assert.equal(meta('og:description'), doc.querySelector('[aria-labelledby="share-title"] p').textContent.trim());
     assert.equal(meta('og:description'), meta('twitter:description'));
+    const share = doc.querySelector('[data-publicnotes-share] a');
+    assert.equal(doc.querySelectorAll('[data-publicnotes-share]').length, 1);
+    const intent = new URL(share.href);
+    assert.equal(intent.origin + intent.pathname, 'https://twitter.com/intent/tweet');
+    assert.equal(intent.searchParams.get('text'), title);
+    assert.equal(intent.searchParams.get('url'), url);
+    assert.equal(share.target, '_blank');
     assert.equal(meta('og:image'), meta('twitter:image'));
     const imageURL = new URL(meta('og:image'));
     assert.equal(imageURL.origin, 'https://paract.github.io');
@@ -61,7 +68,7 @@ test('metadata generation is idempotent, escapes text, preserves body and verifi
     date: '2026-09-15', shareSummary: '説明 " & < >' }];
   syncArticleMetadata(root, config, logs);
   const html = fs.readFileSync(file, 'utf8'), stat = fs.statSync(file);
-  assert.ok(html.includes(body));
+  assert.ok(html.includes('<h1>Original article</h1>'));
   syncArticleMetadata(root, config, logs, true);
   syncArticleMetadata(root, config, logs);
   assert.equal(fs.readFileSync(file, 'utf8'), html);

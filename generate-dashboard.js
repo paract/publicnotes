@@ -441,6 +441,11 @@ function generateHTML(logs, tags, config = defaultConfig) {
       display: none;
     }
 
+    .card-link { display:flex; flex:1; flex-direction:column; justify-content:space-between; color:inherit; text-decoration:none; }
+    .x-share { align-self:flex-start; margin-top:16px; padding:5px 9px; border:1px solid #c8cdd2; border-radius:4px; color:#30363b; background:#fff; font-size:12px; line-height:1.5; text-decoration:none; }
+    .x-share:hover { background:#f0f3f5; }
+    .x-share:focus-visible, .card-link:focus-visible { outline:2px solid #355875; outline-offset:4px; }
+
     .card-date {
       display: inline-block;
       font-size: 0.85rem;
@@ -704,9 +709,12 @@ function generateHTML(logs, tags, config = defaultConfig) {
       const pageLogs = filteredLogs.slice(startIndex, startIndex + pageSize);
 
       pageLogs.forEach(log => {
-        const card = document.createElement('a');
-        card.href = \`notes/\${log.filename}\`;
+        const card = document.createElement('article');
+        const articlePath = 'notes/' + encodeURIComponent(log.filename);
         card.className = 'card';
+        const cardLink = document.createElement('a');
+        cardLink.className = 'card-link';
+        cardLink.href = articlePath;
         card.setAttribute('data-tags', log.tags.join(','));
 
         const dateStr = new Date(log.date).toLocaleDateString('ja-JP', {
@@ -727,7 +735,7 @@ function generateHTML(logs, tags, config = defaultConfig) {
           ? log.question.substring(0, 80) + '…'
           : log.question;
 
-        card.innerHTML = \`
+        cardLink.innerHTML = \`
           <div>
             <div class="card-date">\${dateStr}</div>
             <div class="card-title">\${log.title}</div>
@@ -737,6 +745,16 @@ function generateHTML(logs, tags, config = defaultConfig) {
           <div class="card-question">\${questionText}</div>
         \`;
 
+        const share = document.createElement('a');
+        share.className = 'x-share';
+        share.textContent = 'Xでシェア';
+        const publicBase = ${JSON.stringify(config.siteUrl || '')};
+        const articleURL = publicBase ? new URL(cardLink.getAttribute('href'), publicBase).href : cardLink.href;
+        share.href = 'https://twitter.com/intent/tweet?' + new URLSearchParams({text:log.title, url:articleURL});
+        share.target = '_blank';
+        share.rel = 'noopener noreferrer';
+        share.setAttribute('aria-label', log.title + 'をXでシェア（新しいタブ）');
+        card.append(cardLink, share);
         grid.appendChild(card);
       });
 

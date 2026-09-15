@@ -69,8 +69,17 @@ test('dashboard renders seven cards and changes pages; all current navigation pa
   const dom = new JSDOM(fs.readFileSync(outputFile, 'utf8'), { runScripts: 'dangerously' });
   t.after(() => dom.window.close());
   assert.equal(dom.window.document.querySelectorAll('.card').length, 7);
+  for (const card of dom.window.document.querySelectorAll('.card')) {
+    assert.equal(card.tagName, 'ARTICLE');
+    assert.equal(card.querySelectorAll('a a').length, 0);
+    assert.ok(card.querySelector('.card-link'));
+    const share = card.querySelector('.x-share');
+    assert.equal(share.textContent, 'Xでシェア');
+    assert.equal(new URL(share.href).searchParams.get('text'), card.querySelector('.card-title').textContent);
+  }
   dom.window.document.querySelector('#nextPage').click();
   assert.equal(dom.window.document.querySelectorAll('.card').length, 1);
+  assert.equal(dom.window.document.querySelectorAll('.x-share').length, 1);
   const noteDir = path.join(__dirname, '../notes');
   for (const name of fs.readdirSync(noteDir).filter(n => n.endsWith('.html'))) {
     const page = new JSDOM(fs.readFileSync(path.join(noteDir, name), 'utf8'));
