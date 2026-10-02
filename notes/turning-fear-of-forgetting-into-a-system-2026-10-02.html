@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>「忘れるかも」を、仕組みづくりの材料に</title>
+  <style>
+    :root { --ink:#25282b; --muted:#687078; --paper:#f8f7f1; --surface:#fff; --line:#d8d3c8; --blue:#49749a; --green:#537961; --gold:#aa7b3a; --red:#a6534c; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,rgba(73,116,154,.12),transparent 32rem),var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.8; }
+    .home,main { width:min(920px,calc(100% - 32px)); margin-inline:auto; }
+    .home { display:flex; align-items:center; flex-wrap:wrap; gap:12px; padding-top:24px; }
+    .home>a { display:inline-flex; align-items:center; min-height:44px; padding:0 8px; color:#355875; background:#fff; border:1px solid var(--line); border-radius:4px; font-weight:700; }
+    main { padding:36px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 8px; color:var(--blue); font-size:.9rem; font-weight:700; }
+    h1 { margin:0; font-size:clamp(2rem,4vw,2.6rem); line-height:1.25; }
+    section,.source { margin-top:26px; padding:24px; border:1px solid var(--line); background:var(--surface); }
+    .source { border-left:5px solid var(--blue); }
+    .debugger { border-top:5px solid var(--red); }
+    .question { border-top:5px solid var(--gold); }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:#355f80; }
+    .arc { margin:0; padding-left:24px; }
+    .arc li { padding:10px 0; border-bottom:1px solid var(--line); }
+    .arc li:last-child { border-bottom:0; }
+    .arc b { display:block; color:var(--green); }
+    @media(max-width:680px) { main { padding-top:28px; } section,.source { padding:18px; } }
+  </style>
+<!-- publicnotes:metadata:start -->
+<link rel="canonical" href="https://paract.github.io/publicnotes/notes/turning-fear-of-forgetting-into-a-system-2026-10-02.html">
+<meta name="description" content="「できるかな？」と不安になったとき、気合いで抱え込んでいませんか。その不安が「忘れること」なら、覚え続ける努力より、必要なときに思い出せる手順を作る方が助けになるかもしれません。AIと一緒に確認方法を考え、次の場面で一つ試す。頭の中の心配を少し外に置けたら、人の話を聞く余裕は生まれるのか。不安を仕組みづくりの材料に変える、小さな実験です。">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="パラ式　思考デバッガー">
+<meta property="og:title" content="「忘れるかも」を、仕組みづくりの材料に">
+<meta property="og:description" content="「できるかな？」と不安になったとき、気合いで抱え込んでいませんか。その不安が「忘れること」なら、覚え続ける努力より、必要なときに思い出せる手順を作る方が助けになるかもしれません。AIと一緒に確認方法を考え、次の場面で一つ試す。頭の中の心配を少し外に置けたら、人の話を聞く余裕は生まれるのか。不安を仕組みづくりの材料に変える、小さな実験です。">
+<meta property="og:url" content="https://paract.github.io/publicnotes/notes/turning-fear-of-forgetting-into-a-system-2026-10-02.html">
+<meta property="og:image" content="https://paract.github.io/publicnotes/assets/ogp/turning-fear-of-forgetting-into-a-system-2026-10-02-a9cd9e816892-eyecatch.png">
+<meta property="og:image:secure_url" content="https://paract.github.io/publicnotes/assets/ogp/turning-fear-of-forgetting-into-a-system-2026-10-02-a9cd9e816892-eyecatch.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="「忘れるかも」を、仕組みづくりの材料にのアイキャッチ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="「忘れるかも」を、仕組みづくりの材料に">
+<meta name="twitter:description" content="「できるかな？」と不安になったとき、気合いで抱え込んでいませんか。その不安が「忘れること」なら、覚え続ける努力より、必要なときに思い出せる手順を作る方が助けになるかもしれません。AIと一緒に確認方法を考え、次の場面で一つ試す。頭の中の心配を少し外に置けたら、人の話を聞く余裕は生まれるのか。不安を仕組みづくりの材料に変える、小さな実験です。">
+<meta name="twitter:image" content="https://paract.github.io/publicnotes/assets/ogp/turning-fear-of-forgetting-into-a-system-2026-10-02-a9cd9e816892-eyecatch.png">
+<meta name="twitter:image:alt" content="「忘れるかも」を、仕組みづくりの材料にのアイキャッチ">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://paract.github.io/publicnotes/notes/turning-fear-of-forgetting-into-a-system-2026-10-02.html#article","mainEntityOfPage":{"@type":"WebPage","@id":"https://paract.github.io/publicnotes/notes/turning-fear-of-forgetting-into-a-system-2026-10-02.html"},"url":"https://paract.github.io/publicnotes/notes/turning-fear-of-forgetting-into-a-system-2026-10-02.html","headline":"「忘れるかも」を、仕組みづくりの材料に","description":"「できるかな？」と不安になったとき、気合いで抱え込んでいませんか。その不安が「忘れること」なら、覚え続ける努力より、必要なときに思い出せる手順を作る方が助けになるかもしれません。AIと一緒に確認方法を考え、次の場面で一つ試す。頭の中の心配を少し外に置けたら、人の話を聞く余裕は生まれるのか。不安を仕組みづくりの材料に変える、小さな実験です。","image":["https://paract.github.io/publicnotes/assets/ogp/turning-fear-of-forgetting-into-a-system-2026-10-02-a9cd9e816892-eyecatch.png"],"datePublished":"2026-10-02","author":{"@type":"Person","name":"なお（パラ）"},"inLanguage":"ja"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"パラ式　思考デバッガー","item":"https://paract.github.io/publicnotes/"},{"@type":"ListItem","position":2,"name":"「忘れるかも」を、仕組みづくりの材料に","item":"https://paract.github.io/publicnotes/notes/turning-fear-of-forgetting-into-a-system-2026-10-02.html"}]}</script>
+<!-- publicnotes:metadata:end -->
+</head>
+<body>
+  <nav class="home" data-publicnotes-home-link aria-label="ページ移動"><a href="../index.html">← トップページへ戻る</a><span data-publicnotes-share-top><a href="https://twitter.com/intent/tweet?text=%E3%80%8C%E5%BF%98%E3%82%8C%E3%82%8B%E3%81%8B%E3%82%82%E3%80%8D%E3%82%92%E3%80%81%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E6%9D%90%E6%96%99%E3%81%AB&amp;url=https%3A%2F%2Fparact.github.io%2Fpublicnotes%2Fnotes%2Fturning-fear-of-forgetting-into-a-system-2026-10-02.html" target="_blank" rel="noopener noreferrer" aria-label="Xでシェア（新しいタブ）" style="display:inline-block;padding:5px 9px;border:1px solid #c8cdd2;border-radius:4px;font:12px/1.5 sans-serif;color:#30363b;background:#fff;text-decoration:none">Xでシェア</a></span></nav>
+  <main>
+    <header>
+      <p class="eyebrow">2026-10-02 / 不安・AI・人の話を聞く時間</p>
+      <h1>「忘れるかも」を、仕組みづくりの材料に</h1>
+      <div class="source">
+        <p>「できるかな？」と不安になると、これまでは気合いで乗り切ろうとしていた。今回は、その不安を押し込めずに、材料として見てみた。</p>
+        <p>何が不安なのか。答えは「忘れること」だった。それなら、忘れても困らない仕組みをAIと作ればいい。不安の正体がわかると、AIに頼める部分も見えてくる。</p>
+        <p>頭の中で覚え続ける負担が減れば、浮いた時間を人の話を聞くことにまわせそうだ。</p>
+      </div>
+    </header>
+    <section aria-labelledby="shift-title">
+      <h2 id="shift-title">気合いの置き場所を変える</h2>
+      <p>「忘れないようにしなきゃ」と力むほど、会話の最中まで頭の一角を確認作業に取られてしまう。忘れること自体を責めるより、思い出せる場所やタイミングを作ったほうが、いま目の前にいる人へ意識を向けられるかもしれない。</p>
+      <p>AIに頼みたいのは、不安を丸ごと消してもらうことではない。まずは<strong>忘れたくないことを言葉にし、短い確認手順にする</strong>ところから。自分が使う場面に合わせて、仕組みを小さく作ってみたい。</p>
+    </section>
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>なるほど、「不安はAIにお任せ！」……と言いたいけれど、ちょっと待った。仕組みを作っただけで安心して、次はその仕組みを開くのを忘れたら、忘れ物が一つ増えるだけだ。</p>
+      <p>「何を」「いつ」「どこで」確認するかまで決めて、次の一回で使えるか試したい。完璧なアプリを作る話に飛ばず、まずは一枚のチェックリストでも十分かもしれない。</p>
+      <p>内を変えてみるなら、「忘れそうな自分を何とかする」から「忘れても戻れる手順を用意する」へ。気合いを責める方向ではなく、人に向ける余白を作る方向に使ってみる。</p>
+    </section>
+    <section aria-labelledby="step-title">
+      <h2 id="step-title">次に試す、小さな手順</h2>
+      <p>次に人と話す予定を一つ選び、忘れると困ることを一つだけ書き出す。AIと一緒に短い確認項目にして、会話の前後など、実際に見返せるタイミングへ置く。</p>
+      <p>終わったら「確認できたか」「会話中、相手の話に集中しやすかったか」を振り返る。時間が本当に浮いたかどうかは、使ってから確かめればいい。</p>
+    </section>
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>ぼくが怖いのは、単に「忘れること」だろうか。それとも、忘れた結果、相手との約束や信頼を損ねることだろうか。次の一回で、何を一つ確認できれば安心して相手の話を聞けそうだろう？</p>
+    </section>
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">気持ちの動き</h2>
+      <ol class="arc">
+        <li><b>不安</b>「できるかな？」を気合いで乗り切ろうとする。</li>
+        <li><b>発見</b>不安の中身は「忘れること」だと気づく。</li>
+        <li><b>見通し</b>AIと、忘れても困らない小さな手順を考える。</li>
+        <li><b>期待</b>頭の中の確認作業を減らし、人の話を聞く余裕につなげたい。</li>
+      </ol>
+    </section>
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>「できるかな？」と不安になったとき、気合いで抱え込んでいませんか。その不安が「忘れること」なら、覚え続ける努力より、必要なときに思い出せる手順を作る方が助けになるかもしれません。AIと一緒に確認方法を考え、次の場面で一つ試す。頭の中の心配を少し外に置けたら、人の話を聞く余裕は生まれるのか。不安を仕組みづくりの材料に変える、小さな実験です。</p>
+    </section>
+  </main>
+<!-- publicnotes:share:start -->
+<div data-publicnotes-share style="width:min(920px,calc(100% - 32px));margin:20px auto 32px"><a href="https://twitter.com/intent/tweet?text=%E3%80%8C%E5%BF%98%E3%82%8C%E3%82%8B%E3%81%8B%E3%82%82%E3%80%8D%E3%82%92%E3%80%81%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E6%9D%90%E6%96%99%E3%81%AB&amp;url=https%3A%2F%2Fparact.github.io%2Fpublicnotes%2Fnotes%2Fturning-fear-of-forgetting-into-a-system-2026-10-02.html" target="_blank" rel="noopener noreferrer" aria-label="Xでシェア（新しいタブ）" style="display:inline-block;padding:5px 9px;border:1px solid #c8cdd2;border-radius:4px;font:12px/1.5 sans-serif;color:#30363b;background:#fff;text-decoration:none">Xでシェア</a></div>
+<!-- publicnotes:share:end -->
+</body>
+</html>
