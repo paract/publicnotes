@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>話すだけで、AIが整理してくれる仕組みを作った話</title>
+  <style>
+    :root { --ink:#25282b; --muted:#66727a; --paper:#f7f8f5; --surface:#fff; --line:#d5dcd7; --teal:#2e776f; --blue:#426d98; --gold:#ab7937; --red:#a34e48; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,rgba(46,119,111,.1),transparent 28rem),var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.8; }
+    .home,main { width:min(940px,calc(100% - 32px)); margin-inline:auto; }
+    .home { display:flex; align-items:center; flex-wrap:wrap; gap:12px; padding-top:24px; }
+    .home>a { display:inline-flex; align-items:center; min-height:44px; padding:0 8px; border:1px solid var(--line); border-radius:4px; background:#fff; color:#355875; font-weight:700; }
+    main { padding:32px 0 64px; }
+    header { padding-bottom:24px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 8px; color:var(--teal); font-size:.9rem; font-weight:700; }
+    h1 { max-width:850px; margin:0; font-size:clamp(2rem,4vw,2.75rem); line-height:1.24; }
+    .lead { margin:18px 0 0; font-size:1.12rem; }
+    section { margin-top:26px; padding:24px; background:var(--surface); border:1px solid var(--line); }
+    section.source { border-left:5px solid var(--teal); }
+    section.debugger { border-top:5px solid var(--red); }
+    section.question { border-top:5px solid var(--gold); }
+    h2 { margin:0 0 12px; font-size:1.28rem; line-height:1.4; }
+    h3 { margin:20px 0 8px; font-size:1.05rem; }
+    p { margin:0 0 12px; }
+    p:last-child { margin-bottom:0; }
+    strong { color:#286a63; }
+    ul,ol { margin:10px 0 0; padding-left:1.5em; }
+    li { padding:4px 0; }
+    .flow { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:16px; }
+    .flow>div { padding:16px; background:#eef5f1; border-top:3px solid var(--teal); }
+    .flow b { display:block; margin-bottom:4px; color:#225b55; }
+    .flow p { font-size:.94rem; }
+    .detail { color:var(--muted); font-size:.94rem; }
+    .arc { margin-top:4px; }
+    .arc li { padding:9px 0; border-bottom:1px solid var(--line); }
+    .arc b { display:block; color:var(--teal); }
+    @media(max-width:680px) { main { padding-top:24px; } section { padding:18px; } .flow { grid-template-columns:1fr; } }
+  </style>
+<!-- publicnotes:metadata:start -->
+<link rel="canonical" href="https://paract.github.io/publicnotes/notes/voice-capture-ai-inbox-2026-10-14.html">
+<meta name="description" content="移動中のひらめきを書き留めても、あとで見つからないことはありませんか。Apple Watchに話した内容を受け箱に集め、AIが1日1回タスクや日記へ振り分ける仕組みを作りました。鍵になったのは、新しい保存先を増やす前に、記録の正本を一つに決めること。ショートカットの設定でつまずいた場面も含め、話して残すところから小さく始める方法を紹介します。自動化した後の確認をどう続けるかも、一緒に考えてみませんか。">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="パラ式　思考デバッガー">
+<meta property="og:title" content="話すだけで、AIが整理してくれる仕組みを作った話">
+<meta property="og:description" content="移動中のひらめきを書き留めても、あとで見つからないことはありませんか。Apple Watchに話した内容を受け箱に集め、AIが1日1回タスクや日記へ振り分ける仕組みを作りました。鍵になったのは、新しい保存先を増やす前に、記録の正本を一つに決めること。ショートカットの設定でつまずいた場面も含め、話して残すところから小さく始める方法を紹介します。自動化した後の確認をどう続けるかも、一緒に考えてみませんか。">
+<meta property="og:url" content="https://paract.github.io/publicnotes/notes/voice-capture-ai-inbox-2026-10-14.html">
+<meta property="og:image" content="https://paract.github.io/publicnotes/assets/ogp/voice-capture-ai-inbox-2026-10-14-bc9fb4be9fc2-eyecatch.png">
+<meta property="og:image:secure_url" content="https://paract.github.io/publicnotes/assets/ogp/voice-capture-ai-inbox-2026-10-14-bc9fb4be9fc2-eyecatch.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="話すだけで、AIが整理してくれる仕組みを作った話のアイキャッチ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="話すだけで、AIが整理してくれる仕組みを作った話">
+<meta name="twitter:description" content="移動中のひらめきを書き留めても、あとで見つからないことはありませんか。Apple Watchに話した内容を受け箱に集め、AIが1日1回タスクや日記へ振り分ける仕組みを作りました。鍵になったのは、新しい保存先を増やす前に、記録の正本を一つに決めること。ショートカットの設定でつまずいた場面も含め、話して残すところから小さく始める方法を紹介します。自動化した後の確認をどう続けるかも、一緒に考えてみませんか。">
+<meta name="twitter:image" content="https://paract.github.io/publicnotes/assets/ogp/voice-capture-ai-inbox-2026-10-14-bc9fb4be9fc2-eyecatch.png">
+<meta name="twitter:image:alt" content="話すだけで、AIが整理してくれる仕組みを作った話のアイキャッチ">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://paract.github.io/publicnotes/notes/voice-capture-ai-inbox-2026-10-14.html#article","mainEntityOfPage":{"@type":"WebPage","@id":"https://paract.github.io/publicnotes/notes/voice-capture-ai-inbox-2026-10-14.html"},"url":"https://paract.github.io/publicnotes/notes/voice-capture-ai-inbox-2026-10-14.html","headline":"話すだけで、AIが整理してくれる仕組みを作った話","description":"移動中のひらめきを書き留めても、あとで見つからないことはありませんか。Apple Watchに話した内容を受け箱に集め、AIが1日1回タスクや日記へ振り分ける仕組みを作りました。鍵になったのは、新しい保存先を増やす前に、記録の正本を一つに決めること。ショートカットの設定でつまずいた場面も含め、話して残すところから小さく始める方法を紹介します。自動化した後の確認をどう続けるかも、一緒に考えてみませんか。","image":["https://paract.github.io/publicnotes/assets/ogp/voice-capture-ai-inbox-2026-10-14-bc9fb4be9fc2-eyecatch.png"],"datePublished":"2026-10-14","author":{"@type":"Person","name":"なお（パラ）"},"inLanguage":"ja"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"パラ式　思考デバッガー","item":"https://paract.github.io/publicnotes/"},{"@type":"ListItem","position":2,"name":"話すだけで、AIが整理してくれる仕組みを作った話","item":"https://paract.github.io/publicnotes/notes/voice-capture-ai-inbox-2026-10-14.html"}]}</script>
+<!-- publicnotes:metadata:end -->
+</head>
+<body>
+  <nav class="home" data-publicnotes-home-link aria-label="ページ移動"><a href="../index.html">← トップページへ戻る</a><span data-publicnotes-share-top><a href="https://twitter.com/intent/tweet?text=%E8%A9%B1%E3%81%99%E3%81%A0%E3%81%91%E3%81%A7%E3%80%81AI%E3%81%8C%E6%95%B4%E7%90%86%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%82%8B%E4%BB%95%E7%B5%84%E3%81%BF%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%9F%E8%A9%B1&amp;url=https%3A%2F%2Fparact.github.io%2Fpublicnotes%2Fnotes%2Fvoice-capture-ai-inbox-2026-10-14.html" target="_blank" rel="noopener noreferrer" aria-label="Xでシェア（新しいタブ）" style="display:inline-block;padding:5px 9px;border:1px solid #c8cdd2;border-radius:4px;font:12px/1.5 sans-serif;color:#30363b;background:#fff;text-decoration:none">Xでシェア</a></span></nav>
+  <main>
+    <header>
+      <p class="eyebrow">2026-10-14 · なお / 音声入力・AI・記録の整理</p>
+      <h1>話すだけで、AIが整理してくれる仕組みを作った話</h1>
+      <p class="lead">Apple Watchに話しかけた思いつきを、AIがタスクや日記へ振り分ける。Claude CodeとiPhoneのショートカットを使い、1日かけて形にした。</p>
+    </header>
+    <section class="source" aria-labelledby="problem-title">
+      <h2 id="problem-title">思いつきは、たいてい行方不明になる</h2>
+      <p>移動中や仕事の合間に「これをやろう」「いい気づきだ」と思っても、メモアプリに書いたまま忘れる。記録があちこちへ散らばり、どこに書いたか分からなくなる。ぼくはずっと、この状態だった。</p>
+      <p>ほしかったのは、思いついたその場で話し、整理はあとから任せられる仕組み。自分はまず「話す」ことに集中したかった。</p>
+    </section>
+    <section aria-labelledby="flow-title">
+      <h2 id="flow-title">できあがった流れ</h2>
+      <div class="flow">
+        <div><b>1. 話して受け箱へ</b><p>Apple WatchやiPhoneから話した内容を、一つの受け箱へ入れる。PC作業中はClaude Codeへ一言打っても同じ場所に集まる。</p></div>
+        <div><b>2. 1日1回の仕分け</b><p>AIが受け箱の中身を見て、行動できるものはタスク、出来事や気づきは日記などへ振り分ける。</p></div>
+        <div><b>3. 足あとを残す</b><p>作業の終わりには、その日の動きを1〜3行で日記に残す。週末の振り返りにも使える形を目指す。</p></div>
+      </div>
+      <p class="detail">話した瞬間にすべてが処理されるわけではなく、仕分けは1日1回。入力の速さと整理のタイミングは別だ。</p>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title">新しい置き場より、まず「正本」を決める</h2>
+      <p>最初はAI秘書用のフォルダを新設するつもりだった。ところが既存のObsidianを調べると、整理用のフォルダはすでにあり、同じ資料のコピーが60組以上見つかった。片方だけ更新され、中身が食い違うものもあった。</p>
+      <p>ここにさらに置き場を足せば、どれが最新かますます分からなくなる。そこでルールを三つに絞った。</p>
+      <ul>
+        <li>同じ情報は一か所だけに書き、そこを「正本」にする。</li>
+        <li>作業記録をコピーしない。AI秘書が持つのはリンクと1〜3行の要約だけ。</li>
+        <li>食い違いを見つけてもAIは勝手に直さず、「どちらが正しい？」と聞く。</li>
+      </ul>
+      <p>使用量も気になる。毎回すべてをAIに読ませるのではなく、仕分け先には必要な情報を末尾へ書き足す方式にした。単純な仕分けは軽いモデルへ任せる。</p>
+    </section>
+    <section aria-labelledby="trouble-title">
+      <h2 id="trouble-title">つまずいたのは、AIよりショートカットの画面</h2>
+      <p>一番時間がかかったのは、初めて触るショートカットの設定だった。画面をAIに見せながら、一つずつ原因を切り分けた。</p>
+      <ul>
+        <li>「通知時刻が無効」：話した言葉が時刻欄に入っていた。タイトル欄へ入れ直した。</li>
+        <li>「繰り返し項目」が出ない：アクションが繰り返しの外にあった。「繰り返す」と「終了」の間へ移した。</li>
+        <li>シェルスクリプトが動かない：設定の「詳細」で実行を許可した。</li>
+        <li>Mac版で「完了」が見つからない：移し終えたメモは削除する流れへ変更した。</li>
+      </ul>
+      <p>「ここ、合ってる？」と画面を見せれば、分からないまま一人で立ち止まらずに済む。完成後、最初に受け箱へ届いたのは「ショートカットで初めてプログラムを完成させた」というメモだった。</p>
+    </section>
+    <section aria-labelledby="change-title">
+      <h2 id="change-title">「あとで書こう」が「今話す」に変わった</h2>
+      <p>まだ使い始めたばかりだ。それでも、整理する手間を先に考えず、思いついた瞬間に話して預けられるようになった。</p>
+      <p>記録がたまれば、週末にAIから自分に合った問いを返してもらえるかもしれない。秘書でありメンターでもある存在へ育てたい。ただし、助言が本当に良くなるかは、使い続けて確かめることだ。</p>
+    </section>
+    <section class="debugger" aria-labelledby="debugger-title">
+      <h2 id="debugger-title">思考のデバッガーからの突っ込み</h2>
+      <p>「話すだけで整う」。響きはいい。でも、実際には<strong>話すだけで受け箱に入る</strong>のであって、正しく整ったかどうかは別問題だ。AI秘書が「片付けました！」と胸を張って、必要なメモまで削除していたら、なかなか手厳しい秘書である。</p>
+      <p>特に「完了」の代わりに削除する流れは、振り分け先へ確実に残ったことを確認できるまで慎重に扱いたい。最初の数日は受け箱の件数、振り分け先、削除されたものを見比べる。個人的な記録をAIへ渡す範囲も、自分で決めておく。</p>
+      <p>内を変えてみるなら、「何でも自動で片付く」への期待から、「自分が安心して任せられる範囲を少しずつ増やす」へ。完成した仕組みを、使う人である自分が検証して育てていく。</p>
+    </section>
+    <section aria-labelledby="start-title">
+      <h2 id="start-title">小さく始めるなら</h2>
+      <ol>
+        <li>リマインダーに受け箱を一つ作り、話した内容が入るショートカットを試す。ここまではAIなしでもできる。</li>
+        <li>今ある記録を見直し、同じ内容の置き場が重なっていないか確認する。</li>
+        <li>「行動できる→タスク」「出来事→日記」のように、仕分けのルールを一枚に書く。</li>
+      </ol>
+      <p>メモをためがちな人や、複数の活動を行き来している人にも、この入口は試せそうだ。ぼく自身はプログラミングの知識を前提にせず、やりたいことを言葉にしてAIと進めた。ただし、設定画面の確認や動作テストまで不要になるわけではない。</p>
+    </section>
+    <section class="question" aria-labelledby="question-title">
+      <h2 id="question-title">一段深掘りする問い</h2>
+      <p>この仕組みが本当に役立ったと言えるのは、受け箱へ何件入ったときではなく、どんな「行方不明だったはずの思いつき」を一つ使えたときだろう？　まず一週間、何を見ればそれを確かめられるだろうか。</p>
+    </section>
+    <section aria-labelledby="arc-title">
+      <h2 id="arc-title">気持ちの動き</h2>
+      <ol class="arc">
+        <li><b>もどかしさ</b>思いつきがアプリに散らばり、後で見つからない。</li>
+        <li><b>発見と冷や汗</b>新しい置き場を作る前に、60組以上のコピーと食い違いを見つける。</li>
+        <li><b>試行錯誤</b>ショートカットの画面で何度も止まり、その都度AIと切り分ける。</li>
+        <li><b>手応え</b>最初のメモが届き、「あとで書こう」から「今話す」へ変わる。</li>
+        <li><b>これから</b>仕分けの正確さと、記録が実際に役立つ場面を確かめていく。</li>
+      </ol>
+    </section>
+    <section aria-labelledby="share-title">
+      <h2 id="share-title">他者紹介用メモ</h2>
+      <p>移動中のひらめきを書き留めても、あとで見つからないことはありませんか。Apple Watchに話した内容を受け箱に集め、AIが1日1回タスクや日記へ振り分ける仕組みを作りました。鍵になったのは、新しい保存先を増やす前に、記録の正本を一つに決めること。ショートカットの設定でつまずいた場面も含め、話して残すところから小さく始める方法を紹介します。自動化した後の確認をどう続けるかも、一緒に考えてみませんか。</p>
+    </section>
+  </main>
+<!-- publicnotes:share:start -->
+<div data-publicnotes-share style="width:min(920px,calc(100% - 32px));margin:20px auto 32px"><a href="https://twitter.com/intent/tweet?text=%E8%A9%B1%E3%81%99%E3%81%A0%E3%81%91%E3%81%A7%E3%80%81AI%E3%81%8C%E6%95%B4%E7%90%86%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%82%8B%E4%BB%95%E7%B5%84%E3%81%BF%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%9F%E8%A9%B1&amp;url=https%3A%2F%2Fparact.github.io%2Fpublicnotes%2Fnotes%2Fvoice-capture-ai-inbox-2026-10-14.html" target="_blank" rel="noopener noreferrer" aria-label="Xでシェア（新しいタブ）" style="display:inline-block;padding:5px 9px;border:1px solid #c8cdd2;border-radius:4px;font:12px/1.5 sans-serif;color:#30363b;background:#fff;text-decoration:none">Xでシェア</a></div>
+<!-- publicnotes:share:end -->
+</body>
+</html>
