@@ -44,6 +44,34 @@ test('build is repeatable; check is read-only and blocks stale or invalid conten
   await assert.rejects(generateDashboard({ rootDir: root, strict: true }), /home link/);
 });
 
+test('homepage card metadata uses the configured public image', async t => {
+  const { root, write } = fixture(t);
+  write('first-2026-09-01.html');
+  fs.mkdirSync(path.join(root, 'assets', 'ogp'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'assets', 'ogp', 'home.png'), 'png fixture');
+  fs.writeFileSync(path.join(root, 'publicnotes.config.json'), JSON.stringify({
+    siteUrl: 'https://example.com/publicnotes/',
+    siteTitle: '思考デバッガー',
+    siteDescription: '気づきを次の一歩へ',
+    authorName: 'なお',
+    siteCardImage: 'assets/ogp/home.png'
+  }));
+  const { outputFile } = await generateDashboard({ rootDir: root, strict: true });
+  const dom = new JSDOM(fs.readFileSync(outputFile, 'utf8'));
+  t.after(() => dom.window.close());
+  const head = dom.window.document.head;
+  const meta = selector => head.querySelector(selector)?.content;
+  assert.equal(meta('meta[property="og:title"]'), '思考デバッガー');
+  assert.equal(meta('meta[property="og:description"]'), '気づきを次の一歩へ');
+  assert.equal(meta('meta[property="og:url"]'), 'https://example.com/publicnotes/');
+  assert.equal(meta('meta[property="og:image"]'), 'https://example.com/publicnotes/assets/ogp/home.png');
+  assert.equal(meta('meta[name="twitter:card"]'), 'summary_large_image');
+  assert.equal(meta('meta[name="twitter:image"]'), meta('meta[property="og:image"]'));
+  await generateDashboard({ rootDir: root, check: true });
+  fs.unlinkSync(path.join(root, 'assets', 'ogp', 'home.png'));
+  await assert.rejects(generateDashboard({ rootDir: root, check: true }), /Missing homepage card image/);
+});
+
 test('batch Git history preserves old per-file ordering after bulk edits', async t => {
   const { root, git, write } = fixture(t);
   write('older-2026-09-01.html');

@@ -189,6 +189,13 @@ function extractTextFromHTML(filePath, rootDir = process.cwd(), addedTimes) {
 async function generateDashboard(options = {}) {
   const rootDir = path.resolve(options.rootDir || process.cwd());
   const config = { ...loadConfig(rootDir), ...options.config };
+  if (config.siteCardImage) {
+    const cardPath = path.resolve(rootDir, config.siteCardImage);
+    if (!cardPath.startsWith(rootDir + path.sep) ||
+        !fs.existsSync(cardPath) || fs.statSync(cardPath).size === 0) {
+      throw new Error(`Missing homepage card image: ${config.siteCardImage}`);
+    }
+  }
   const notesDir = path.join(rootDir, config.notesDir);
 
   const files = fs.existsSync(notesDir)
@@ -271,13 +278,36 @@ async function generateDashboard(options = {}) {
 function generateHTML(logs, tags, config = defaultConfig) {
   const logsJSON = JSON.stringify(logs, null, 2).replace(/</g, '\\u003c');
   const tagsJSON = JSON.stringify(tags, null, 2);
+  const title = escapeHTML(config.siteTitle);
+  const description = escapeHTML(config.siteDescription);
+  const homepage = config.siteUrl ? new URL(config.siteUrl).href : null;
+  const cardImage = homepage && config.siteCardImage
+    ? new URL(config.siteCardImage, homepage).href : null;
+  const socialTags = homepage ? `
+  <link rel="canonical" href="${escapeHTML(homepage)}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="${title}">
+  <meta property="og:title" content="${title}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:url" content="${escapeHTML(homepage)}">${cardImage ? `
+  <meta property="og:image" content="${escapeHTML(cardImage)}">
+  <meta property="og:image:secure_url" content="${escapeHTML(cardImage)}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="パラ式 思考デバッガーのトップページ画像">` : ''}
+  <meta name="twitter:card" content="${cardImage ? 'summary_large_image' : 'summary'}">
+  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:description" content="${description}">${cardImage ? `
+  <meta name="twitter:image" content="${escapeHTML(cardImage)}">
+  <meta name="twitter:image:alt" content="パラ式 思考デバッガーのトップページ画像">` : ''}` : '';
 
   return `<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${escapeHTML(config.siteTitle)}</title>
+  <title>${title}</title>
+  <meta name="description" content="${description}">${socialTags}
   <style>
     * {
       margin: 0;
