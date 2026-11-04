@@ -43,6 +43,10 @@
     .comparison p { font-size: 1.08rem; font-weight: 600; }
     .question { border-bottom-color: #176f70; }
     .question p { font-size: 1.12rem; font-weight: 600; }
+    .infographic figure { margin: 0; }
+    .infographic a { display: block; }
+    .infographic img { display: block; width: 100%; height: auto; border: 1px solid #cbd9d8; }
+    .infographic figcaption { margin-top: 10px; color: #43555b; font-size: .85rem; }
     [aria-labelledby="share-title"] { color: #43555b; }
     [aria-labelledby="share-title"] h2 { color: #172b34; }
     @media (max-width: 600px) {
@@ -119,6 +123,16 @@
     <section class="question">
       <h2>一段深掘りする問い</h2>
       <p>このBotに本当に守ってほしいのは、文字の完全一致だろうか。それとも、相手が合言葉を伝えようとした意図だろうか？</p>
+    </section>
+
+    <section class="infographic" aria-labelledby="infographic-title">
+      <h2 id="infographic-title">図解</h2>
+      <figure>
+        <a href="../assets/20261104_invisible-character-bot-green-blueprint.png" target="_blank" rel="noopener" aria-label="図解を拡大して開く">
+          <img src="../assets/20261104_invisible-character-bot-green-blueprint.png" alt="一人だけ返事がないBotを調べ、同じに見える記号の内部の違い、完全一致による不一致、表記をそろえる改善策へ進む4段階の図解" width="1672" height="941" loading="lazy">
+        </a>
+        <figcaption>見た目は同じ、Botには別の文字。優しいグリーンの設計図で4段階を整理。</figcaption>
+      </figure>
     </section>
 
     <section aria-labelledby="share-title">
