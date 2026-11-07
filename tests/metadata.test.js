@@ -34,6 +34,7 @@ test('all published articles have matching static metadata and valid dedicated P
     const footer = doc.querySelector('[data-publicnotes-footer]');
     assert.equal(doc.querySelectorAll('[data-publicnotes-footer]').length, 1);
     assert.match(footer.textContent, /© .*なお（パラ）/);
+    assert.match(footer.getAttribute('style'), /text-align:center/);
     assert.equal(footer.querySelector('a')?.getAttribute('href'), '../index.html');
     assert.equal(meta('og:image'), meta('twitter:image'));
     const imageURL = new URL(meta('og:image'));

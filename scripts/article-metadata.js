@@ -19,7 +19,7 @@ function renderSiteFooter(config, homeHref) {
     : '';
   return '<footer data-publicnotes-footer style="width:min(920px,calc(100% - 32px));' +
     'margin:48px auto 24px;padding:20px 0 0;border-top:1px solid #c8d1d3;' +
-    'display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 24px;' +
+    'display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;' +
     'color:#52616a;font:13px/1.6 sans-serif">' +
     '<small style="font:inherit">© ' + new Date().getFullYear() + ' ' + owner +
     ' · ' + brand + '</small>' + homeLink + '</footer>';

@@ -61,6 +61,7 @@ test('homepage card metadata uses the configured public image', async t => {
   t.after(() => dom.window.close());
   assert.equal(dom.window.document.querySelectorAll('[data-publicnotes-footer]').length, 1);
   assert.match(dom.window.document.querySelector('[data-publicnotes-footer]').textContent, /© .*なお/);
+  assert.match(dom.window.document.querySelector('[data-publicnotes-footer]').getAttribute('style'), /text-align:center/);
   const head = dom.window.document.head;
   const meta = selector => head.querySelector(selector)?.content;
   assert.equal(meta('meta[property="og:title"]'), '思考デバッガー');
