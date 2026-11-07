@@ -11,6 +11,20 @@ const escape = value => String(value).replace(/[&<>"']/g,
 const json = value => JSON.stringify(value).replace(/</g, '\\u003c');
 const relativeURL = (file, base) => new URL(file.split(path.sep).map(encodeURIComponent).join('/'), base).href;
 
+function renderSiteFooter(config, homeHref) {
+  const owner = escape(config.authorName || config.siteTitle || 'publicnotes');
+  const brand = escape(config.siteTitle || 'publicnotes');
+  const homeLink = homeHref
+    ? '<a href="' + escape(homeHref) + '" style="color:inherit;text-underline-offset:3px">記事一覧へ</a>'
+    : '';
+  return '<footer data-publicnotes-footer style="width:min(920px,calc(100% - 32px));' +
+    'margin:48px auto 24px;padding:20px 0 0;border-top:1px solid #c8d1d3;' +
+    'display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 24px;' +
+    'color:#52616a;font:13px/1.6 sans-serif">' +
+    '<small style="font:inherit">© ' + new Date().getFullYear() + ' ' + owner +
+    ' · ' + brand + '</small>' + homeLink + '</footer>';
+}
+
 function wrap(ctx, text, width) {
   const lines = [];
   let line = '';
@@ -157,6 +171,12 @@ function syncArticleMetadata(root, config, logs, check = false) {
     if (updated.includes('<!-- publicnotes:share:start -->')) {
       updated = updated.replace(/<!-- publicnotes:share:start -->[\s\S]*?<!-- publicnotes:share:end -->/, share);
     } else updated = updated.replace(/<\/body\s*>/i, share + '\n</body>');
+    const footer = '<!-- publicnotes:footer:start -->\n' +
+      renderSiteFooter(config, '../index.html') + '\n' +
+      '<!-- publicnotes:footer:end -->';
+    if (updated.includes('<!-- publicnotes:footer:start -->')) {
+      updated = updated.replace(/<!-- publicnotes:footer:start -->[\s\S]*?<!-- publicnotes:footer:end -->/, footer);
+    } else updated = updated.replace(/<\/body\s*>/i, footer + '\n</body>');
     updated = updated.replace(/<span data-publicnotes-share-top>[\s\S]*?<\/span>/,
       () => '<span data-publicnotes-share-top>' + shareLink + '</span>');
     if (updated !== html) {
@@ -169,4 +189,4 @@ function syncArticleMetadata(root, config, logs, check = false) {
   }
   return changedFiles;
 }
-module.exports = { syncArticleMetadata, replaceMetadata, renderCover };
+module.exports = { syncArticleMetadata, replaceMetadata, renderCover, renderSiteFooter };

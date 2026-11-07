@@ -31,6 +31,10 @@ test('all published articles have matching static metadata and valid dedicated P
     assert.equal(intent.searchParams.get('text'), title);
     assert.equal(intent.searchParams.get('url'), url);
     assert.equal(share.target, '_blank');
+    const footer = doc.querySelector('[data-publicnotes-footer]');
+    assert.equal(doc.querySelectorAll('[data-publicnotes-footer]').length, 1);
+    assert.match(footer.textContent, /© .*なお（パラ）/);
+    assert.equal(footer.querySelector('a')?.getAttribute('href'), '../index.html');
     assert.equal(meta('og:image'), meta('twitter:image'));
     const imageURL = new URL(meta('og:image'));
     assert.equal(imageURL.origin, 'https://paract.github.io');
@@ -75,6 +79,7 @@ test('metadata generation is idempotent, escapes text, preserves body and verifi
   assert.equal(fs.statSync(file).mtimeMs, stat.mtimeMs);
   const dom = new JSDOM(html);
   assert.equal(dom.window.document.querySelectorAll('[property="og:title"]').length, 1);
+  assert.equal(dom.window.document.querySelectorAll('[data-publicnotes-footer]').length, 1);
   assert.equal(JSON.parse(dom.window.document.querySelector('script').textContent).headline, logs[0].title);
   dom.window.close();
   assert.throws(() => syncArticleMetadata(root, config, [{ ...logs[0], shareSummary: '変更後' }], true), /Stale/);

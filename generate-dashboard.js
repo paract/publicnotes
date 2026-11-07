@@ -156,6 +156,7 @@ function extractTextFromHTML(filePath, rootDir = process.cwd(), addedTimes) {
     }
 
     // テキスト全体を結合（タグ抽出用）
+    doc.querySelector('[data-publicnotes-footer]')?.remove();
     const fullText = [
       title,
       excerpt,
@@ -300,6 +301,7 @@ function generateHTML(logs, tags, config = defaultConfig) {
   <meta name="twitter:description" content="${description}">${cardImage ? `
   <meta name="twitter:image" content="${escapeHTML(cardImage)}">
   <meta name="twitter:image:alt" content="パラ式 思考デバッガーのトップページ画像">` : ''}` : '';
+  const footer = require('./scripts/article-metadata').renderSiteFooter(config);
 
   return `<!doctype html>
 <html lang="ja">
@@ -652,6 +654,7 @@ function generateHTML(logs, tags, config = defaultConfig) {
       <button class="page-btn" id="nextPage" type="button">次へ</button>
     </nav>
   </div>
+  ${footer}
 
   <script>
     const logs = ${logsJSON};
