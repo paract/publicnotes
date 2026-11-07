@@ -18,8 +18,8 @@ function renderSiteFooter(config, homeHref) {
     ? '<a href="' + escape(homeHref) + '" style="color:inherit;text-underline-offset:3px">記事一覧へ</a>'
     : '';
   return '<footer data-publicnotes-footer style="width:min(920px,calc(100% - 32px));' +
-    'margin:48px auto 24px;padding:20px 0 0;border-top:1px solid #c8d1d3;' +
-    'display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;' +
+    'margin:48px auto 24px;padding:20px 0;border-top:1px solid #c8d1d3;' +
+    'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;' +
     'color:#52616a;font:13px/1.6 sans-serif">' +
     '<small style="font:inherit">© ' + new Date().getFullYear() + ' ' + owner +
     ' · ' + brand + '</small>' + homeLink + '</footer>';
