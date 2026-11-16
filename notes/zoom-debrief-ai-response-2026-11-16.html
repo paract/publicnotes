@@ -35,6 +35,10 @@
     .debugger { border-bottom-color: #c57b63; }
     .question { border-bottom-color: #176f70; }
     .question p { font-size: 1.12rem; font-weight: 600; }
+    .infographic figure { margin: 0; }
+    .infographic a { display: block; }
+    .infographic img { display: block; width: 100%; height: auto; border: 1px solid #cbd9d8; }
+    .infographic figcaption { margin-top: 10px; color: #43555b; font-size: .85rem; }
     [aria-labelledby="share-title"] { color: #43555b; }
     [aria-labelledby="share-title"] h2 { color: #172b34; }
     @media (max-width: 600px) {
@@ -106,6 +110,16 @@
     <section class="question">
       <h2>一段深掘りする問い</h2>
       <p>僕が続けたいのは「AIから返事をもらうこと」だろうか。それとも「打ち合わせで生まれた気づきを、次の行動に渡すこと」だろうか？</p>
+    </section>
+
+    <section class="infographic" aria-labelledby="infographic-title">
+      <h2 id="infographic-title">図解</h2>
+      <figure>
+        <a href="../assets/20261116_zoom-debrief-premium-flat.png" target="_blank" rel="noopener" aria-label="図解を拡大して開く">
+          <img src="../assets/20261116_zoom-debrief-premium-flat.png" alt="Zoom終了後に決まったこと、引っかかること、次にすることを3行で記録し、AIの問いで深めて次の行動につなげる流れ。AIの返事がなくても一行残せるかを確かめる" width="1672" height="941" loading="lazy">
+        </a>
+        <figcaption>記録を始める力と、AIの問いで深める力を分けて見る。</figcaption>
+      </figure>
     </section>
 
     <section aria-labelledby="share-title">
