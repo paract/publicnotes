@@ -11,6 +11,13 @@ const escape = value => String(value).replace(/[&<>"']/g,
 const json = value => JSON.stringify(value).replace(/</g, '\\u003c');
 const relativeURL = (file, base) => new URL(file.split(path.sep).map(encodeURIComponent).join('/'), base).href;
 
+function renderSiteIcon(config, page) {
+  if (!config.siteIcon) return '';
+  const href = path.relative(path.dirname(page), config.siteIcon).split(path.sep)
+    .map(encodeURIComponent).join('/');
+  return '<link rel="icon" type="image/svg+xml" href="' + escape(href) + '">';
+}
+
 function renderSiteFooter(config, homeHref) {
   const owner = escape(config.authorName || config.siteTitle || 'publicnotes');
   const brand = escape(config.siteTitle || 'publicnotes');
@@ -154,6 +161,7 @@ function syncArticleMetadata(root, config, logs, check = false) {
       ]
     };
     const block = [START, '<link rel="canonical" href="' + escape(articleURL) + '">',
+      ...(config.siteIcon ? [renderSiteIcon(config, articlePath)] : []),
       ...tags.map(([attr, key, value]) => '<meta ' + attr + '="' + key + '" content="' + escape(value) + '">'),
       '<script type="application/ld+json">' + json(article) + '</script>',
       '<script type="application/ld+json">' + json(breadcrumb) + '</script>', END].join('\n');
@@ -189,4 +197,4 @@ function syncArticleMetadata(root, config, logs, check = false) {
   }
   return changedFiles;
 }
-module.exports = { syncArticleMetadata, replaceMetadata, renderCover, renderSiteFooter };
+module.exports = { syncArticleMetadata, replaceMetadata, renderCover, renderSiteFooter, renderSiteIcon };

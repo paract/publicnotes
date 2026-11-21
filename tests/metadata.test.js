@@ -6,6 +6,26 @@ const path = require('node:path');
 const { JSDOM } = require('jsdom');
 const { syncArticleMetadata } = require('../scripts/article-metadata');
 
+test('homepage and articles resolve their icon to the same SVG', () => {
+  const root = path.join(__dirname, '..');
+  const iconPath = path.join(root, 'assets', 'favicon.svg');
+  assert.match(fs.readFileSync(iconPath, 'utf8'), /<svg\b/);
+  const pages = ['index.html', ...fs.readdirSync(path.join(root, 'notes'))
+    .filter(file => file.endsWith('.html')).map(file => path.join('notes', file))];
+  for (const page of pages) {
+    const file = path.join(root, page);
+    const dom = new JSDOM(fs.readFileSync(file, 'utf8'));
+    try {
+      const icons = dom.window.document.head.querySelectorAll('link[rel="icon"]');
+      assert.equal(icons.length, 1, page);
+      assert.equal(icons[0].type, 'image/svg+xml', page);
+      assert.equal(path.resolve(path.dirname(file), icons[0].getAttribute('href')), iconPath, page);
+    } finally {
+      dom.window.close();
+    }
+  }
+});
+
 test('all published articles have matching static metadata and valid dedicated PNGs', () => {
   const root = path.join(__dirname, '..');
   const images = new Set();

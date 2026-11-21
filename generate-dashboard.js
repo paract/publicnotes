@@ -190,6 +190,13 @@ function extractTextFromHTML(filePath, rootDir = process.cwd(), addedTimes) {
 async function generateDashboard(options = {}) {
   const rootDir = path.resolve(options.rootDir || process.cwd());
   const config = { ...loadConfig(rootDir), ...options.config };
+  if (config.siteIcon) {
+    const iconPath = path.resolve(rootDir, config.siteIcon);
+    if (!iconPath.startsWith(rootDir + path.sep) ||
+        !fs.existsSync(iconPath) || !fs.statSync(iconPath).isFile() || !fs.statSync(iconPath).size) {
+      throw new Error(`Missing site icon: ${config.siteIcon}`);
+    }
+  }
   if (config.siteCardImage) {
     const cardPath = path.resolve(rootDir, config.siteCardImage);
     if (!cardPath.startsWith(rootDir + path.sep) ||
@@ -301,7 +308,9 @@ function generateHTML(logs, tags, config = defaultConfig) {
   <meta name="twitter:description" content="${description}">${cardImage ? `
   <meta name="twitter:image" content="${escapeHTML(cardImage)}">
   <meta name="twitter:image:alt" content="パラ式 思考デバッガーのトップページ画像">` : ''}` : '';
-  const footer = require('./scripts/article-metadata').renderSiteFooter(config);
+  const { renderSiteFooter, renderSiteIcon } = require('./scripts/article-metadata');
+  const footer = renderSiteFooter(config);
+  const icon = renderSiteIcon(config, config.outputFile || defaultConfig.outputFile);
 
   return `<!doctype html>
 <html lang="ja">
@@ -309,7 +318,7 @@ function generateHTML(logs, tags, config = defaultConfig) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
-  <meta name="description" content="${description}">${socialTags}
+  <meta name="description" content="${description}">${icon ? '\n  ' + icon : ''}${socialTags}
   <style>
     * {
       margin: 0;
